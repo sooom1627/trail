@@ -31,6 +31,7 @@ export default {
 
 ## ディレクトリ構成
 
+```js
 ─ node_modules
 ─ src
 　 ├ components
@@ -47,3 +48,4 @@ export default {
 　　 │ 　 └ types
 　　 ├ 機能 B
 　　　・・・
+```
