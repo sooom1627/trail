@@ -7,16 +7,25 @@ export const TaskPage: React.FC = () => {
 	const today = new Date();
 
 	return (
-		<div className="py-4 grid grid-cols-2 gap-x-4">
-			<div>
+		<div className="flex h-screen py-12">
+			<div className=" w-1/2 flex flex-col">
 				<div className="bg-zinc-100 p-8 rounded-lg mb-4">
 					<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
 					<p className="text-2xl font-bold">You've got 7 tasks today.</p>
 				</div>
 				<Form placeholder="タスクを追加" />
-				<TaskCard />
+				<div className="overflow-y-scroll">
+					<TaskCard />
+					<TaskCard />
+					<TaskCard />
+					<TaskCard />
+					<TaskCard />
+					<TaskCard />
+					<TaskCard />
+					<TaskCard />
+				</div>
 			</div>
-			<div>
+			<div className="w-1/2">
 				<p>hello</p>
 			</div>
 		</div>

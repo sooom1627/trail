@@ -2,7 +2,7 @@ import React from "react";
 
 export const TaskCard: React.FC = () => {
 	return (
-		<div className="bg-zinc-100 p-6 rounded-lg mb-8 flex justify-between items-center">
+		<div className="bg-zinc-100 p-6 rounded-lg mb-2 flex justify-between items-center">
 			<div>
 				<p> Todo Tasks</p>
 				<p className="text-sm text-zinc-400">2023-11-17 11:00</p>
