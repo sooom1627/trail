@@ -1,6 +1,6 @@
 import React from "react";
 import { getCurrentDate } from "../../utils/getCurrentTime";
-import { Form } from "../../components/ui/Form";
+import { AddTaskForm } from "./feature/addTask/AddTaskForm";
 
 export const TaskPage: React.FC = () => {
 	const today = new Date();
@@ -12,7 +12,7 @@ export const TaskPage: React.FC = () => {
 					<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
 					<p className="text-2xl font-bold">You've got 7 tasks today.</p>
 				</div>
-				<Form placeholder="タスクを追加" />
+				<AddTaskForm />
 			</div>
 			<div className="w-1/2 ml-4">
 				<p>hello</p>
