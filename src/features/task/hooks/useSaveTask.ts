@@ -18,8 +18,10 @@ export const useSaveTask = () => {
       id: uuidv4(),
       title,
       priority:"middle",
+      status :"todo",
       created: new Date()
     };
+    
     let updatedTasks = [...currentTasks, newTask];
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     

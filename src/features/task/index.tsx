@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { tasksState } from "./srtores/atom/task";
-import { AddTaskForm } from "./feature/addTask/AddTaskForm";
-import { TaskList } from "./ui/TaskList";
-import { getCurrentDate } from "../../utils/getCurrentTime";
 import { useRecoilState } from "recoil";
 import { useLoadTasks } from "./hooks/useLoadTasks";
+import { useTaskSplitter } from "./hooks/useTaskSplitter";
+import { getCurrentDate } from "../../utils/getCurrentTime";
+import { AddTaskForm } from "./feature/addTask/AddTaskForm";
+import { TaskList } from "./ui/TaskList";
+import { Tab } from "../../components/tab/tab";
+import { TabContent } from "../../components/tab/TabContent";
 
 export const TaskPage: React.FC = () => {
-	const today = new Date();
 	const [tasks] = useRecoilState(tasksState);
+	const tabNames = ["todo", "doing", "done"];
+	const [activeTab, setActiveTab] = useState(tabNames[0]);
 	const loadTasks = useLoadTasks();
+	const today = new Date();
 
 	useEffect(() => {
 		loadTasks();
 	}, []);
+	const { todoTasks, doingTasks, doneTasks } = useTaskSplitter(tasks);
 
 	return (
 		<div className="flex h-screen py-12">
@@ -23,7 +29,21 @@ export const TaskPage: React.FC = () => {
 					<p className="text-2xl font-bold">{`You've got ${tasks.length} tasks today.`}</p>
 				</div>
 				<AddTaskForm />
-				<TaskList tasks={tasks} />
+				<Tab
+					tabNames={tabNames}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+				>
+					<TabContent activeTab={activeTab} tabName="todo">
+						<TaskList tasks={todoTasks} />
+					</TabContent>
+					<TabContent activeTab={activeTab} tabName="doing">
+						<TaskList tasks={doingTasks} />
+					</TabContent>
+					<TabContent activeTab={activeTab} tabName="done">
+						<TaskList tasks={doneTasks} />
+					</TabContent>
+				</Tab>
 			</div>
 			<div className="w-1/2 ml-4">
 				<p>hello</p>
