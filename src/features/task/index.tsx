@@ -5,6 +5,7 @@ import { TaskList } from "./ui/TaskList";
 import { getCurrentDate } from "../../utils/getCurrentTime";
 import { useRecoilState } from "recoil";
 import { useLoadTasks } from "./hooks/useLoadTasks";
+import { Tab } from "../../components/tab/tab";
 
 export const TaskPage: React.FC = () => {
 	const today = new Date();
@@ -23,6 +24,7 @@ export const TaskPage: React.FC = () => {
 					<p className="text-2xl font-bold">{`You've got ${tasks.length} tasks today.`}</p>
 				</div>
 				<AddTaskForm />
+				<Tab />
 				<TaskList tasks={tasks} />
 			</div>
 			<div className="w-1/2 ml-4">
