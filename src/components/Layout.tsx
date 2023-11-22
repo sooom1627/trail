@@ -8,7 +8,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (
 		<div className="flex w-full">
 			<Sidebar />
-			<div className="h-screen px-8 grow">{children}</div>
+			<div className="w-full p-8 max-h-screen">{children}</div>
 		</div>
 	);
 };

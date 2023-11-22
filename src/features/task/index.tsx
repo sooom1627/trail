@@ -25,41 +25,43 @@ export const TaskPage: React.FC = () => {
 	const { todoTasks, doingTasks, doneTasks } = useTaskSplitter(tasks);
 
 	return (
-		<div className="flex h-screen py-12">
-			<div className=" w-1/2 flex flex-col mr-4">
-				<div className="bg-zinc-100 px-8 flex flex-col justify-center rounded-lg mb-4 h-28">
-					<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
-					<p className="text-2xl font-bold">{`You've got ${doneTasks.length} tasks today.`}</p>
-				</div>
-				<AddTaskForm />
-				<Tab
-					tabNames={tabNames}
-					activeTab={activeTab}
-					setActiveTab={setActiveTab}
-				>
-					<TabContent activeTab={activeTab} tabName="todo">
-						<TaskList tasks={todoTasks} />
-					</TabContent>
-					<TabContent activeTab={activeTab} tabName="doing">
-						<TaskList tasks={doingTasks} />
-					</TabContent>
-					<TabContent activeTab={activeTab} tabName="done">
-						<TaskList tasks={doneTasks} />
-					</TabContent>
-				</Tab>
+		<>
+			<div className="bg-zinc-100 px-8 flex flex-col justify-center rounded-lg my-2 h-28">
+				<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
+				<p className="text-2xl font-bold">{`You've got ${doneTasks.length} tasks today.`}</p>
 			</div>
-			<div className="w-1/2 ml-4 h-screen">
-				<div className="bg-zinc-100 p-8 rounded-lg mb-4 h-28">
-					{selectedTask ? (
-						<>
-							<p className="text-xl font-bold">{selectedTask?.title}</p>
-							<button onClick={() => startTask(selectedTask.id)}>hs</button>
-						</>
-					) : (
-						""
-					)}
+			<div className="flex py-4" style={{ height: "calc(100vh - 12rem)" }}>
+				<div className=" w-1/2 flex flex-col mr-4">
+					<AddTaskForm />
+					<Tab
+						tabNames={tabNames}
+						activeTab={activeTab}
+						setActiveTab={setActiveTab}
+					>
+						<TabContent activeTab={activeTab} tabName="todo">
+							<TaskList tasks={todoTasks} />
+						</TabContent>
+						<TabContent activeTab={activeTab} tabName="doing">
+							<TaskList tasks={doingTasks} />
+						</TabContent>
+						<TabContent activeTab={activeTab} tabName="done">
+							<TaskList tasks={doneTasks} />
+						</TabContent>
+					</Tab>
+				</div>
+				<div className="w-1/2 ml-4">
+					<div className="bg-zinc-100 p-8 rounded-lg mb-4 h-28">
+						{selectedTask ? (
+							<>
+								<p className="text-xl font-bold">{selectedTask?.title}</p>
+								<button onClick={() => startTask(selectedTask.id)}>hs</button>
+							</>
+						) : (
+							""
+						)}
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
