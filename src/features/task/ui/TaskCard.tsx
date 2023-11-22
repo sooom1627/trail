@@ -11,14 +11,14 @@ interface TaskCardProps {
 
 export const TaskCard: React.FC<TaskCardProps> = (task) => {
 	return (
-		<div className="p-4 flex justify-between items-center cursor-pointer">
-			<div>
-				<p className="font-bold text-sm">{task.task.title}</p>
+		<div className="p-4 flex justify-between items-center cursor-pointer max-w-full">
+			<div className="truncate">
+				<p className="font-bold text-sm truncate">{task.task.title}</p>
 				<p className="text-sm text-zinc-400">
 					{task.task.created.toLocaleString()}
 				</p>
 			</div>
-			<div className="flex items-center">
+			<div className="flex items-center min-w-fit ml-4">
 				<ClockIcon />
 				<p className="text-sm ml-2 mr-4">00h 00m 00s </p>
 				{getPriorityIcon(task.task.priority)}
