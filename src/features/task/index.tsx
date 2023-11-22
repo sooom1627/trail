@@ -27,9 +27,9 @@ export const TaskPage: React.FC = () => {
 	return (
 		<div className="flex h-screen py-12">
 			<div className=" w-1/2 flex flex-col mr-4">
-				<div className="bg-zinc-100 p-8 rounded-lg mb-4">
+				<div className="bg-zinc-100 px-8 flex flex-col justify-center rounded-lg mb-4 h-28">
 					<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
-					<p className="text-2xl font-bold">{`You've got ${tasks.length} tasks today.`}</p>
+					<p className="text-2xl font-bold">{`You've got ${doneTasks.length} tasks today.`}</p>
 				</div>
 				<AddTaskForm />
 				<Tab
@@ -49,14 +49,16 @@ export const TaskPage: React.FC = () => {
 				</Tab>
 			</div>
 			<div className="w-1/2 ml-4 h-screen">
-				{selectedTask ? (
-					<div>
-						<p>{selectedTask?.title}</p>
-						<button onClick={() => startTask(selectedTask.id)}>hs</button>
-					</div>
-				) : (
-					""
-				)}
+				<div className="bg-zinc-100 p-8 rounded-lg mb-4 h-28">
+					{selectedTask ? (
+						<>
+							<p className="text-xl font-bold">{selectedTask?.title}</p>
+							<button onClick={() => startTask(selectedTask.id)}>hs</button>
+						</>
+					) : (
+						""
+					)}
+				</div>
 			</div>
 		</div>
 	);
