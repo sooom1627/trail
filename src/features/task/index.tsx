@@ -33,40 +33,15 @@ export const TaskPage: React.FC = () => {
 					setActiveTab={setActiveTab}
 				>
 					<TabContent activeTab={activeTab} tabName="todo">
-						<p className="text-sm text-zinc-500 dark:text-zinc-400">
-							This is some placeholder content the{" "}
-							<strong className="font-medium text-zinc-800 dark:text-white">
-								todo tab's associated content
-							</strong>
-							. Clicking another tab will toggle the visibility of this one for
-							the next. The tab JavaScript swaps classes to control the content
-							visibility and styling.
-						</p>
+						<TaskList tasks={tasks} />
 					</TabContent>
 					<TabContent activeTab={activeTab} tabName="doing">
-						<p className="text-sm text-zinc-500 dark:text-zinc-400">
-							This is some placeholder content the{" "}
-							<strong className="font-medium text-zinc-800 dark:text-white">
-								doing tab's associated content
-							</strong>
-							. Clicking another tab will toggle the visibility of this one for
-							the next. The tab JavaScript swaps classes to control the content
-							visibility and styling.
-						</p>
+						<TaskList tasks={tasks} />
 					</TabContent>
 					<TabContent activeTab={activeTab} tabName="done">
-						<p className="text-sm text-zinc-500 dark:text-zinc-400">
-							This is some placeholder content the{" "}
-							<strong className="font-medium text-zinc-800 dark:text-white">
-								done tab's associated content
-							</strong>
-							. Clicking another tab will toggle the visibility of this one for
-							the next. The tab JavaScript swaps classes to control the content
-							visibility and styling.
-						</p>
+						<TaskList tasks={tasks} />
 					</TabContent>
 				</Tab>
-				<TaskList tasks={tasks} />
 			</div>
 			<div className="w-1/2 ml-4">
 				<p>hello</p>
