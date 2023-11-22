@@ -5,3 +5,8 @@ export const tasksState = atom<Task[]>({
   key:"tasksState",
   default:[]
 })
+
+export const selectedTasksState = atom<Task | null>({
+  key:"selectedTasksState",
+  default:null
+})

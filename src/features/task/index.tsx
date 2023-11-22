@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { tasksState } from "./srtores/atom/task";
+import { tasksState, selectedTasksState } from "./srtores/atom/taskAtom";
 import { useRecoilState } from "recoil";
 import { useLoadTasks } from "./hooks/useLoadTasks";
 import { useTaskSplitter } from "./hooks/useTaskSplitter";
+import { useStartTask } from "./hooks/useStartTask";
 import { getCurrentDate } from "../../utils/getCurrentTime";
 import { AddTaskForm } from "./feature/addTask/AddTaskForm";
 import { TaskList } from "./ui/TaskList";
@@ -11,8 +12,10 @@ import { TabContent } from "../../components/tab/TabContent";
 
 export const TaskPage: React.FC = () => {
 	const [tasks] = useRecoilState(tasksState);
+	const [selectedTask] = useRecoilState(selectedTasksState);
 	const tabNames = ["todo", "doing", "done"];
 	const [activeTab, setActiveTab] = useState(tabNames[0]);
+	const startTask = useStartTask();
 	const loadTasks = useLoadTasks();
 	const today = new Date();
 
@@ -45,8 +48,15 @@ export const TaskPage: React.FC = () => {
 					</TabContent>
 				</Tab>
 			</div>
-			<div className="w-1/2 ml-4">
-				<p>hello</p>
+			<div className="w-1/2 ml-4 h-screen">
+				{selectedTask ? (
+					<div>
+						<p>{selectedTask?.title}</p>
+						<button onClick={() => startTask(selectedTask.id)}>hs</button>
+					</div>
+				) : (
+					""
+				)}
 			</div>
 		</div>
 	);

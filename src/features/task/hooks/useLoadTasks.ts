@@ -1,5 +1,5 @@
 import { Task } from '../interface/Task';
-import { tasksState } from '../srtores/atom/task';
+import { tasksState } from '../srtores/atom/taskAtom';
 import { useRecoilState } from 'recoil';
 
 export const useLoadTasks = () => {

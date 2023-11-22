@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { tasksState } from '../srtores/atom/task';
+import { tasksState } from '../srtores/atom/taskAtom';
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../interface/Task';
 
