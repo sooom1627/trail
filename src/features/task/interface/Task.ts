@@ -1,6 +1,6 @@
 export interface Task {
   id : string;
   title : string;
-  priority:"low"| "middle" | "high"
+  priority:"lowest"| "low"| "middle" | "high"| "highest"
   created: Date;
 }
