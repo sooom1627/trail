@@ -33,7 +33,9 @@ export const Tab: React.FC<TabProps> = (props) => {
 					))}
 				</ul>
 			</div>
-			<div id="default-tab-content">{children}</div>
+			<div id="default-tab-content" className="overflow-y-scroll">
+				{children}
+			</div>
 		</>
 	);
 };
