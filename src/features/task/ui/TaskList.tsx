@@ -7,7 +7,7 @@ interface TaskListProps {
 
 export const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
 	return (
-		<div className="divide-y divide-dotted divide-zinc-200 overflow-y-auto pr-2 mt-4">
+		<div className="divide-y divide-dotted divide-zinc-200 overflow-y-auto pr-2">
 			{tasks.map((task: Task) => (
 				<TaskCard key={task.id} task={task} />
 			))}
