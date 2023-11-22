@@ -17,6 +17,7 @@ export const useSaveTask = () => {
     const newTask: Task = {
       id: uuidv4(),
       title,
+      priority:"middle",
       created: new Date()
     };
     let updatedTasks = [...currentTasks, newTask];
