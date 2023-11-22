@@ -1,11 +1,19 @@
 import React from "react";
+import { Task } from "../interface/Task";
 
-export const TaskCard: React.FC = () => {
+interface TaskCardProps {
+	task: Task;
+	key: string;
+}
+
+export const TaskCard: React.FC<TaskCardProps> = (task) => {
 	return (
 		<div className="bg-zinc-100 p-6 rounded-lg mb-2 flex justify-between items-center">
 			<div>
-				<p> Todo Tasks</p>
-				<p className="text-sm text-zinc-400">2023-11-17 11:00</p>
+				<p>{task.task.title}</p>
+				<p className="text-sm text-zinc-400">
+					{task.task.created.toLocaleString()}
+				</p>
 			</div>
 			<div className="flex items-center">
 				<svg
@@ -17,8 +25,8 @@ export const TaskCard: React.FC = () => {
 				>
 					<path
 						stroke="currentColor"
-						stroke-linejoin="round"
-						stroke-width="2"
+						strokeLinejoin="round"
+						strokeWidth="2"
 						d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
 					/>
 				</svg>
@@ -32,9 +40,9 @@ export const TaskCard: React.FC = () => {
 				>
 					<path
 						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth="2"
 						d="M9 5 5 1 1 5m8 6L5 7l-4 4"
 					/>
 				</svg>
