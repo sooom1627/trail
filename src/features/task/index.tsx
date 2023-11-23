@@ -55,12 +55,18 @@ export const TaskPage: React.FC = () => {
 						{selectedTask?.status === "todo" ? (
 							<>
 								<p className="text-xl font-bold">{selectedTask?.title}</p>
-								<button onClick={() => startTask(selectedTask?.id)}>hs</button>
+								<button
+									onClick={() => {
+										startTask(selectedTask?.id);
+									}}
+								>
+									Start
+								</button>
 							</>
 						) : selectedTask?.status === "doing" ? (
 							<>
 								<p className="text-xl font-bold">{selectedTask?.title}</p>
-								<button onClick={() => endTask(selectedTask?.id)}>hs</button>
+								<button onClick={() => endTask(selectedTask?.id)}>end</button>
 							</>
 						) : (
 							""

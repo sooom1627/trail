@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps {
 	childlen: React.ReactNode;
-	onClick: (event: React.MouseEvent) => void;
+	onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const PrimaryButton: React.FC<ButtonProps> = ({ childlen, onClick }) => (

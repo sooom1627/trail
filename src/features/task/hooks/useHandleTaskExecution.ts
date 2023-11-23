@@ -1,11 +1,13 @@
 import { useRecoilState } from 'recoil';
-import { tasksState } from '../srtores/atom/taskAtom';
+import { tasksState,selectedTasksState } from '../srtores/atom/taskAtom';
 import { Task } from "../interface/Task";
 
 export const useHandleTaskExecution = (status: "doing" | "done") => {  
   const [,setTasks] = useRecoilState(tasksState);
+  const [selectedTask, setSelectedTask] = useRecoilState(selectedTasksState)
 
   const handleTaskExecution= (taskId:string) =>{
+    if(selectedTask){
       const tasksString = localStorage.getItem('tasks');
       const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
         ...task,
@@ -22,6 +24,9 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
       
       updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
       setTasks(updatedTasks);
+      setSelectedTask({...selectedTask, status:status, id: selectedTask?.id})
+    }
+
     }
   return handleTaskExecution
 };
