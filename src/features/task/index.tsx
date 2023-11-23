@@ -26,12 +26,12 @@ export const TaskPage: React.FC = () => {
 
 	return (
 		<>
-			<div className="bg-zinc-100 px-8 flex flex-col justify-center rounded-lg my-2 h-28">
-				<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
-				<p className="text-2xl font-bold">{`You've got ${doneTasks.length} tasks today.`}</p>
-			</div>
-			<div className="flex py-4" style={{ height: "calc(100vh - 12rem)" }}>
-				<div className=" w-1/2 flex flex-col mr-4">
+			<div className="flex py-10 h-screen">
+				<div className=" w-2/3 flex flex-col mr-4">
+					<div className="bg-zinc-100 px-8 py-6 flex flex-col justify-center rounded-lg mb-4 min-h-28 max-h-28">
+						<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
+						<p className="text-2xl font-bold">{`You've got ${doneTasks.length} tasks & spent 01:22 on tasks today.`}</p>
+					</div>
 					<AddTaskForm />
 					<Tab
 						tabNames={tabNames}
@@ -49,8 +49,8 @@ export const TaskPage: React.FC = () => {
 						</TabContent>
 					</Tab>
 				</div>
-				<div className="w-1/2 ml-4">
-					<div className="bg-zinc-100 p-8 rounded-lg mb-4 h-28">
+				<div className="w-1/3 ml-4">
+					<div className="bg-zinc-100 p-8 rounded-lg mb-4 h-64">
 						{selectedTask ? (
 							<>
 								<p className="text-xl font-bold">{selectedTask?.title}</p>
