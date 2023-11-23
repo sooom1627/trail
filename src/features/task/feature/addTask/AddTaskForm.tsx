@@ -3,6 +3,7 @@ import { useSaveTask } from "../../hooks/useSaveTask";
 import { PrimaryButton } from "../../../../components/button/PrimaryButton";
 import { TextInput } from "../../../../components/input/TextInput";
 import { PlusIcon } from "../../../../components/icons/action/PlusIcon";
+import { toast } from "react-toastify";
 
 export const AddTaskForm = () => {
 	const [formValue, setFormValue] = useState<string>("");
@@ -10,8 +11,21 @@ export const AddTaskForm = () => {
 
 	const createTaskFunction = (event: React.MouseEvent) => {
 		event.preventDefault();
-		saveTask(formValue);
-		setFormValue("");
+		if (formValue !== "") {
+			saveTask(formValue);
+			setFormValue("");
+		} else {
+			toast.error("🧐 Task is empty!", {
+				position: "top-left",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+		}
 	};
 
 	return (
@@ -29,7 +43,9 @@ export const AddTaskForm = () => {
 					/>
 				</div>
 				<PrimaryButton
-					onClick={createTaskFunction}
+					onClick={(e) => {
+						createTaskFunction(e);
+					}}
 					childlen={<PlusIcon />}
 				></PrimaryButton>
 			</form>
