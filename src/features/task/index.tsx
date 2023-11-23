@@ -3,7 +3,7 @@ import { tasksState, selectedTasksState } from "./srtores/atom/taskAtom";
 import { useRecoilState } from "recoil";
 import { useLoadTasks } from "./hooks/useLoadTasks";
 import { useTaskSplitter } from "./hooks/useTaskSplitter";
-import { useStartTask } from "./hooks/useStartTask";
+import { useHandleTaskExecution } from "./hooks/useHandleTaskExecution";
 import { getCurrentDate } from "../../utils/getCurrentTime";
 import { AddTaskForm } from "./feature/addTask/AddTaskForm";
 import { TaskList } from "./ui/TaskList";
@@ -15,7 +15,8 @@ export const TaskPage: React.FC = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
 	const tabNames = ["todo", "doing", "done"];
 	const [activeTab, setActiveTab] = useState(tabNames[0]);
-	const startTask = useStartTask();
+	const startTask = useHandleTaskExecution("doing");
+	const endTask = useHandleTaskExecution("done");
 	const loadTasks = useLoadTasks();
 	const today = new Date();
 
@@ -51,10 +52,15 @@ export const TaskPage: React.FC = () => {
 				</div>
 				<div className="w-1/3 ml-4">
 					<div className="bg-zinc-100 p-8 rounded-lg mb-4 h-64">
-						{selectedTask ? (
+						{selectedTask?.status === "todo" ? (
 							<>
 								<p className="text-xl font-bold">{selectedTask?.title}</p>
-								<button onClick={() => startTask(selectedTask.id)}>hs</button>
+								<button onClick={() => startTask(selectedTask?.id)}>hs</button>
+							</>
+						) : selectedTask?.status === "doing" ? (
+							<>
+								<p className="text-xl font-bold">{selectedTask?.title}</p>
+								<button onClick={() => endTask(selectedTask?.id)}>hs</button>
 							</>
 						) : (
 							""

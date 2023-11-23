@@ -2,10 +2,10 @@ import { useRecoilState } from 'recoil';
 import { tasksState } from '../srtores/atom/taskAtom';
 import { Task } from "../interface/Task";
 
-export const useStartTask = () => {  
+export const useHandleTaskExecution = (status: "doing" | "done") => {  
   const [,setTasks] = useRecoilState(tasksState);
 
-  const startTask = (taskId:string) =>{
+  const handleTaskExecution= (taskId:string) =>{
       const tasksString = localStorage.getItem('tasks');
       const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
         ...task,
@@ -14,7 +14,7 @@ export const useStartTask = () => {
 
       let updatedTasks = currentTasks.map(t => {
         if (t.id === taskId) {
-          return { ...t, status: "doing" as "doing" | "todo" | "done" };
+          return { ...t, status: status as "doing" | "todo" | "done" };
         }
         return t;
       });
@@ -23,5 +23,5 @@ export const useStartTask = () => {
       updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
       setTasks(updatedTasks);
     }
-  return startTask
+  return handleTaskExecution
 };
