@@ -11,7 +11,9 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
       const tasksString = localStorage.getItem('tasks');
       const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
         ...task,
-        created: new Date(task.created)
+        created: new Date(task.created),
+        startTime: task.startTime ? new Date(task.startTime) : undefined,
+        endTime: task.endTime ? new Date(task.endTime): undefined
       })) as Task[] : [];
 
       let updatedTasks = currentTasks.map(t => {
