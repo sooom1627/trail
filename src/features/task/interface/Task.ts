@@ -4,4 +4,6 @@ export interface Task {
   priority:"lowest"| "low"| "middle" | "high"| "highest"
   status:"todo" | "doing"| "done"
   created: Date;
+  startTime?: Date;
+  endTime?: Date;
 }

@@ -1,13 +1,11 @@
 import { useRecoilState } from "recoil";
 import { selectedTasksState } from "../../srtores/atom/taskAtom";
-import { useHandleTaskExecution } from "../../hooks/useHandleTaskExecution";
-import { PlayIcon } from "../../../../components/icons/action/PlayIcon";
+
 import { EditIcon } from "../../../../components/icons/action/EditIcon";
+import { TaskTimer } from "./TaskTimer";
 
 export const TaskPanel = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
-	const startTask = useHandleTaskExecution("doing");
-	const endTask = useHandleTaskExecution("done");
 
 	return (
 		<div className="flex w-full gap-4">
@@ -32,70 +30,7 @@ export const TaskPanel = () => {
 								</span>
 							</p>
 						</div>
-						<div></div>
-						<p className="text-2xl items-center m-4 text-center">
-							<span className="text-5xl m-1">00</span>h
-							<span className="text-5xl m-1">00</span>m
-							<span className="text-5xl m-1">00</span>s
-						</p>
-						<div className="gap-2 flex items-center justify-center min-w-fit">
-							{selectedTask?.status === "todo" ? (
-								<>
-									<button
-										type="button"
-										className="h-fit text-white bg-zinc-700 hover:bg-zinc-800 rounded-full text-sm p-2.5 text-center inline-flex items-center"
-										onClick={() => startTask(selectedTask.id)}
-									>
-										<PlayIcon />
-									</button>
-								</>
-							) : selectedTask?.status === "doing" ? (
-								<>
-									<button className="h-fit text-white bg-red-500 hover:bg-red-600 rounded-full text-sm p-2.5 text-center inline-flex items-center">
-										<svg
-											className="w-2 h-2 text-white"
-											aria-hidden="true"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="currentColor"
-											viewBox="0 0 10 16"
-										>
-											<path
-												fillRule="evenodd"
-												d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z"
-												clipRule="evenodd"
-											/>
-										</svg>
-									</button>
-									<button
-										onClick={() => endTask(selectedTask.id)}
-										className="h-fit text-white bg-zinc-700 hover:bg-zinc-800 rounded-full text-sm p-2.5 text-center inline-flex items-center"
-									>
-										<svg
-											className="w-2 h-2 text-white"
-											aria-hidden="true"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 16 12"
-										>
-											<path
-												stroke="currentColor"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M1 5.917 5.724 10.5 15 1.5"
-											/>
-										</svg>
-									</button>
-								</>
-							) : selectedTask?.status === "done" ? (
-								<div className="block text-center">
-									<p>2023/11/23 11:11 ~ 13:22</p>
-									<p className="text-xs text-zinc-500">(Pause in 23min)</p>
-								</div>
-							) : (
-								""
-							)}
-						</div>
+						<TaskTimer task={selectedTask} />
 					</>
 				) : (
 					""

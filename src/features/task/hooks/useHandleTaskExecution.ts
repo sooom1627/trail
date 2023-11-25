@@ -16,6 +16,13 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
 
       let updatedTasks = currentTasks.map(t => {
         if (t.id === taskId) {
+          switch(status){
+            case "doing":
+              return { ...t, status: status as "doing" | "todo" | "done", startTime:new Date() };
+            case "done":
+              return { ...t, status: status as "doing" | "todo" | "done", endTime:new Date() };
+          }
+            
           return { ...t, status: status as "doing" | "todo" | "done" };
         }
         return t;
