@@ -16,9 +16,9 @@ interface TaskCardProps {
 export const TaskCard: React.FC<TaskCardProps> = (task) => {
 	const [, setSelectedTask] = useRecoilState(selectedTasksState);
 	const [executionTime, setExecutionTime] = useState<ExecutionTime>({
-		hoursStr: "--",
-		minutesStr: "--",
-		secondsStr: "--",
+		hoursStr: "00",
+		minutesStr: "00",
+		secondsStr: "00",
 	});
 
 	useEffect(() => {
