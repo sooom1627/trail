@@ -1,8 +1,8 @@
 import { useRecoilState } from "recoil";
 import { selectedTasksState } from "../../srtores/atom/taskAtom";
-
-import { EditIcon } from "@/components/icons/action/EditIcon";
 import { TaskTimer } from "./TaskTimer";
+import { EditIcon } from "@/components/icons/action/EditIcon";
+import { TimerEmpty } from "../ui/TimerEmpty/TimerEmpty";
 
 export const TaskPanel = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
@@ -34,7 +34,7 @@ export const TaskPanel = () => {
 					</>
 				) : (
 					<>
-						<p>hello</p>
+						<TimerEmpty />
 					</>
 				)}
 			</div>

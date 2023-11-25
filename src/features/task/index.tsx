@@ -15,14 +15,13 @@ export const TaskPage: React.FC = () => {
 
 	const tabNames = ["todo", "doing", "done"];
 	const [activeTab, setActiveTab] = useState(tabNames[0]);
-
+	const { todoTasks, doingTasks, doneTasks } = taskSplitter(tasks);
 	const loadTasks = useLoadTasks();
 	const today = new Date();
 
 	useEffect(() => {
 		loadTasks();
 	}, []);
-	const { todoTasks, doingTasks, doneTasks } = taskSplitter(tasks);
 
 	return (
 		<>
