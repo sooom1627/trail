@@ -30,7 +30,7 @@ export const TaskPanel = () => {
 								</span>
 							</p>
 						</div>
-						<TaskTimer task={selectedTask} />
+						<TaskTimer />
 					</>
 				) : (
 					<>

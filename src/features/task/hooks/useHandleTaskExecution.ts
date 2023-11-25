@@ -20,8 +20,10 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
         if (t.id === taskId) {
           switch(status){
             case "doing":
+              setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, startTime:new Date()})
               return { ...t, status: status as "doing" | "todo" | "done", startTime:new Date() };
             case "done":
+              setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, endTime:new Date()})
               return { ...t, status: status as "doing" | "todo" | "done", endTime:new Date() };
           }
         }
@@ -31,7 +33,6 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
       
       updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
       setTasks(updatedTasks);
-      setSelectedTask({...selectedTask, status:status, id: selectedTask?.id})
     }
 
     }
