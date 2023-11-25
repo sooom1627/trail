@@ -1,12 +1,12 @@
-import { useHandleTaskExecution } from "../../hooks/useHandleTaskExecution";
+import { useHandleTaskExecution } from "../../../hooks/useHandleTaskExecution";
 import { PlayIcon } from "@/components/icons/action/PlayIcon";
 import { PauseIcon } from "@/components/icons/action/PauseIcon";
 import { CheckIcon } from "@/components/icons/action/CheckIcon";
 import { useEffect, useState } from "react";
-import { ExecutionTime } from "../../interface/ExecutionTime";
-import { getTimerTaskExecutionTime } from "../../utils/getExecutionTime";
+import { ExecutionTime } from "../../../interface/ExecutionTime";
+import { getTimerTaskExecutionTime } from "../../../utils/getExecutionTime";
 import { useRecoilState } from "recoil";
-import { selectedTasksState } from "../../srtores/atom/taskAtom";
+import { selectedTasksState } from "../../../srtores/atom/taskAtom";
 
 export const TaskTimer: React.FC = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);

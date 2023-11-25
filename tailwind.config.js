@@ -5,6 +5,9 @@ export default {
   ],
   theme: {
     extend: {
+      height:{
+        '30':'7.5rem'
+      },
       maxWidth: {
         '5/12': '41.666667%',
         '2/3' :"66%"
