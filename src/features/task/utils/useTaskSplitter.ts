@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Task } from 'src/features/task/interface/Task';
 
-export const useTaskSplitter = (tasks: Task[]) => {
+export const taskSplitter = (tasks: Task[]) => {
   const [todoTasks, setTodoTasks] = useState<Task[]>([]);
   const [doingTasks, setDoingTasks] = useState<Task[]>([]);
   const [doneTasks, setDoneTasks] = useState<Task[]>([]);

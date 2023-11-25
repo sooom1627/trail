@@ -32,13 +32,12 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 	}, []);
 
 	return (
-		<div
-			className="p-4 flex justify-between items-center cursor-pointer max-w-full"
-			onClick={() => setSelectedTask(task.task)}
-		>
-			<div className="truncate">
+		<div className="p-4 flex justify-between items-center  max-w-full">
+			<div
+				className="truncate cursor-pointer grow"
+				onClick={() => setSelectedTask(task.task)}
+			>
 				<p className="font-bold text-sm truncate">{task.task.title}</p>
-
 				{task.task.status === "todo" ? (
 					<p className="text-sm text-zinc-400">
 						Create: {task.task.created.toLocaleString()}
@@ -59,7 +58,7 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 					{`${executionTime.hoursStr}h ${executionTime.minutesStr}m ${executionTime.secondsStr}s`}
 				</p>
 				{getPriorityIcon(task.task.priority)}
-				<div className="bg-zinc-100 p-1.5 rounded-full ml-4 cursol-pointer hover:bg-zinc-200">
+				<div className="bg-zinc-100 p-1.5 rounded-full ml-4 cursol-pointer hover:bg-zinc-200 cursor-pointer">
 					<EditIcon />
 				</div>
 			</div>
