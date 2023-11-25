@@ -11,9 +11,11 @@ export const useSaveTask = () => {
     const tasksString = localStorage.getItem('tasks');
     const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
       ...task,
-      created: new Date(task.created)
+      created: new Date(task.created),
+      startTime: task.startTime ? new Date(task.startTime) : undefined,
+      endTime: task.endTime ? new Date(task.endTime): undefined
     })) as Task[] : [];
-
+    
     const newTask: Task = {
       id: uuidv4(),
       title,

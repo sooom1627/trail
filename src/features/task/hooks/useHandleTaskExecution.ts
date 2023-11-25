@@ -11,19 +11,21 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
       const tasksString = localStorage.getItem('tasks');
       const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
         ...task,
-        created: new Date(task.created)
+        created: new Date(task.created),
+        startTime: task.startTime ? new Date(task.startTime) : undefined,
+        endTime: task.endTime ? new Date(task.endTime): undefined
       })) as Task[] : [];
 
       let updatedTasks = currentTasks.map(t => {
         if (t.id === taskId) {
           switch(status){
             case "doing":
+              setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, startTime:new Date()})
               return { ...t, status: status as "doing" | "todo" | "done", startTime:new Date() };
             case "done":
+              setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, endTime:new Date()})
               return { ...t, status: status as "doing" | "todo" | "done", endTime:new Date() };
           }
-            
-          return { ...t, status: status as "doing" | "todo" | "done" };
         }
         return t;
       });
@@ -31,7 +33,6 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
       
       updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
       setTasks(updatedTasks);
-      setSelectedTask({...selectedTask, status:status, id: selectedTask?.id})
     }
 
     }
