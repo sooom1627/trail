@@ -24,8 +24,6 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
             case "done":
               return { ...t, status: status as "doing" | "todo" | "done", endTime:new Date() };
           }
-            
-          return { ...t, status: status as "doing" | "todo" | "done" };
         }
         return t;
       });
