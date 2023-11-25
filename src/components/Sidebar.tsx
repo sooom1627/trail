@@ -1,7 +1,7 @@
 export const Sidebar = () => {
 	return (
 		<>
-			<div className="h-screen p-8 w-60" aria-label="Sidebar">
+			<div className="h-screen py-8 px-4 w-52" aria-label="Sidebar">
 				<div className="h-full px-3 py-6 overflow-y-auto bg-zinc-950 rounded-3xl shadow-2xl shadow-zinc-700">
 					<ul className="space-y-2 font-medium">
 						<li>

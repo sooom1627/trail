@@ -2,14 +2,30 @@ import { useState } from "react";
 import { useSaveTask } from "../../hooks/useSaveTask";
 import { PrimaryButton } from "../../../../components/button/PrimaryButton";
 import { TextInput } from "../../../../components/input/TextInput";
+import { PlusIcon } from "../../../../components/icons/action/PlusIcon";
+import { toast } from "react-toastify";
 
 export const AddTaskForm = () => {
 	const [formValue, setFormValue] = useState<string>("");
 	const saveTask = useSaveTask();
 
-	const createTaskFunction = () => {
-		saveTask(formValue);
-		setFormValue("");
+	const createTaskFunction = (event: React.MouseEvent) => {
+		event.preventDefault();
+		if (formValue !== "") {
+			saveTask(formValue);
+			setFormValue("");
+		} else {
+			toast.error("🧐 Task is empty!", {
+				position: "top-left",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+		}
 	};
 
 	return (
@@ -27,24 +43,10 @@ export const AddTaskForm = () => {
 					/>
 				</div>
 				<PrimaryButton
-					onClick={createTaskFunction}
-					childlen={
-						<svg
-							className="w-4 h-4 text-white dark:text-white"
-							aria-hidden="true"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 20 20"
-						>
-							<path
-								stroke="currentColor"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-							/>
-						</svg>
-					}
+					onClick={(e) => {
+						createTaskFunction(e);
+					}}
+					childlen={<PlusIcon />}
 				></PrimaryButton>
 			</form>
 		</>
