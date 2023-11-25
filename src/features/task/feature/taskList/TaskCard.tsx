@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { selectedTasksState } from "../../srtores/atom/taskAtom";
 import { Task } from "../../interface/Task";
 import { getPriorityIcon } from "../../utils/getPriorityIcon";
 import { ClockIcon } from "../../../../components/icons/ClockIcon";
 import { EditIcon } from "../../../../components/icons/action/EditIcon";
+import { calculateExecutionTime } from "../../utils/calculateExecutionTime";
 
 interface TaskCardProps {
 	task: Task;
@@ -13,6 +14,20 @@ interface TaskCardProps {
 
 export const TaskCard: React.FC<TaskCardProps> = (task) => {
 	const [, setSelectedTask] = useRecoilState(selectedTasksState);
+	const [executionTime, setExecutionTime] = useState<
+		{ hoursStr: string; minutesStr: string; secondsStr: string } | undefined
+	>({ hoursStr: "00", minutesStr: "00", secondsStr: "00" });
+
+	useEffect(() => {
+		if (task.task.startTime && task.task.endTime) {
+			const result = calculateExecutionTime(
+				task.task.startTime,
+				task.task.endTime
+			);
+			setExecutionTime(result);
+		}
+	}, [task.task.startTime, task.task.endTime]);
+
 	return (
 		<div
 			className="p-4 flex justify-between items-center cursor-pointer max-w-full"
@@ -26,7 +41,7 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 			</div>
 			<div className="flex items-center min-w-fit ml-4">
 				<ClockIcon />
-				<p className="text-sm ml-2 mr-4">00h 00m 00s </p>
+				<p className="text-sm ml-2 mr-4">{`${executionTime?.hoursStr}h ${executionTime?.minutesStr}m ${executionTime?.secondsStr}s`}</p>
 				{getPriorityIcon(task.task.priority)}
 				<div className="bg-zinc-100 p-1.5 rounded-full ml-6 cursol-pointer hover:bg-zinc-200">
 					<EditIcon />

@@ -11,6 +11,8 @@ export const useLoadTasks = () => {
     // 各タスクの `created` を Date オブジェクトに変換
     loadedTasks.forEach(task => {
       task.created = new Date(task.created);
+      task.startTime = task.startTime ? new Date(task.startTime) : undefined;
+      task.endTime = task.endTime ? new Date(task.endTime) : undefined;
     });
     // タスクを `created` の降順にソート
     loadedTasks = loadedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
