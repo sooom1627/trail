@@ -5,10 +5,10 @@ import { useLoadTasks } from "./hooks/useLoadTasks";
 import { useTaskSplitter } from "./hooks/useTaskSplitter";
 import { getCurrentDate } from "../../utils/getCurrentTime";
 import { AddTaskForm } from "./feature/addTask/AddTaskForm";
-import { TaskList } from "./ui/TaskList";
+import { TaskList } from "./feature/taskList/TaskList";
 import { Tab } from "../../components/tab/tab";
 import { TabContent } from "../../components/tab/TabContent";
-import { TaskPanel } from "./ui/TaskPanel";
+import { TaskPanel } from "./feature/taskPanel/TaskPanel";
 
 export const TaskPage: React.FC = () => {
 	const [tasks] = useRecoilState(tasksState);

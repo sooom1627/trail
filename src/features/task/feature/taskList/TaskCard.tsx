@@ -1,10 +1,10 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { selectedTasksState } from "../srtores/atom/taskAtom";
-import { Task } from "../interface/Task";
-import { getPriorityIcon } from "../utils/getPriorityIcon";
-import { ClockIcon } from "../../../components/icons/ClockIcon";
-import { EditIcon } from "../../../components/icons/action/EditIcon";
+import { selectedTasksState } from "../../srtores/atom/taskAtom";
+import { Task } from "../../interface/Task";
+import { getPriorityIcon } from "../../utils/getPriorityIcon";
+import { ClockIcon } from "../../../../components/icons/ClockIcon";
+import { EditIcon } from "../../../../components/icons/action/EditIcon";
 
 interface TaskCardProps {
 	task: Task;
@@ -28,7 +28,7 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 				<ClockIcon />
 				<p className="text-sm ml-2 mr-4">00h 00m 00s </p>
 				{getPriorityIcon(task.task.priority)}
-				<div className="bg-zinc-100 p-1.5 rounded-full ml-6 cursol-pointer">
+				<div className="bg-zinc-100 p-1.5 rounded-full ml-6 cursol-pointer hover:bg-zinc-200">
 					<EditIcon />
 				</div>
 			</div>
