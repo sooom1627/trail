@@ -28,7 +28,7 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 				<ClockIcon />
 				<p className="text-sm ml-2 mr-4">00h 00m 00s </p>
 				{getPriorityIcon(task.task.priority)}
-				<div className="bg-zinc-100 p-1.5 rounded-full ml-6">
+				<div className="bg-zinc-100 p-1.5 rounded-full ml-6 cursol-pointer">
 					<EditIcon />
 				</div>
 			</div>
