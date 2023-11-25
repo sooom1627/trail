@@ -1,7 +1,7 @@
 import { useHandleTaskExecution } from "../../hooks/useHandleTaskExecution";
-import { PlayIcon } from "../../../../components/icons/action/PlayIcon";
-import { PauseIcon } from "../../../../components/icons/action/PauseIcon";
-import { CheckIcon } from "../../../../components/icons/action/CheckIcon";
+import { PlayIcon } from "@/components/icons/action/PlayIcon";
+import { PauseIcon } from "@/components/icons/action/PauseIcon";
+import { CheckIcon } from "@/components/icons/action/CheckIcon";
 import { useEffect, useState } from "react";
 import { ExecutionTime } from "../../interface/ExecutionTime";
 import { getTimerTaskExecutionTime } from "../../utils/getExecutionTime";

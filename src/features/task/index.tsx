@@ -3,11 +3,11 @@ import { tasksState } from "./srtores/atom/taskAtom";
 import { useRecoilState } from "recoil";
 import { useLoadTasks } from "./hooks/useLoadTasks";
 import { useTaskSplitter } from "./hooks/useTaskSplitter";
-import { getCurrentDate } from "../../utils/getCurrentTime";
+import { getCurrentDate } from "@/utils/getCurrentTime";
 import { AddTaskForm } from "./feature/addTask/AddTaskForm";
 import { TaskList } from "./feature/taskList/TaskList";
-import { Tab } from "../../components/tab/tab";
-import { TabContent } from "../../components/tab/TabContent";
+import { Tab } from "@/components/tab/tab";
+import { TabContent } from "@/components/tab/TabContent";
 import { TaskPanel } from "./feature/taskPanel/TaskPanel";
 
 export const TaskPage: React.FC = () => {

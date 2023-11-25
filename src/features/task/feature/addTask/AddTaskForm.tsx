@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSaveTask } from "../../hooks/useSaveTask";
-import { PrimaryButton } from "../../../../components/button/PrimaryButton";
-import { TextInput } from "../../../../components/input/TextInput";
-import { PlusIcon } from "../../../../components/icons/action/PlusIcon";
+import { PrimaryButton } from "@/components/button/PrimaryButton";
+import { TextInput } from "@/components/input/TextInput";
+import { PlusIcon } from "@/components/icons/action/PlusIcon";
 import { toast } from "react-toastify";
 
 export const AddTaskForm = () => {

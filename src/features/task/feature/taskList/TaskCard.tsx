@@ -3,8 +3,8 @@ import { useRecoilState } from "recoil";
 import { selectedTasksState } from "../../srtores/atom/taskAtom";
 import { Task } from "../../interface/Task";
 import { getPriorityIcon } from "../../utils/getPriorityIcon";
-import { ClockIcon } from "../../../../components/icons/ClockIcon";
-import { EditIcon } from "../../../../components/icons/action/EditIcon";
+import { ClockIcon } from "@/components/icons/ClockIcon";
+import { EditIcon } from "@/components/icons/action/EditIcon";
 import { getDoneTaskExecutionTime } from "../../utils/getExecutionTime";
 import { ExecutionTime } from "../../interface/ExecutionTime";
 
