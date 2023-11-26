@@ -6,8 +6,13 @@ import { TimerEmpty } from "../ui/TimerEmpty/TimerEmpty";
 import { TaskTrackChart } from "./TaskTrackChart/TaskTrackChart";
 import { TaskEditModal } from "../editTask/TaskEditModal";
 import { useState } from "react";
+import { Task } from "../../interface/Task";
 
-export const TaskPanel = () => {
+interface TaskPanelProps {
+	doneTasks: Task[];
+}
+
+export const TaskPanel: React.FC<TaskPanelProps> = ({ doneTasks }) => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
 	const [toggleModal, setToggleModal] = useState<boolean>(false);
 
@@ -52,7 +57,7 @@ export const TaskPanel = () => {
 			</div>
 			<div className="bg-zinc-100 p-6 rounded-lg mb-4 h-56 w-7/12">
 				<p className="pb-4 font-bold">Today's Flow</p>
-				<TaskTrackChart />
+				<TaskTrackChart doneTasks={doneTasks} />
 			</div>
 		</div>
 	);
