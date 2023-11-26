@@ -49,9 +49,6 @@ export const TaskPage: React.FC = () => {
 						</TabContent>
 					</Tab>
 				</div>
-				<div className="grow ml-4">
-					<p>hello</p>
-				</div>
 			</div>
 		</>
 	);

@@ -4,9 +4,9 @@ export const MiddleIcon = () => {
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
-			strokeWidth="1.5"
+			strokeWidth={2}
 			stroke="currentColor"
-			className="w-4 h-4 text-green-500"
+			className="w-4 h-4 text-green-400"
 		>
 			<path
 				strokeLinecap="round"

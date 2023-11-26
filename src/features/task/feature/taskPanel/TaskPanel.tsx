@@ -4,9 +4,12 @@ import { TaskTimer } from "./TaskTimer/TaskTimer";
 import { EditIcon } from "@/components/icons/action/EditIcon";
 import { TimerEmpty } from "../ui/TimerEmpty/TimerEmpty";
 import { TaskTrackChart } from "./TaskTrackChart/TaskTrackChart";
+import { TaskEditModal } from "../editTask/TaskEditModal";
+import { useState } from "react";
 
 export const TaskPanel = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
+	const [toggleModal, setToggleModal] = useState<boolean>(false);
 
 	return (
 		<div className="flex w-full gap-4">
@@ -18,7 +21,10 @@ export const TaskPanel = () => {
 								<p className="text-sm font-bold truncate mb-1">
 									{selectedTask?.title}
 								</p>
-								<div className="w-fit cursor-pointer">
+								<div
+									className="w-fit cursor-pointer"
+									onClick={() => setToggleModal(true)}
+								>
 									<EditIcon />
 								</div>
 							</div>
@@ -32,6 +38,11 @@ export const TaskPanel = () => {
 							</p>
 						</div>
 						<TaskTimer />
+						<TaskEditModal
+							task={selectedTask}
+							toggleModal={toggleModal}
+							setToggleModal={setToggleModal}
+						/>
 					</>
 				) : (
 					<>
