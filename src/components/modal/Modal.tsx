@@ -21,7 +21,7 @@ export const Modal: React.FC<ModalProps> = ({
 			{toggleModal && (
 				<>
 					<div
-						className="fixed inset-0 bg-zinc-700 opacity-40"
+						className="fixed inset-0 bg-zinc-700 opacity-40 z-10"
 						onClick={() => setToggleModal(false)}
 					/>
 					<div className="w-full h-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto flex items-center justify-center">
