@@ -4,6 +4,7 @@ import { CloseIcon } from "../icons/action/CloseIcon";
 interface ModalProps {
 	modalTitle: string;
 	children: React.ReactNode;
+	confirmModal: React.ReactNode;
 	toggleModal: boolean;
 	setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -11,6 +12,7 @@ interface ModalProps {
 export const Modal: React.FC<ModalProps> = ({
 	modalTitle,
 	children,
+	confirmModal,
 	toggleModal,
 	setToggleModal,
 }) => {
@@ -43,12 +45,7 @@ export const Modal: React.FC<ModalProps> = ({
 									>
 										Close
 									</button>
-									<button
-										type="button"
-										className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-zinc-600 text-white hover:bg-zinc-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-zinc-600"
-									>
-										Save changes
-									</button>
+									{confirmModal}
 								</div>
 							</div>
 						</div>

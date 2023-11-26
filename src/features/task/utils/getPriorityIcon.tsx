@@ -6,15 +6,15 @@ import { LowIcon } from "@/components/icons/priority/LowIcon";
 
 export const getPriorityIcon = (priority: string) => {
 	switch (priority) {
-		case "highest":
+		case "Highest":
 			return <HighestIcon />;
-		case "high":
+		case "High":
 			return <HighIcon />;
-		case "medium":
+		case "Medium":
 			return <MiddleIcon />;
-		case "low":
+		case "Low":
 			return <LowIcon />;
-		case "lowest":
+		case "Lowest":
 			return <LowestIcon />;
 		default:
 			return <MiddleIcon />;

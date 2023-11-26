@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { TextInput } from "@/components/input/TextInput";
 import { Modal } from "@/components/modal/Modal";
-import { HighIcon } from "@/components/icons/priority/HighIcon";
-import { HighestIcon } from "@/components/icons/priority/HighestIcon";
-import { LowIcon } from "@/components/icons/priority/LowIcon";
-import { LowestIcon } from "@/components/icons/priority/LowestIcon";
-import { MiddleIcon } from "@/components/icons/priority/MiddleIcon";
 import { Task } from "../../interface/Task";
+import { PrimaryButton } from "@/components/button/PrimaryButton";
+import { useEditTask } from "../../hooks/useEditTask";
+import { getPriorityIcon } from "../../utils/getPriorityIcon";
 
-const priorityConfig = [
-	{ label: "Lowest", color: "sky", icon: <LowestIcon /> },
-	{ label: "Low", color: "sky", icon: <LowIcon /> },
-	{ label: "Middle", color: "green", icon: <MiddleIcon /> },
-	{ label: "High", color: "red", icon: <HighIcon /> },
-	{ label: "Highest", color: "red", icon: <HighestIcon /> },
+const priorityConfig: {
+	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
+	color: string;
+}[] = [
+	{ label: "Lowest", color: "sky" },
+	{ label: "Low", color: "sky" },
+	{ label: "Middle", color: "green" },
+	{ label: "High", color: "red" },
+	{ label: "Highest", color: "red" },
 ];
 
 interface TaskEditModalProps {
@@ -28,15 +29,29 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 	setToggleModal,
 }) => {
 	const [formValue, setFormValue] = useState<string>(task.title);
-	const [selectedPriority, setSelectedPriority] = useState<string>(
-		task.priority
-	);
+	const [selectedPriority, setSelectedPriority] = useState<
+		"Lowest" | "Low" | "Middle" | "High" | "Highest"
+	>(task.priority);
+
+	const taskEdit = useEditTask({
+		taskId: task.id,
+		title: formValue,
+		priority: selectedPriority,
+	});
+
+	const taskEditHandler = () => {
+		taskEdit();
+		setToggleModal(false);
+	};
 
 	return (
 		<Modal
 			modalTitle={task.title}
 			toggleModal={toggleModal}
 			setToggleModal={setToggleModal}
+			confirmModal={
+				<PrimaryButton childlen="Edit" onClick={() => taskEditHandler()} />
+			}
 		>
 			<div>
 				<p className="text-sm font-bold pb-2">Title</p>
@@ -62,7 +77,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 							}`}
 							onClick={() => setSelectedPriority(priority.label)}
 						>
-							{priority.icon}
+							{getPriorityIcon(priority.label)}
 							<div className="w-full text-sm">{priority.label}</div>
 						</li>
 					))}
