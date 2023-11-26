@@ -58,7 +58,7 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 					{`${executionTime.hoursStr}h ${executionTime.minutesStr}m ${executionTime.secondsStr}s`}
 				</p>
 				{getPriorityIcon(task.task.priority)}
-				<div className="bg-zinc-100 p-1.5 rounded-full ml-4 cursol-pointer hover:bg-zinc-200 cursor-pointer">
+				<div className="bg-zinc-100 p-1.5 rounded-full ml-4 hover:bg-zinc-200 cursor-pointer">
 					<EditIcon />
 				</div>
 			</div>

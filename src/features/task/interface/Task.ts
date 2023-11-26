@@ -1,7 +1,7 @@
 export interface Task {
   id : string;
   title : string;
-  priority:"lowest"| "low"| "middle" | "high"| "highest"
+  priority:"Lowest"| "Low"| "Middle" | "High"| "Highest"
   status:"todo" | "doing"| "done"
   created: Date;
   startTime?: Date;

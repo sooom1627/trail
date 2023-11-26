@@ -19,7 +19,7 @@ export const useSaveTask = () => {
     const newTask: Task = {
       id: uuidv4(),
       title,
-      priority:"middle",
+      priority:"Middle",
       status :"todo",
       created: new Date()
     };
