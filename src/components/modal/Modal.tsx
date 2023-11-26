@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { PrimaryButton } from "../button/PrimaryButton";
 import { SecondaryButton } from "../button/SecondaryButton";
 import { CloseIcon } from "../icons/action/CloseIcon";
 
 interface ModalProps {
 	modalTitle: string;
 	children: React.ReactNode;
+	toggleModal: boolean;
+	setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Modal: React.FC<ModalProps> = ({ modalTitle, children }) => {
-	const [toggleModal, setToggleModal] = useState<boolean>(false);
+export const Modal: React.FC<ModalProps> = ({
+	modalTitle,
+	children,
+	toggleModal,
+	setToggleModal,
+}) => {
 	return (
 		<>
-			<PrimaryButton
-				onClick={() => setToggleModal(true)}
-				childlen="Vertically centered modal"
-			/>
 			{toggleModal && (
 				<>
 					<div

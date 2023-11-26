@@ -6,6 +6,7 @@ import { HighestIcon } from "@/components/icons/priority/HighestIcon";
 import { LowIcon } from "@/components/icons/priority/LowIcon";
 import { LowestIcon } from "@/components/icons/priority/LowestIcon";
 import { MiddleIcon } from "@/components/icons/priority/MiddleIcon";
+import { Task } from "../../interface/Task";
 
 const priorityConfig = [
 	{ label: "Lowest", color: "sky", icon: <LowestIcon /> },
@@ -15,12 +16,28 @@ const priorityConfig = [
 	{ label: "Highest", color: "red", icon: <HighestIcon /> },
 ];
 
-export const TaskEditModal = () => {
-	const [formValue, setFormValue] = useState<string>("");
-	const [selectedPriority, setSelectedPriority] = useState<string>("Middle");
+interface TaskEditModalProps {
+	task: Task;
+	toggleModal: boolean;
+	setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const TaskEditModal: React.FC<TaskEditModalProps> = ({
+	task,
+	toggleModal,
+	setToggleModal,
+}) => {
+	const [formValue, setFormValue] = useState<string>(task.title);
+	const [selectedPriority, setSelectedPriority] = useState<string>(
+		task.priority
+	);
 
 	return (
-		<Modal modalTitle="Modal Title">
+		<Modal
+			modalTitle={task.title}
+			toggleModal={toggleModal}
+			setToggleModal={setToggleModal}
+		>
 			<div>
 				<p className="text-sm font-bold pb-2">Title</p>
 				<TextInput

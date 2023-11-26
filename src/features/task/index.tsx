@@ -9,7 +9,6 @@ import { TaskList } from "./feature/taskList/TaskList";
 import { Tab } from "@/components/tab/tab";
 import { TabContent } from "@/components/tab/TabContent";
 import { TaskPanel } from "./feature/taskPanel/TaskPanel";
-import { TaskEditModal } from "./feature/editTask/TaskEditModal";
 
 export const TaskPage: React.FC = () => {
 	const [tasks] = useRecoilState(tasksState);
@@ -49,9 +48,6 @@ export const TaskPage: React.FC = () => {
 							<TaskList tasks={doneTasks} />
 						</TabContent>
 					</Tab>
-				</div>
-				<div className="grow ml-4">
-					<TaskEditModal />
 				</div>
 			</div>
 		</>
