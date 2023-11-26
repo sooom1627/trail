@@ -16,7 +16,7 @@ export const Tab: React.FC<TabProps> = (props) => {
 
 	return (
 		<>
-			<div className="mb-4 border-b border-zinc-200 dark:border-zinc-700">
+			<div className="mb-2 border-b border-zinc-200 dark:border-zinc-700">
 				<ul
 					className="flex flex-wrap -mb-px text-sm font-medium text-center"
 					id="default-tab"

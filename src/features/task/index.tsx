@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { tasksState } from "./srtores/atom/taskAtom";
 import { useRecoilState } from "recoil";
 import { useLoadTasks } from "./hooks/useLoadTasks";
-import { useTaskSplitter } from "./hooks/useTaskSplitter";
+import { taskSplitter } from "./utils/useTaskSplitter";
 import { getCurrentDate } from "@/utils/getCurrentTime";
 import { AddTaskForm } from "./feature/addTask/AddTaskForm";
 import { TaskList } from "./feature/taskList/TaskList";
@@ -15,14 +15,13 @@ export const TaskPage: React.FC = () => {
 
 	const tabNames = ["todo", "doing", "done"];
 	const [activeTab, setActiveTab] = useState(tabNames[0]);
-
+	const { todoTasks, doingTasks, doneTasks } = taskSplitter(tasks);
 	const loadTasks = useLoadTasks();
 	const today = new Date();
 
 	useEffect(() => {
 		loadTasks();
 	}, []);
-	const { todoTasks, doingTasks, doneTasks } = useTaskSplitter(tasks);
 
 	return (
 		<>

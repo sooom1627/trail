@@ -1,9 +1,10 @@
 import { Task } from '../interface/Task';
-import { tasksState } from '../srtores/atom/taskAtom';
+import { selectedTasksState, tasksState } from '../srtores/atom/taskAtom';
 import { useRecoilState } from 'recoil';
 
 export const useLoadTasks = () => {
   const [,setTasks] = useRecoilState(tasksState);
+  const[selectedTask, setSelectedTask] = useRecoilState(selectedTasksState)
 
   const loadTasks = () => {
     const tasksString = localStorage.getItem('tasks');
@@ -16,6 +17,10 @@ export const useLoadTasks = () => {
     });
     // タスクを `created` の降順にソート
     loadedTasks = loadedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
+    if(!selectedTask){
+      const latestTodoTask = loadedTasks.filter(task => task.status === 'todo')
+      setSelectedTask(latestTodoTask[0])
+    }
     setTasks(loadedTasks);
   };
 

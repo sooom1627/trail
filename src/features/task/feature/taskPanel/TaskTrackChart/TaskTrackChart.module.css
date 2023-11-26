@@ -1,0 +1,21 @@
+.dispTime::after {
+	content: var(--time, "");
+	font-size: 0.725rem;
+	position: absolute;
+	bottom: -24px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.taskTime::before {
+	content: "bar";
+	position: absolute;
+	height: var(--height, 0px);
+	width: 0.5rem;
+	background-color: #f59e0b;
+	color: transparent;
+	border-radius: 0.25rem;
+	bottom: 0px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}

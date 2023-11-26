@@ -1,12 +1,12 @@
-import { useHandleTaskExecution } from "../../hooks/useHandleTaskExecution";
+import { useHandleTaskExecution } from "../../../hooks/useHandleTaskExecution";
 import { PlayIcon } from "@/components/icons/action/PlayIcon";
 import { PauseIcon } from "@/components/icons/action/PauseIcon";
 import { CheckIcon } from "@/components/icons/action/CheckIcon";
 import { useEffect, useState } from "react";
-import { ExecutionTime } from "../../interface/ExecutionTime";
-import { getTimerTaskExecutionTime } from "../../utils/getExecutionTime";
+import { ExecutionTime } from "../../../interface/ExecutionTime";
+import { getTimerTaskExecutionTime } from "../../../utils/getExecutionTime";
 import { useRecoilState } from "recoil";
-import { selectedTasksState } from "../../srtores/atom/taskAtom";
+import { selectedTasksState } from "../../../srtores/atom/taskAtom";
 
 export const TaskTimer: React.FC = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
@@ -28,7 +28,7 @@ export const TaskTimer: React.FC = () => {
 				}
 			};
 		}
-	}, [selectedTask, selectedTask?.status, setExecutionTime]);
+	}, [selectedTask, setExecutionTime]);
 
 	return (
 		<>
@@ -63,7 +63,7 @@ export const TaskTimer: React.FC = () => {
 						</button>
 					</>
 				) : selectedTask?.status === "done" ? (
-					<div className="block text-center">
+					<div className="block text-center" style={{ marginTop: "-4px" }}>
 						<p>2023/11/23 11:11 ~ 13:22</p>
 						<p className="text-xs text-zinc-500">(Pause in 23min)</p>
 					</div>
