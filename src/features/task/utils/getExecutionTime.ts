@@ -1,7 +1,7 @@
 import { ExecutionTime } from "../interface/ExecutionTime";
 import { Task } from "../interface/Task";
 
-const calcDiffExecutionTime = (diff:number) =>{
+export const calcDiffExecutionTime = (diff:number) =>{
   const hours = Math.floor(diff / 1000 / 60 / 60);
   const minutes = Math.floor((diff / 1000 / 60) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
@@ -54,3 +54,17 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 
 	return timerId;
 };
+
+export const getTodayDoneTaskExecutionTime = (tasks:Task[]) =>{
+	let totalDiff = 0;
+
+	tasks.map((task) =>{
+		if(task.startTime && task.endTime){
+			const diff = task.endTime.getTime() - task.startTime.getTime();
+			totalDiff += diff
+		}
+	})
+
+	const executionTime =  calcDiffExecutionTime(totalDiff)
+	return executionTime
+}

@@ -9,7 +9,18 @@ export const taskSplitter = (tasks: Task[]) => {
   useEffect(() => {
     setTodoTasks(tasks.filter(task => task.status === 'todo'));
     setDoingTasks(tasks.filter(task => task.status === 'doing').sort((a, b) => ((b.startTime || 0) as number) - ((a.startTime || 0) as number)));
-    setDoneTasks(tasks.filter(task => task.status === 'done').sort((a, b) => ((b.endTime || 0) as number) - ((a.endTime || 0) as number)));
+    setDoneTasks(tasks.filter(task => {
+      if (task.status !== 'done' || !task.endTime) {
+        return false;
+      }
+    
+      const taskDate = new Date(task.endTime);
+      const today = new Date();
+    
+      return taskDate.getDate() === today.getDate() &&
+        taskDate.getMonth() === today.getMonth() &&
+        taskDate.getFullYear() === today.getFullYear();
+    }).sort((a, b) => ((b.endTime || 0) as number) - ((a.endTime || 0) as number)));
   }, [tasks]);
 
   return { todoTasks, doingTasks, doneTasks };
