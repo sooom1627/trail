@@ -5,6 +5,7 @@ import { Task } from "../../interface/Task";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { useEditTask } from "../../hooks/useEditTask";
 import { getPriorityIcon } from "../../utils/getPriorityIcon";
+import { AtentionButton } from "@/components/button/AtentionButton";
 
 const priorityConfig: {
 	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
@@ -49,8 +50,11 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 			modalTitle={task.title}
 			toggleModal={toggleModal}
 			setToggleModal={setToggleModal}
-			confirmModal={
+			confirmButton={
 				<PrimaryButton childlen="Edit" onClick={() => taskEditHandler()} />
+			}
+			deleteButton={
+				<AtentionButton childlen="Delete" onClick={() => alert("hello")} />
 			}
 		>
 			<div>
