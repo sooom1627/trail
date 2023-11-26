@@ -6,6 +6,7 @@ import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { useEditTask } from "../../hooks/useEditTask";
 import { getPriorityIcon } from "../../utils/getPriorityIcon";
 import { AtentionButton } from "@/components/button/AtentionButton";
+import { useDeleteTask } from "../../hooks/useDeleteTask";
 
 const priorityConfig: {
 	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
@@ -39,6 +40,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 		title: formValue,
 		priority: selectedPriority,
 	});
+	const taskDelete = useDeleteTask(task.id);
 
 	const taskEditHandler = () => {
 		taskEdit();
@@ -54,7 +56,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 				<PrimaryButton childlen="Edit" onClick={() => taskEditHandler()} />
 			}
 			deleteButton={
-				<AtentionButton childlen="Delete" onClick={() => alert("hello")} />
+				<AtentionButton childlen="Delete" onClick={() => taskDelete()} />
 			}
 		>
 			<div>
