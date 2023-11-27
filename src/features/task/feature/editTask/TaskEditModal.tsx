@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextInput } from "@/components/input/TextInput";
 import { Modal } from "@/components/modal/Modal";
 import { Task } from "../../interface/Task";
@@ -41,6 +41,11 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 		priority: selectedPriority,
 	});
 	const taskDelete = useDeleteTask(task.id);
+
+	useEffect(() => {
+		setFormValue(task.title);
+		setSelectedPriority(task.priority);
+	}, [task]);
 
 	const taskEditHandler = () => {
 		taskEdit();
