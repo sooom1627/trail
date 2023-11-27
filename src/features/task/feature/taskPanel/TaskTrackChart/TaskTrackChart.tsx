@@ -13,7 +13,6 @@ export const TaskTrackChart: React.FC<TaskTrackChartProps> = ({
 	const [taskDistribution, setTaskDistribution] = useState<number[]>([]);
 
 	useEffect(() => {
-		console.log(doneTasks);
 		const result = calculateTaskDistribution(doneTasks);
 		setTaskDistribution(result);
 	}, [doneTasks]);
