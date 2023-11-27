@@ -26,7 +26,7 @@ export const TaskPage: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="flex py-10 h-screen gap-4">
+		<div className="flex py-10 h-screen gap-8">
 			<div className="max-w-2/3 min-w-2/3 flex flex-col">
 				<div className="flex flex-col justify-center mb-4 min-h-28 max-h-28">
 					<p className="text-zinc-400">Hello, {getCurrentDate(today)} </p>
@@ -59,10 +59,10 @@ export const TaskPage: React.FC = () => {
 					</TabContent>
 				</Tab>
 			</div>
-			<div className="flex flex-col gap-4 grow">
-				<p className="h-1/3 bg-zinc-100 p-6 rounded-lg w-full">hello</p>
-				<p className="h-1/3 bg-zinc-100 p-6 rounded-lg">hello</p>
-				<p className="h-1/3 bg-zinc-100 p-6 rounded-lg">hello</p>
+			<div className="flex flex-col gap-4 grow px-4 divide-y divide-dotted divide-zinc-200 ">
+				<p className="h-1/4 rounded-lg w-full font-bold pb-2">hello</p>
+				<p className="h-1/2 rounded-lg py-2 font-bold">Quick Task</p>
+				<p className="h-1/4 bg-zinc-100 p-6 rounded-lg pt-2">hello</p>
 			</div>
 		</div>
 	);
