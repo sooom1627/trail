@@ -47,6 +47,11 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 		setToggleModal(false);
 	};
 
+	const taskDeleteHandler = () => {
+		taskDelete();
+		setToggleModal(false);
+	};
+
 	return (
 		<Modal
 			modalTitle={task.title}
@@ -56,7 +61,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 				<PrimaryButton childlen="Edit" onClick={() => taskEditHandler()} />
 			}
 			deleteButton={
-				<AtentionButton childlen="Delete" onClick={() => taskDelete()} />
+				<AtentionButton childlen="Delete" onClick={() => taskDeleteHandler()} />
 			}
 		>
 			<div>

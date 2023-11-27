@@ -5,7 +5,7 @@
 	bottom: -24px;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	transition: 300s;
+	transition: 300ms;
 }
 
 .taskTime::before {
@@ -19,5 +19,5 @@
 	bottom: 0px;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	transition: 300s;
+	transition: 300ms;
 }

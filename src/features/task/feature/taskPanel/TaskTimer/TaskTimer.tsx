@@ -64,7 +64,7 @@ export const TaskTimer: React.FC = () => {
 					</>
 				) : selectedTask?.status === "done" ? (
 					<div className="block text-center" style={{ marginTop: "-4px" }}>
-						<p>2023/11/23 11:11 ~ 13:22</p>
+						<p className="">2023/11/23 11:11 ~ 13:22</p>
 						<p className="text-xs text-zinc-500">(Pause in 23min)</p>
 					</div>
 				) : (
