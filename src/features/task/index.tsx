@@ -59,8 +59,10 @@ export const TaskPage: React.FC = () => {
 					</TabContent>
 				</Tab>
 			</div>
-			<div>
-				<p>hello</p>
+			<div className="flex flex-col gap-4 grow">
+				<p className="h-1/3 bg-zinc-100 p-6 rounded-lg w-full">hello</p>
+				<p className="h-1/3 bg-zinc-100 p-6 rounded-lg">hello</p>
+				<p className="h-1/3 bg-zinc-100 p-6 rounded-lg">hello</p>
 			</div>
 		</div>
 	);
