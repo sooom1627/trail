@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  purge: {
+    content: ['./src/**/*.{js,ts,jsx,tsx}'],
+    options: {
+      safelist: ['border-red-500', 'border-green-500', 'border-sky-500','hover:border-red-500', 'hover:border-green-500', 'hover:border-sky-500'],
+    },
+  },
   theme: {
     extend: {
       height:{
@@ -22,4 +25,3 @@ export default {
   },
   plugins: [],
 }
-

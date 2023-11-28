@@ -91,7 +91,9 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 									? `border-${priority.color}-500`
 									: "border-zinc-200"
 							}`}
-							onClick={() => setSelectedPriority(priority.label)}
+							onClick={() => {
+								setSelectedPriority(priority.label);
+							}}
 						>
 							{getPriorityIcon(priority.label)}
 							<div className="w-full text-sm">{priority.label}</div>
