@@ -3,6 +3,7 @@ export default {
   purge: {
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
     options: {
+      // 下記は直接読み込まれないため
       safelist: ['border-red-500', 'border-green-500', 'border-sky-500','hover:border-red-500', 'hover:border-green-500', 'hover:border-sky-500'],
     },
   },

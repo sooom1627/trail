@@ -23,7 +23,7 @@ export const Accrodion: React.FC<AccordionProps> = ({
 				<div key={index}>
 					<button
 						type="button"
-						className="flex items-center justify-between w-full py-5 font-medium rtl:text-right border-b border-zinc-200 gap-3"
+						className="flex items-center justify-between w-full py-4 font-medium rtl:text-right border-b border-zinc-200 gap-3"
 						onClick={() => handleAccordionClick(`accordion-${title}`)}
 					>
 						<span>{title}</span>
