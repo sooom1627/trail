@@ -1,7 +1,7 @@
-import { Task } from "@/features/task/interface/Task";
+import { Task } from "@/lib/task/interface/Task";
 import styles from "./TaskTrackChart.module.css";
 import { useEffect, useState } from "react";
-import { calculateTaskDistribution } from "@/features/task/utils/getTaskTrackChartData";
+import { calculateTaskDistribution } from "@/lib/task/utils/getTaskTrackChartData";
 
 interface TaskTrackChartProps {
 	doneTasks: Task[];

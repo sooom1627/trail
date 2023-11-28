@@ -1,4 +1,4 @@
-import { Task } from "@/features/task/interface/Task";
+import { Task } from "@/lib/task/interface/Task";
 import { atom } from "recoil";
 
 export const tasksState = atom<Task[]>({
