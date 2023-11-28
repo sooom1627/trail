@@ -1,4 +1,4 @@
-import { QuickTaskPanel } from "@/lib/quickTask/feature/QuickTaskPanel";
+import { QuickTaskPanel } from "@/lib/quickTask/index.tsx";
 import { Layout } from "../components/templates/Layout";
 
 interface IndexPageProps {
