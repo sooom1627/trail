@@ -1,5 +1,6 @@
 export interface QuickTask{
+  id:string
   title:string,
-  status:boolean,
+  status:"todo" | "done",
   created:Date
 }

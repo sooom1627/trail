@@ -1,6 +1,6 @@
-import { PlusIcon } from "@/components/icons/action/PlusIcon";
 import { QuickTaskList } from "./feature/quickTaskList/QuickTaskList";
 import { InfoIcon } from "@/components/icons/InfoIcon";
+import { AddQuickTaskForm } from "./feature/addQuickTask/AddQuickTaskForm";
 
 export const QuickTaskPanel = () => {
 	return (
@@ -21,18 +21,8 @@ export const QuickTaskPanel = () => {
 						</p>
 					</div>
 				</div>
-				<form className="flex justify-between grow border-b focus-within:border-zinc-500">
-					<input
-						type="text"
-						className="grow text-xs font-medium p-2 focus:outline-0"
-						placeholder="クイックタスクを追加"
-					/>
-					<button type="submit">
-						<PlusIcon color="text-zinc-500" />
-					</button>
-				</form>
+				<AddQuickTaskForm />
 			</div>
-
 			<div className="max-w-full py-4">
 				<QuickTaskList />
 			</div>

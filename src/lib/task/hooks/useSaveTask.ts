@@ -9,7 +9,7 @@ export const useSaveTask = () => {
 
   const saveTask = (title: string) => {
     const tasksString = localStorage.getItem('tasks');
-    const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
+    const currentTasks = tasksString ? JSON.parse(tasksString).map((task:Task) => ({
       ...task,
       created: new Date(task.created),
       startTime: task.startTime ? new Date(task.startTime) : undefined,
