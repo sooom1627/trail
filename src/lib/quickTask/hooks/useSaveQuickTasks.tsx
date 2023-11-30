@@ -1,7 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { QuickTask } from "../interface/QuickTask";
+import { useRecoilState } from "recoil";
+import { quickTasksState } from "../stores/quickTaskAtom";
 
 export const useSaveQuickTasks = () => {
+	const [, setQuickTasks] = useRecoilState(quickTasksState);
 	const saveQuickTask = (title: string) => {
 		const quickTaskString = localStorage.getItem("quickTasks");
 		const currentQuickTasks = quickTaskString
@@ -20,6 +23,7 @@ export const useSaveQuickTasks = () => {
 
 		let updateQuickTasks = [...currentQuickTasks, newQuickTask];
 		localStorage.setItem("quickTasks", JSON.stringify(updateQuickTasks));
+		setQuickTasks(updateQuickTasks);
 	};
 
 	return saveQuickTask;
