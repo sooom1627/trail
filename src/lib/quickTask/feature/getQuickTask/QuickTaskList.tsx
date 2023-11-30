@@ -15,17 +15,13 @@ export const QuickTaskList = () => {
 	}, []);
 
 	return (
-		<>
-			<div>
-				{todoQuickTask.map((task, i) => (
-					<QuickTaskCard key={i} task={task} />
-				))}
-			</div>
-			<div>
-				{doneQuickTask.map((task, i) => (
-					<QuickTaskCard key={i} task={task} />
-				))}
-			</div>
-		</>
+		<div className="h-full overflow-y-auto mt-2">
+			{todoQuickTask.map((task, i) => (
+				<QuickTaskCard key={i} task={task} />
+			))}
+			{doneQuickTask.map((task, i) => (
+				<QuickTaskCard key={i} task={task} />
+			))}
+		</div>
 	);
 };

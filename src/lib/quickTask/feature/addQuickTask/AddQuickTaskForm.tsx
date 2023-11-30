@@ -10,7 +10,10 @@ export const AddQuickTaskForm = () => {
 		setFormValue("");
 	};
 	return (
-		<form className="flex justify-between grow border-b focus-within:border-zinc-500">
+		<form
+			className="flex justify-between grow border-b focus-within:border-zinc-500"
+			name="input"
+		>
 			<input
 				type="text"
 				className="grow text-xs font-medium p-2 focus:outline-0"
