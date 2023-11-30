@@ -1,7 +1,13 @@
-export const PlusIcon = () => {
+interface PlusIcconProps {
+	color?: string;
+}
+
+export const PlusIcon: React.FC<PlusIcconProps> = ({
+	color = "text-white",
+}) => {
 	return (
 		<svg
-			className="w-4 h-4 text-white dark:text-white"
+			className={`w-4 h-4 ${color} dark:text-white`}
 			aria-hidden="true"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
