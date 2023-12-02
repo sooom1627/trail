@@ -1,16 +1,8 @@
 import { useRecoilState } from 'recoil';
 import { tasksState, selectedTasksState } from '../srtores/atom/taskAtom';
 import { Task } from '../interface/Task';
+import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
 
-const getTasksFromLocalStorage = (): Task[] => {
-  const tasksString = localStorage.getItem('tasks');
-  return tasksString ? JSON.parse(tasksString).map((task: any) => ({
-    ...task,
-    created: new Date(task.created),
-    startTime: task.startTime ? new Date(task.startTime) : undefined,
-    endTime: task.endTime ? new Date(task.endTime): undefined
-  })) as Task[] : [];
-};
 
 export const useDeleteTask = (taskId:String) => {
   const [, setTasks] = useRecoilState(tasksState);

@@ -1,6 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { tasksState, selectedTasksState } from '../srtores/atom/taskAtom';
 import { Task } from '../interface/Task';
+import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
 
 interface useEditTaskProps{
   taskId:string
@@ -25,13 +26,7 @@ export const useEditTask = ({taskId, title, priority}: useEditTaskProps) => {
   };
 
   const editTask = () => {
-    const tasksString = localStorage.getItem('tasks');
-    const currentTasks = tasksString ? JSON.parse(tasksString).map((task: any) => ({
-      ...task,
-      created: new Date(task.created),
-      startTime: task.startTime ? new Date(task.startTime) : undefined,
-      endTime: task.endTime ? new Date(task.endTime): undefined
-    })) as Task[] : [];
+    let currentTasks = getTasksFromLocalStorage();
     
     const updatedTasks = currentTasks.map(updateTask);
     saveTasksToLocalStorage(updatedTasks);

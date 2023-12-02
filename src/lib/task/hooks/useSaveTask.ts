@@ -2,21 +2,8 @@ import { useRecoilState } from 'recoil';
 import { tasksState } from '../srtores/atom/taskAtom';
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../interface/Task';
+import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
 
-const getTasksFromLocalStorage = (): Task[] => {
-  const tasksString = localStorage.getItem('tasks');
-  try {
-    return tasksString ? JSON.parse(tasksString).map((task:Task) => ({
-      ...task,
-      created: new Date(task.created),
-      startTime: task.startTime ? new Date(task.startTime) : undefined,
-      endTime: task.endTime ? new Date(task.endTime): undefined
-    })) as Task[] : [];
-  } catch (error) {
-    console.error('Failed to parse tasks from localStorage', error);
-    return [];
-  }
-};
 
 const saveTasksToLocalStorage = (tasks: Task[]) => {
   try {
