@@ -2,6 +2,8 @@ import { useRecoilState } from 'recoil';
 import { tasksState, selectedTasksState } from '../srtores/atom/taskAtom';
 import { Task } from '../interface/Task';
 import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
+import { saveTasksToLocalStorage } from '../dataAccess/saveTasksToLocalStorage';
+import { sortAndSetTasksToGlobalState } from '../utils/sortAndSetTasksToGlobalState';
 
 
 export const useDeleteTask = (taskId:String) => {
@@ -12,9 +14,8 @@ export const useDeleteTask = (taskId:String) => {
     let currentTasks = getTasksFromLocalStorage();
     let updatedTasks = currentTasks.filter((task: Task) => task.id !== taskId);
     
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
-    setTasks(updatedTasks);
+    saveTasksToLocalStorage(updatedTasks)
+    sortAndSetTasksToGlobalState(updatedTasks,setTasks)
 
     if(selectedTask?.id === taskId){
       setSelectedTask(null)

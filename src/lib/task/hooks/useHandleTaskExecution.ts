@@ -1,6 +1,8 @@
 import { useRecoilState } from 'recoil';
 import { tasksState,selectedTasksState } from '../srtores/atom/taskAtom';
 import { Task } from "../interface/Task";
+import { saveTasksToLocalStorage } from '../dataAccess/saveTasksToLocalStorage';
+import { sortAndSetTasksToGlobalState } from '../utils/sortAndSetTasksToGlobalState';
 
 export const useHandleTaskExecution = (status: "doing" | "done") => {  
   const [,setTasks] = useRecoilState(tasksState);
@@ -29,10 +31,8 @@ export const useHandleTaskExecution = (status: "doing" | "done") => {
         }
         return t;
       });
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      
-      updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
-      setTasks(updatedTasks);
+      saveTasksToLocalStorage(updatedTasks)
+      sortAndSetTasksToGlobalState(updatedTasks,setTasks)
     }
 
     }

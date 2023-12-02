@@ -3,15 +3,9 @@ import { tasksState } from '../srtores/atom/taskAtom';
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../interface/Task';
 import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
+import { saveTasksToLocalStorage } from '../dataAccess/saveTasksToLocalStorage';
+import { sortAndSetTasksToGlobalState } from '../utils/sortAndSetTasksToGlobalState';
 
-
-const saveTasksToLocalStorage = (tasks: Task[]) => {
-  try {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  } catch (error) {
-    console.error('Failed to save tasks to localStorage', error);
-  }
-};
 
 export const useSaveTask = () => {
   const [, setTasks] = useRecoilState(tasksState);
@@ -29,9 +23,7 @@ export const useSaveTask = () => {
     
     let updatedTasks = [...currentTasks, newTask];
     saveTasksToLocalStorage(updatedTasks);
-    
-    updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
-    setTasks(updatedTasks);
+    sortAndSetTasksToGlobalState(updatedTasks,setTasks)
   };
 
   return saveTask;

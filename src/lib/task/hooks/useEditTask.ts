@@ -2,6 +2,8 @@ import { useRecoilState } from 'recoil';
 import { tasksState, selectedTasksState } from '../srtores/atom/taskAtom';
 import { Task } from '../interface/Task';
 import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
+import { saveTasksToLocalStorage } from '../dataAccess/saveTasksToLocalStorage';
+import { sortAndSetTasksToGlobalState } from '../utils/sortAndSetTasksToGlobalState';
 
 interface useEditTaskProps{
   taskId:string
@@ -21,18 +23,12 @@ export const useEditTask = ({taskId, title, priority}: useEditTaskProps) => {
     return task;
   };
 
-  const saveTasksToLocalStorage = (tasks: Task[]) => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  };
-
   const editTask = () => {
     let currentTasks = getTasksFromLocalStorage();
     
     const updatedTasks = currentTasks.map(updateTask);
     saveTasksToLocalStorage(updatedTasks);
-    
-    updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
-    setTasks(updatedTasks);
+    sortAndSetTasksToGlobalState(updatedTasks,setTasks)
   };
 
   return editTask;
