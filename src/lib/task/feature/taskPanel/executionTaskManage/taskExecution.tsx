@@ -2,14 +2,22 @@ import { useHandleTaskExecution } from "../../../hooks/useHandleTaskExecution";
 import { PlayIcon } from "@/components/icons/action/PlayIcon";
 import { PauseIcon } from "@/components/icons/action/PauseIcon";
 import { CheckIcon } from "@/components/icons/action/CheckIcon";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ExecutionTime } from "../../../interface/ExecutionTime";
 import { getTimerTaskExecutionTime } from "../../../utils/getExecutionTime";
-import { useRecoilState } from "recoil";
-import { selectedTasksState } from "../../../srtores/atom/taskAtom";
+import { Timer } from "../../../ui/taskExecution/Timer";
+import { EditIcon } from "@/components/icons/action/EditIcon";
+import { Task } from "@/lib/task/interface/Task";
+import { ModalContext } from "@/lib/task/srtores/context/ModalContext";
 
-export const TaskTimer: React.FC = () => {
-	const [selectedTask] = useRecoilState(selectedTasksState);
+interface taskExecutionProps {
+	selectedTask: Task;
+}
+
+export const TaskExecution: React.FC<taskExecutionProps> = ({
+	selectedTask,
+}) => {
+	const { setToggleModal } = useContext(ModalContext);
 	const [executionTime, setExecutionTime] = useState<ExecutionTime>({
 		hoursStr: "00",
 		minutesStr: "00",
@@ -32,11 +40,28 @@ export const TaskTimer: React.FC = () => {
 
 	return (
 		<>
-			<p className="text-2xl items-center m-4 text-center">
-				<span className="text-5xl m-1">{executionTime.hoursStr}</span>h
-				<span className="text-5xl m-1">{executionTime.minutesStr}</span>m
-				<span className="text-5xl m-1">{executionTime.secondsStr}</span>s
-			</p>
+			<div className="border-b pb-4">
+				<div className="flex items-center justify-between gap-2">
+					<p className="text-sm font-bold truncate mb-1">
+						{selectedTask?.title}
+					</p>
+					<div
+						className="w-fit cursor-pointer"
+						onClick={() => setToggleModal(true)}
+					>
+						<EditIcon />
+					</div>
+				</div>
+				<p
+					className="cursor-pointer"
+					onClick={() => alert("Ready in Tags!! Just wait!")}
+				>
+					<span className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-300">
+						+ add tags
+					</span>
+				</p>
+			</div>
+			<Timer executionTime={executionTime} />
 			<div className="gap-2 flex items-center justify-center min-w-fit">
 				{selectedTask?.status === "todo" ? (
 					<>

@@ -12,7 +12,7 @@ export const AddQuickTaskForm = () => {
 			setFormValue("");
 		} else {
 			toast.error("🧐 Task is empty!", {
-				position: "top-right",
+				position: "top-left",
 				autoClose: 3000,
 				hideProgressBar: false,
 				closeOnClick: true,

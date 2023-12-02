@@ -47,26 +47,27 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 		setSelectedPriority(task.priority);
 	}, [task]);
 
-	const taskEditHandler = () => {
-		taskEdit();
+	const taskEditHandler = async () => {
+		await taskEdit();
 		setToggleModal(false);
 	};
 
-	const taskDeleteHandler = () => {
-		taskDelete();
+	const taskDeleteHandler = async () => {
+		await taskDelete();
 		setToggleModal(false);
 	};
-
 	return (
 		<Modal
 			modalTitle={task.title}
 			toggleModal={toggleModal}
 			setToggleModal={setToggleModal}
 			confirmButton={
-				<PrimaryButton childlen="Edit" onClick={() => taskEditHandler()} />
+				<PrimaryButton onClick={() => taskEditHandler()}>Edit</PrimaryButton>
 			}
 			deleteButton={
-				<AtentionButton childlen="Delete" onClick={() => taskDeleteHandler()} />
+				<AtentionButton onClick={() => taskDeleteHandler()}>
+					Delete
+				</AtentionButton>
 			}
 		>
 			<div>

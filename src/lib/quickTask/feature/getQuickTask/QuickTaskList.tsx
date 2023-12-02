@@ -1,13 +1,10 @@
-import { QuickTaskCard } from "./QuickTaskCard";
+import { QuickTaskCard } from "../handleQuickTask/QuickTaskCard";
 import { useLoadQuickTasks } from "../../hooks/useLoadQuickTasks";
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { quickTasksState } from "../../stores/quickTaskAtom";
 import { quickTaskSplitter } from "../../util/quickTaskSplitter";
 
 export const QuickTaskList = () => {
-	const [quickTasks] = useRecoilState(quickTasksState);
-	const loadQuickTasks = useLoadQuickTasks();
+	const [quickTasks, loadQuickTasks] = useLoadQuickTasks();
 	const { todoQuickTask, doneQuickTask } = quickTaskSplitter(quickTasks);
 
 	useEffect(() => {
