@@ -1,13 +1,9 @@
 import "./App.css";
-import { Layout } from "./components/Layout";
-import { TaskPage } from "./features/task";
+import { IndexPage } from "./pages/IndexPage";
+import { TaskPage } from "./lib/task";
 
 function App() {
-	return (
-		<Layout>
-			<TaskPage />
-		</Layout>
-	);
+	return <IndexPage leftChildren={<TaskPage />} />;
 }
 
 export default App;
