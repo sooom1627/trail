@@ -8,6 +8,7 @@ import { EditIcon } from "@/components/icons/action/EditIcon";
 import { getDoneTaskExecutionTime } from "../../utils/getExecutionTime";
 import { ExecutionTime } from "../../interface/ExecutionTime";
 import { TaskEditModal } from "../editTask/TaskEditModal";
+import { TaskTitle } from "../ui/TaskTitle/TaskTitle";
 
 interface TaskCardProps {
 	task: Task;
@@ -36,25 +37,7 @@ export const TaskCard: React.FC<TaskCardProps> = (task) => {
 	return (
 		<>
 			<div className="p-4 flex justify-between items-center  max-w-full">
-				<div
-					className="truncate cursor-pointer grow"
-					onClick={() => setSelectedTask(task.task)}
-				>
-					<p className="font-bold text-sm truncate">{task.task.title}</p>
-					{task.task.status === "todo" ? (
-						<p className="text-sm text-zinc-400">
-							Create: {task.task.created.toLocaleString()}
-						</p>
-					) : task.task.status === "doing" && task.task.startTime ? (
-						<p className="text-sm text-zinc-400">
-							Start: {task.task.startTime.toLocaleString()}
-						</p>
-					) : task.task.status === "done" && task.task.endTime ? (
-						<p className="text-sm text-zinc-400">
-							End: {task.task.endTime.toLocaleString()}
-						</p>
-					) : null}
-				</div>
+				<TaskTitle setSelectedTask={setSelectedTask} task={task.task} />
 				<div className="flex items-center min-w-fit ml-4">
 					<ClockIcon />
 					<p className="text-sm flex gap-1 mr-4 ml-2 items-center justify-between">

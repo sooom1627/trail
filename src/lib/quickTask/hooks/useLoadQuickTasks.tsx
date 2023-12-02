@@ -2,7 +2,7 @@ import { QuickTask } from "../interface/QuickTask";
 import { useRecoilState } from "recoil";
 import { quickTasksState } from "../stores/quickTaskAtom";
 
-export const useLoadQuickTasks = () => {
+export const useLoadQuickTasks = (): [QuickTask[], () => void] => {
 	const [quickTask, setQuickTasks] = useRecoilState(quickTasksState);
 	const loadQuickTasks = () => {
 		const quickTaskString = localStorage.getItem("quickTasks");

@@ -1,4 +1,4 @@
-import { QuickTaskCard } from "./QuickTaskCard";
+import { QuickTaskCard } from "../handleQuickTask/QuickTaskCard";
 import { useLoadQuickTasks } from "../../hooks/useLoadQuickTasks";
 import { useEffect } from "react";
 import { quickTaskSplitter } from "../../util/quickTaskSplitter";

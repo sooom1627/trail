@@ -5,7 +5,7 @@ import { AddQuickTaskForm } from "./feature/addQuickTask/AddQuickTaskForm";
 export const QuickTaskPanel = () => {
 	return (
 		<>
-			<div className="flex items-center gap-2 mt-2 h-fit">
+			<div className="flex items-center gap-2 mt-2 h-">
 				<div className="group relative">
 					<div className="flex justify-start items-center min-w-fit">
 						<p className="font-bold mr-1">Quick Task</p>
