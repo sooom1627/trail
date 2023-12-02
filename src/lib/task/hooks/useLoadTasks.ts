@@ -2,8 +2,8 @@ import { Task } from '../interface/Task';
 import { selectedTasksState, tasksState } from '../srtores/atom/taskAtom';
 import { useRecoilState } from 'recoil';
 
-export const useLoadTasks = () => {
-  const [,setTasks] = useRecoilState(tasksState);
+export const useLoadTasks = (): [Task[], () => void] => {
+  const [tasks,setTasks] = useRecoilState(tasksState);
   const[selectedTask, setSelectedTask] = useRecoilState(selectedTasksState)
 
   const loadTasks = () => {
@@ -24,5 +24,5 @@ export const useLoadTasks = () => {
     setTasks(loadedTasks);
   };
 
-  return loadTasks;
+  return [tasks,loadTasks];
 };

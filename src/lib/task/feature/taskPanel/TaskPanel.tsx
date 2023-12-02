@@ -1,13 +1,10 @@
 import { useRecoilState } from "recoil";
 import { selectedTasksState } from "../../srtores/atom/taskAtom";
-import { EditIcon } from "@/components/icons/action/EditIcon";
-import { TimerEmpty } from "../ui/Timer/TimerEmpty";
+import { TimerEmpty } from "../../ui/Timer/TimerEmpty";
 import { TaskTrackChart } from "./TaskTrackChart/TaskTrackChart";
-import { TaskEditModal } from "../editTask/TaskEditModal";
-import { useState } from "react";
 import { Task } from "../../interface/Task";
 import { TaskExecution } from "./executionTaskManage/taskExecution";
-import { TrackChartHeading } from "../ui/trackChart/TrackChartHeading";
+import { TrackChartHeading } from "../../ui/heading/TrackChartHeading";
 
 interface TaskPanelProps {
 	doneTasks: Task[];
@@ -15,40 +12,13 @@ interface TaskPanelProps {
 
 export const TaskPanel: React.FC<TaskPanelProps> = ({ doneTasks }) => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
-	const [toggleModal, setToggleModal] = useState<boolean>(false);
 
 	return (
 		<div className="flex w-full gap-4">
 			<div className="h-56 min-w-5/12 max-w-5/12 w-full bg-zinc-100 rounded-lg px-4 py-6">
 				{selectedTask ? (
 					<>
-						<div className="border-b pb-4">
-							<div className="flex items-center justify-between gap-2">
-								<p className="text-sm font-bold truncate mb-1">
-									{selectedTask?.title}
-								</p>
-								<div
-									className="w-fit cursor-pointer"
-									onClick={() => setToggleModal(true)}
-								>
-									<EditIcon />
-								</div>
-							</div>
-							<p
-								className="cursor-pointer"
-								onClick={() => alert("Ready in Tags!! Just wait!")}
-							>
-								<span className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-300">
-									+ add tags
-								</span>
-							</p>
-						</div>
-						<TaskExecution />
-						<TaskEditModal
-							task={selectedTask}
-							toggleModal={toggleModal}
-							setToggleModal={setToggleModal}
-						/>
+						<TaskExecution selectedTask={selectedTask} />
 					</>
 				) : (
 					<>
