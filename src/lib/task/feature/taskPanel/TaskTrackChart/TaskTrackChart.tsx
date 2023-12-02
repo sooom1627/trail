@@ -7,6 +7,24 @@ interface TaskTrackChartProps {
 	doneTasks: Task[];
 }
 
+const TaskTimeBlock: React.FC<{
+	hour: string;
+	taskDuration: number;
+	showTime: boolean;
+}> = ({ hour, taskDuration, showTime }) => {
+	return (
+		<div
+			className={`w-2 bg-zinc-200 h-30 rounded relative ${styles.dispTime} ${styles.taskTime}`}
+			style={
+				{
+					"--time": showTime ? `"${hour}:00"` : `""`,
+					"--height": `${taskDuration > 60 ? 120 : taskDuration * 2}px`,
+				} as React.CSSProperties
+			}
+		></div>
+	);
+};
+
 export const TaskTrackChart: React.FC<TaskTrackChartProps> = ({
 	doneTasks,
 }) => {
@@ -22,33 +40,11 @@ export const TaskTrackChart: React.FC<TaskTrackChartProps> = ({
 			{taskDistribution &&
 				Object.entries(taskDistribution).map(([hour, taskDuration], i) => (
 					<div key={i} className="max-w-min">
-						{i !== 0 && i !== 23 && i % 4 === 0 ? (
-							<div
-								key={i}
-								className={`w-2 bg-zinc-200 h-30 rounded relative ${styles.dispTime} ${styles.taskTime}`}
-								style={
-									{
-										"--time": `"${hour}:00"`,
-										"--height": `${
-											taskDuration > 60 ? 120 : taskDuration * 2
-										}px`,
-									} as React.CSSProperties
-								}
-							></div>
-						) : (
-							<div
-								key={i}
-								className={`w-2 bg-zinc-200 h-30 rounded relative ${styles.dispTime} ${styles.taskTime}`}
-								style={
-									{
-										"--time": `""`,
-										"--height": `${
-											taskDuration > 60 ? 120 : taskDuration * 2
-										}px`,
-									} as React.CSSProperties
-								}
-							></div>
-						)}
+						<TaskTimeBlock
+							hour={hour}
+							taskDuration={taskDuration}
+							showTime={i !== 0 && i !== 23 && i % 4 === 0}
+						/>
 					</div>
 				))}
 		</div>

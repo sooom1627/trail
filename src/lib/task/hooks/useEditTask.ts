@@ -10,7 +10,19 @@ interface useEditTaskProps{
 
 export const useEditTask = ({taskId, title, priority}: useEditTaskProps) => {
   const [, setTasks] = useRecoilState(tasksState);
-  const [selectedTask, setSelectedTask] = useRecoilState(selectedTasksState);
+  const [, setSelectedTask] = useRecoilState(selectedTasksState);
+
+  const updateTask = (task: Task) => {
+    if (task.id === taskId) {
+      setSelectedTask({ ...task, title: title, priority: priority });
+      return { ...task, title: title, priority: priority };
+    }
+    return task;
+  };
+
+  const saveTasksToLocalStorage = (tasks: Task[]) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
 
   const editTask = () => {
     const tasksString = localStorage.getItem('tasks');
@@ -21,23 +33,12 @@ export const useEditTask = ({taskId, title, priority}: useEditTaskProps) => {
       endTime: task.endTime ? new Date(task.endTime): undefined
     })) as Task[] : [];
     
-    let updatedTasks = currentTasks.map((task: Task) => {
-      if (task.id === taskId) {
-        if(selectedTask){
-          selectedTask.id === taskId && setSelectedTask({ ...task, title: title, priority: priority })
-        }
-        return { ...task, title: title, priority: priority };
-      }
-      return task;
-    });
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    const updatedTasks = currentTasks.map(updateTask);
+    saveTasksToLocalStorage(updatedTasks);
     
-    updatedTasks = updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
+    updatedTasks.sort((a, b) => b.created.getTime() - a.created.getTime());
     setTasks(updatedTasks);
   };
 
   return editTask;
 };
-
-
-

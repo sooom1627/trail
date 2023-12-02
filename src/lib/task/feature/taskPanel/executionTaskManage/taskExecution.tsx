@@ -5,7 +5,7 @@ import { CheckIcon } from "@/components/icons/action/CheckIcon";
 import { useContext, useEffect, useState } from "react";
 import { ExecutionTime } from "../../../interface/ExecutionTime";
 import { getTimerTaskExecutionTime } from "../../../utils/getExecutionTime";
-import { Timer } from "../../../ui/Timer/Timer";
+import { Timer } from "../../../ui/taskExecution/Timer";
 import { EditIcon } from "@/components/icons/action/EditIcon";
 import { Task } from "@/lib/task/interface/Task";
 import { ModalContext } from "@/lib/task/srtores/context/ModalContext";
