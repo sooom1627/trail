@@ -1,5 +1,5 @@
 import { Task } from "../../interface/Task";
-import { TaskEmpty } from "../empty/TaskEmpty";
+import { TaskEmpty } from "../Empty/TaskEmpty";
 import { TaskCard } from "./TaskCard";
 
 interface TaskListProps {

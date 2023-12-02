@@ -1,10 +1,10 @@
 import { useRecoilState } from "recoil";
-import { selectedTasksState } from "../../srtores/atom/taskAtom";
-import { TimerEmpty } from "../../ui/empty/TimerEmpty";
+import { selectedTasksState } from "../../stores/task/taskAtom";
+import { TimerEmpty } from "../../ui/Empty/TimerEmpty";
 import { TaskTrackChart } from "./TaskTrackChart/TaskTrackChart";
 import { Task } from "../../interface/Task";
 import { TaskExecution } from "./executionTaskManage/taskExecution";
-import { TrackChartHeading } from "../../ui/heading/TrackChartHeading";
+import { TrackChartHeading } from "../../ui/Heading/TrackChartHeading";
 
 interface TaskPanelProps {
 	doneTasks: Task[];
