@@ -43,7 +43,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 					{getPriorityIcon(task.priority)}
 					<div
 						className="bg-zinc-100 p-1.5 rounded-full ml-4 hover:bg-zinc-200 cursor-pointer"
-						onClick={() => setToggleModal(true)}
+						onClick={() => {
+							setSelectedTask(task);
+							setToggleModal(true);
+						}}
 					>
 						<EditIcon />
 					</div>
