@@ -2,10 +2,11 @@ interface TabPanelsProps {
 	activeTab: string;
 	handleTabClick: (tabName: string) => void;
 	tabName: string;
+	taskCount: number;
 }
 
 export const TabPanel: React.FC<TabPanelsProps> = (props) => {
-	const { activeTab, handleTabClick, tabName } = props;
+	const { activeTab, handleTabClick, tabName, taskCount } = props;
 	return (
 		<li className="me-2" role="presentation">
 			<button
@@ -23,6 +24,9 @@ export const TabPanel: React.FC<TabPanelsProps> = (props) => {
 				onClick={() => handleTabClick(tabName)}
 			>
 				{tabName}
+				<span className="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-zinc-800 bg-zinc-200 rounded-full">
+					{taskCount}
+				</span>
 			</button>
 		</li>
 	);
