@@ -8,17 +8,24 @@ interface TaskTabsProps {
 	todoTasks: Task[];
 	doingTasks: Task[];
 	doneTasks: Task[];
+	setSorting: React.Dispatch<React.SetStateAction<"date" | "priority">>;
 }
 
 export const TaskTabs: React.FC<TaskTabsProps> = ({
 	todoTasks,
 	doingTasks,
 	doneTasks,
+	setSorting,
 }) => {
 	const tabNames = ["todo", "doing", "done"];
 	const [activeTab, setActiveTab] = useState(tabNames[0]);
 	return (
-		<Tab tabNames={tabNames} activeTab={activeTab} setActiveTab={setActiveTab}>
+		<Tab
+			tabNames={tabNames}
+			activeTab={activeTab}
+			setActiveTab={setActiveTab}
+			setSorting={setSorting}
+		>
 			<TabContent activeTab={activeTab} tabName="todo">
 				<TaskList tasks={todoTasks} />
 			</TabContent>

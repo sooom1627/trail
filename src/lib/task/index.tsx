@@ -14,11 +14,12 @@ export const TaskPage: React.FC = () => {
 	const [selectedTask] = useRecoilState(selectedTasksState);
 	const [tasks, loadTasks] = useLoadTasks();
 	const [toggleModal, setToggleModal] = useState<boolean>(false);
-	const { todoTasks, doingTasks, doneTasks } = taskSplitter(tasks);
+	const [sorting, setSorting] = useState<"date" | "priority">("date");
+	const { todoTasks, doingTasks, doneTasks } = taskSplitter(tasks, sorting);
 
 	useEffect(() => {
 		loadTasks();
-	}, []);
+	}, [sorting]);
 
 	return (
 		<ModalContext.Provider value={{ toggleModal, setToggleModal }}>
@@ -29,6 +30,7 @@ export const TaskPage: React.FC = () => {
 				todoTasks={todoTasks}
 				doingTasks={doingTasks}
 				doneTasks={doneTasks}
+				setSorting={setSorting}
 			/>
 			{selectedTask && (
 				<TaskEditModal
