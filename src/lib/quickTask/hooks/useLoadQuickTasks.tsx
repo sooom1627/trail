@@ -1,6 +1,7 @@
 import { QuickTask } from "../interface/QuickTask";
 import { useRecoilState } from "recoil";
 import { quickTasksState } from "../stores/quickTaskAtom";
+import { sortAndSetQuickTasksToGlobalState } from "../util/sortAndSetQuickTasksToGlobalState";
 
 export const useLoadQuickTasks = (): [QuickTask[], () => void] => {
 	const [quickTask, setQuickTasks] = useRecoilState(quickTasksState);
@@ -13,11 +14,7 @@ export const useLoadQuickTasks = (): [QuickTask[], () => void] => {
 		loadedQuickTasks.forEach((task) => {
 			task.created = new Date(task.created);
 		});
-		loadedQuickTasks = loadedQuickTasks.sort(
-			(a, b) => b.created.getTime() - a.created.getTime()
-		);
-
-		setQuickTasks(loadedQuickTasks);
+		sortAndSetQuickTasksToGlobalState(loadedQuickTasks, setQuickTasks);
 	};
 
 	return [quickTask, loadQuickTasks];

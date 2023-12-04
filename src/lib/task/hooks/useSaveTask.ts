@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import { tasksState } from '../stores/task/taskAtom';
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../interface/Task';
-import { getTasksFromLocalStorage } from '../dataAccess/ getTasksFromLocalStorage';
+import { getTasksFromLocalStorage } from '../dataAccess/getTasksFromLocalStorage';
 import { saveTasksToLocalStorage } from '../dataAccess/saveTasksToLocalStorage';
 import { sortAndSetTasksToGlobalState } from '../utils/sortAndSetTasksToGlobalState';
 
