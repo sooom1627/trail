@@ -1,32 +1,41 @@
 import { PlusIcon } from "@/components/icons/action/PlusIcon";
 import { useSaveQuickTasks } from "../../hooks/useSaveQuickTasks";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { toast } from "react-toastify";
+
+const toastConfig = {
+	position: toast.POSITION.TOP_LEFT,
+	autoClose: 3000,
+	hideProgressBar: false,
+	closeOnClick: true,
+	pauseOnHover: true,
+	draggable: true,
+	progress: undefined,
+	theme: "light" as const,
+};
 
 export const AddQuickTaskForm = () => {
 	const [formValue, setFormValue] = useState<string>("");
 	const saveQuickTask = useSaveQuickTasks();
-	const saveQuickTaskHandler = () => {
-		if (formValue !== "") {
-			saveQuickTask(formValue);
-			setFormValue("");
-		} else {
-			toast.error("🧐 Task is empty!", {
-				position: "top-left",
-				autoClose: 3000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "light",
-			});
-		}
-	};
+
+	const saveQuickTaskHandler = useCallback(
+		(event: React.FormEvent) => {
+			event.preventDefault();
+			if (formValue !== "") {
+				saveQuickTask(formValue);
+				setFormValue("");
+			} else {
+				toast.error("🧐 Task is empty!", toastConfig);
+			}
+		},
+		[formValue, saveQuickTask]
+	);
+
 	return (
 		<form
 			className="flex justify-between grow border-b focus-within:border-zinc-500"
 			name="input"
+			onSubmit={saveQuickTaskHandler}
 		>
 			<input
 				type="text"
@@ -35,7 +44,7 @@ export const AddQuickTaskForm = () => {
 				value={formValue}
 				onChange={(e) => setFormValue(e.target.value)}
 			/>
-			<button type="submit" onClick={() => saveQuickTaskHandler()}>
+			<button type="submit">
 				<PlusIcon color="text-zinc-500" />
 			</button>
 		</form>
