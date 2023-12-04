@@ -1,3 +1,4 @@
+import { SortIcon } from "../icons/action/SortIcon";
 import { TabPanel } from "./TabPanel";
 
 interface TabProps {
@@ -6,10 +7,18 @@ interface TabProps {
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
 	children: React.ReactNode;
+	sortingHandler: () => void;
 }
 
 export const Tab: React.FC<TabProps> = (props) => {
-	const { tabNames, taskCounts, activeTab, setActiveTab, children } = props;
+	const {
+		tabNames,
+		taskCounts,
+		activeTab,
+		setActiveTab,
+		children,
+		sortingHandler,
+	} = props;
 
 	const handleTabClick = (tab: string) => {
 		setActiveTab(tab);
@@ -34,6 +43,14 @@ export const Tab: React.FC<TabProps> = (props) => {
 						/>
 					))}
 				</ul>
+				{activeTab === "todo" && (
+					<div
+						className="w-fit mr-4 mt-4 cursor-pointer flex items-center"
+						onClick={sortingHandler}
+					>
+						<SortIcon />
+					</div>
+				)}
 			</div>
 			<div id="default-tab-content" className="overflow-y-scroll">
 				{children}
