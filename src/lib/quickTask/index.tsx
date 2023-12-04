@@ -1,8 +1,16 @@
 import { QuickTaskList } from "./feature/getQuickTask/QuickTaskList";
 import { InfoIcon } from "@/components/icons/InfoIcon";
 import { AddQuickTaskForm } from "./feature/addQuickTask/AddQuickTaskForm";
+import { useEffect } from "react";
+import { useLoadQuickTasks } from "./hooks/useLoadQuickTasks";
 
 export const QuickTaskPanel = () => {
+	const [quickTasks, loadQuickTasks] = useLoadQuickTasks();
+
+	useEffect(() => {
+		loadQuickTasks();
+	}, []);
+
 	return (
 		<>
 			<div className="flex items-center gap-2 mt-2 h-">
@@ -23,7 +31,7 @@ export const QuickTaskPanel = () => {
 				</div>
 				<AddQuickTaskForm />
 			</div>
-			<QuickTaskList />
+			<QuickTaskList quickTasks={quickTasks} />
 		</>
 	);
 };

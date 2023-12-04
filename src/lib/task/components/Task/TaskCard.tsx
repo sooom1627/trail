@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { selectedTasksState } from "../../srtores/atom/taskAtom";
-import { ModalContext } from "../../srtores/context/ModalContext";
+import { selectedTasksState } from "../../stores/task/taskAtom";
+import { ModalContext } from "../../stores/modal/ModalContext";
 import { Task } from "../../interface/Task";
 import { ExecutionTime } from "../../interface/ExecutionTime";
 import { getDoneTaskExecutionTime } from "../../utils/getExecutionTime";

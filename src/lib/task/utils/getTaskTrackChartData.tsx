@@ -1,57 +1,69 @@
 import { Task } from "../interface/Task";
 
-// 1日の時間と1時間の分数を定数として定義
 const HOURS_IN_DAY = 24;
 const MINUTES_IN_HOUR = 60;
 
-// タスクの開始時間を調整する関数
-// 今日の日付と一致しない場合は、開始時間を今日の0時に設定
-const refineStartTime = (tasks: Task[]) => {
-	const refinedStartTimeTasks = tasks.map((task) => {
-		const today = new Date();
-
-		if (task.startTime && task.startTime.getDate() === today.getDate()) {
-			return { ...task };
-		} else if (task.startTime && task.startTime.getDate() !== today.getDate()) {
-			const todayStart = new Date();
-			todayStart.setHours(0, 0, 0, 0);
-			return { ...task, startTime: todayStart };
-		}
-	});
-
-	return refinedStartTimeTasks;
+const isSameDay = (date1: Date, date2: Date) => {
+	return date1.getDate() === date2.getDate();
 };
 
-// タスクの分布を計算する関数
+const resetToStartOfDay = (date: Date) => {
+	const resetDate = new Date(date);
+	resetDate.setHours(0, 0, 0, 0);
+	return resetDate;
+};
+
+const refineStartTime = (tasks: Task[]) => {
+	const today = new Date();
+	return tasks.map((task) => {
+		if (task.startTime && !isSameDay(task.startTime, today)) {
+			return { ...task, startTime: resetToStartOfDay(task.startTime) };
+		}
+		return task;
+	});
+};
+
+const calculateDuration = (
+	startHour: number,
+	startMinutes: number,
+	endHour: number,
+	endMinutes: number
+) => {
+	let hourlyDurations = new Array(HOURS_IN_DAY).fill(0);
+	if (startHour === endHour) {
+		hourlyDurations[startHour] += endMinutes - startMinutes;
+	} else {
+		for (let hour = startHour + 1; hour < endHour; hour++) {
+			hourlyDurations[hour] += MINUTES_IN_HOUR;
+		}
+		hourlyDurations[startHour] += MINUTES_IN_HOUR - startMinutes;
+		hourlyDurations[endHour] += endMinutes;
+	}
+	return hourlyDurations;
+};
+
 export const calculateTaskDistribution = (tasks: Task[]) => {
-	// 1日の各時間帯におけるタスクの実行時間を格納する配列を初期化
-	const hourlyDurations = new Array(HOURS_IN_DAY).fill(0);
 	const refinedStartTimeTasks = refineStartTime(tasks);
+	let hourlyDurations = new Array(HOURS_IN_DAY).fill(0);
 
 	refinedStartTimeTasks.forEach((task) => {
-		if (!task || !task.startTime || !task.endTime) return;
-
-		const { startTime, endTime } = task;
-		const startHour = startTime.getHours();
-		const startMinutes = startTime.getMinutes();
-		const endHour = endTime.getHours();
-		const endMinutes = endTime.getMinutes();
-
-		// 開始時間と終了時間が同じ時間帯の場合
-		if (startHour === endHour && typeof startHour === "number") {
-			hourlyDurations[startHour] += endMinutes - startMinutes;
-		} else {
-			// 開始時間と終了時間が異なる時間帯の場合
-			for (let hour = startHour + 1; hour < endHour; hour++) {
-				hourlyDurations[hour] += 60;
-			}
-			// 開始時間帯の残りの分数を追加
-			hourlyDurations[startHour] += MINUTES_IN_HOUR - startMinutes;
-			// 終了時間帯の分数を追加
-			hourlyDurations[endHour] += endMinutes;
+		if (task && task.startTime && task.endTime) {
+			const { startTime, endTime } = task;
+			const startHour = startTime.getHours();
+			const startMinutes = startTime.getMinutes();
+			const endHour = endTime.getHours();
+			const endMinutes = endTime.getMinutes();
+			const taskHourlyDurations = calculateDuration(
+				startHour,
+				startMinutes,
+				endHour,
+				endMinutes
+			);
+			hourlyDurations = hourlyDurations.map(
+				(val, index) => val + taskHourlyDurations[index]
+			);
 		}
 	});
 
-	// 各時間帯のタスク実行時間を格納した配列を返す
 	return hourlyDurations;
 };

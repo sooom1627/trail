@@ -1,14 +1,16 @@
 import { useRecoilState } from "recoil";
 import { quickTasksState } from "../stores/quickTaskAtom";
 import { QuickTask } from "../interface/QuickTask";
+import { getQuickTasksFromLocalStorage } from "../dataAccess/getQuickTasksFromLocalStorage";
+import { saveQuickTasksFromLocalStorage } from "../dataAccess/saveQuickTasksFromLocalStorage";
+import { sortAndSetQuickTasksToGlobalState } from "../util/sortAndSetQuickTasksToGlobalState";
 
 export const useHandleQuickTaskExecution = (quickTask: QuickTask) => {
 	const [, setQuickTasks] = useRecoilState(quickTasksState);
 	const handleQuickTaskExecution = () => {
-		const quickTaskString = localStorage.getItem("quickTasks");
-		let currentQuickTasks = quickTaskString ? JSON.parse(quickTaskString) : [];
+		const currentQuickTasks =  getQuickTasksFromLocalStorage()
 
-		currentQuickTasks = currentQuickTasks.map((task: QuickTask) => {
+		let updatedQuickTasks = currentQuickTasks.map((task: QuickTask) => {
 			if (task.id === quickTask.id) {
 				return {
 					...task,
@@ -20,10 +22,11 @@ export const useHandleQuickTaskExecution = (quickTask: QuickTask) => {
 					...task, created:new Date(task.created)
 				}
 			}
-		});
+		}) as QuickTask[];
 
-		setQuickTasks(currentQuickTasks);
-		localStorage.setItem("quickTasks", JSON.stringify(currentQuickTasks));
+		saveQuickTasksFromLocalStorage(updatedQuickTasks)
+		sortAndSetQuickTasksToGlobalState(updatedQuickTasks, setQuickTasks)
+		
 	};
 	return handleQuickTaskExecution;
 };
