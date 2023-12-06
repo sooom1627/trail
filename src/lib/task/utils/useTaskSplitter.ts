@@ -24,7 +24,7 @@ export const taskSplitter = (tasks: Task[], sorting:"date"|"priority") => {
     }else if(sorting === "priority"){
       setTodoTasks(tasks.filter(task => task.status === 'todo').sort(compareTasksByPriority));
     }    
-    setDoingTasks(tasks.filter(task => task.status === 'doing').sort((a, b) => ((b.startTime || 0) as number) - ((a.startTime || 0) as number)));
+    setDoingTasks(tasks.filter(task => task.status === 'doing' || task.status === "pause").sort((a, b) => ((b.startTime || 0) as number) - ((a.startTime || 0) as number)));
     setDoneTasks(tasks.filter(task => {
       if (task.status !== 'done' || !task.endTime) {
         return false;
