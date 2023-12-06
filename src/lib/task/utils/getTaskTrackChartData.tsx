@@ -7,8 +7,8 @@ const isSameDay = (date1: Date, date2: Date) => {
 	return date1.getDate() === date2.getDate();
 };
 
-const resetToStartOfDay = (date: Date) => {
-	const resetDate = new Date(date);
+const resetToStartOfDay = () => {
+	const resetDate = new Date();
 	resetDate.setHours(0, 0, 0, 0);
 	return resetDate;
 };
@@ -17,7 +17,7 @@ const refineStartTime = (tasks: Task[]) => {
 	const today = new Date();
 	return tasks.map((task) => {
 		if (task.startTime && !isSameDay(task.startTime, today)) {
-			return { ...task, startTime: resetToStartOfDay(task.startTime) };
+			return { ...task, startTime: resetToStartOfDay() };
 		}
 		return task;
 	});
@@ -44,6 +44,7 @@ const calculateDuration = (
 
 export const calculateTaskDistribution = (tasks: Task[]) => {
 	const refinedStartTimeTasks = refineStartTime(tasks);
+	console.log(refinedStartTimeTasks);
 	let hourlyDurations = new Array(HOURS_IN_DAY).fill(0);
 
 	refinedStartTimeTasks.forEach((task) => {
