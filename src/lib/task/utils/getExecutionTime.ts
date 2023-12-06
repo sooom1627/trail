@@ -1,7 +1,7 @@
 import { ExecutionTime } from "../interface/ExecutionTime";
 import { Task } from "../interface/Task";
 
-export const calcDiffExecutionTime = (diff:number) =>{
+const calcDiffExecutionTime = (diff:number) =>{
   const hours = Math.floor(diff / 1000 / 60 / 60);
   const minutes = Math.floor((diff / 1000 / 60) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
@@ -19,7 +19,7 @@ export const getDoneTaskExecutionTime = (startTime:Date, endTime:Date) =>{
   return executionTime
 }
 
-export const getDoingTaskExecutionTime = (startTime: Date) =>{
+export const getDoingTaskExecutionTime = (startTime: Date, pauses?:{pause:Date, restart?:Date}[]) =>{
   const now = new Date();
   const diff = now.getTime() - startTime.getTime();
   const executionTime =  calcDiffExecutionTime(diff)
@@ -29,13 +29,26 @@ export const getDoingTaskExecutionTime = (startTime: Date) =>{
 export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: React.Dispatch<React.SetStateAction<ExecutionTime>>) => {
 	let timerId: ReturnType<typeof setTimeout> | null = null;
 
-	if (!selectedTask?.startTime && !selectedTask?.endTime) {
+	if (selectedTask.status === "todo") {
 		setExecutionTime({
 			hoursStr: "00",
 			minutesStr: "00",
 			secondsStr: "00",
 		});
 		return timerId;
+	}
+
+	if (selectedTask.status === "doing") {
+		timerId = setInterval(() => {
+			const result = selectedTask.startTime
+				? getDoingTaskExecutionTime(selectedTask.startTime)
+				: null;
+			if (result) {
+				setExecutionTime(result);
+			}
+		}, 1000);
+
+		return timerId
 	}
 
 	if (selectedTask?.startTime && selectedTask?.endTime) {
@@ -45,17 +58,6 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 		);
 		setExecutionTime(result);
 		return timerId;
-	}
-
-	if (selectedTask?.startTime && !selectedTask?.endTime) {
-		timerId = setInterval(() => {
-			const result = selectedTask.startTime
-				? getDoingTaskExecutionTime(selectedTask.startTime)
-				: null;
-			if (result) {
-				setExecutionTime(result);
-			}
-		}, 1000);
 	}
 
 	return timerId;

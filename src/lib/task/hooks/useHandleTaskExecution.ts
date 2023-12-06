@@ -17,14 +17,14 @@ export const useHandleTaskExecution = (status: "doing" | "pause" | "done") => {
           switch(status){
             case "doing":
               if(selectedTask.status === "pause"){
-                setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, startTime:new Date()})
+                setSelectedTask({ ...t, status: status as "todo" | "doing" | "pause" | "done", pauses:(t.pauses ? [...t.pauses.slice(0, -1), {...t.pauses[t.pauses.length - 1], restart: new Date()}] : [{pause:new Date(), restart:new Date()}]) })
                 return { ...t, status: status as "todo" | "doing" | "pause" | "done", pauses:(t.pauses ? [...t.pauses.slice(0, -1), {...t.pauses[t.pauses.length - 1], restart: new Date()}] : [{pause:new Date(), restart:new Date()}]) };
               }else{
                 setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, startTime:new Date()})
                 return { ...t, status: status as "todo" | "doing" | "pause" | "done", startTime:new Date() };
               }
             case "pause":
-              setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, startTime:new Date()})
+              setSelectedTask({ ...t, status: status as "todo" | "doing" | "pause" | "done", pauses:(t.pauses ? [...t.pauses, {pause:new Date(), restart:undefined}] : [{pause:new Date(), restart:undefined}]) })
               return { ...t, status: status as "todo" | "doing" | "pause" | "done", pauses:(t.pauses ? [...t.pauses, {pause:new Date(), restart:undefined}] : [{pause:new Date(), restart:undefined}]) };
             case "done":
               setSelectedTask({...selectedTask, status:status, id: selectedTask?.id, endTime:new Date()})
