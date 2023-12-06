@@ -2,8 +2,9 @@ export interface Task {
   id : string;
   title : string;
   priority:"Lowest"| "Low"| "Middle" | "High"| "Highest"
-  status:"todo" | "doing"| "done"
+  status:"todo" | "doing"| "pause" | "done"
   created: Date;
   startTime?: Date;
   endTime?: Date;
+  pauses?:{start: Date, end:Date | null};
 }
