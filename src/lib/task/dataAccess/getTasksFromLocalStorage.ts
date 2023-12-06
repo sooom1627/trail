@@ -1,6 +1,5 @@
 import { Task } from "../interface/Task";
 
-// src/lib/task/helpers.ts
 export const getTasksFromLocalStorage = (): Task[] => {
   const tasksString = localStorage.getItem('tasks');
   try {
@@ -9,7 +8,10 @@ export const getTasksFromLocalStorage = (): Task[] => {
       created: new Date(task.created),
       startTime: task.startTime ? new Date(task.startTime) : undefined,
       endTime: task.endTime ? new Date(task.endTime) : undefined,
-      pauses: task.pauses ? { pause: new Date(task.pauses.pause), restart: task.pauses.restart ? new Date(task.pauses.restart) : undefined } : undefined
+      pauses: Array.isArray(task.pauses) ? task.pauses.map((pause) => ({
+        pause: new Date(pause.pause),
+        restart: pause.restart ? new Date(pause.restart) : undefined,
+      })) : undefined,
     })) as Task[] : [];
   } catch (error) {
     console.error('Failed to parse tasks from localStorage', error);

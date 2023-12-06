@@ -24,6 +24,7 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 		secondsStr: "00",
 	});
 	const startTask = useHandleTaskExecution("doing");
+	const pauseTask = useHandleTaskExecution("pause");
 	const endTask = useHandleTaskExecution("done");
 
 	useEffect(() => {
@@ -75,7 +76,10 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 					</>
 				) : selectedTask?.status === "doing" ? (
 					<>
-						<button className="h-fit text-white bg-red-500 hover:bg-red-600 rounded-full text-sm p-2.5 text-center inline-flex items-center">
+						<button
+							onClick={() => pauseTask(selectedTask.id)}
+							className="h-fit text-white bg-red-500 hover:bg-red-600 rounded-full text-sm p-2.5 text-center inline-flex items-center"
+						>
 							<PauseIcon />
 						</button>
 						<button
@@ -85,6 +89,16 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 							className="h-fit text-white bg-zinc-700 hover:bg-zinc-800 rounded-full text-sm p-2.5 text-center inline-flex items-center"
 						>
 							<CheckIcon />
+						</button>
+					</>
+				) : selectedTask?.status === "pause" ? (
+					<>
+						<button
+							type="button"
+							className="h-fit text-white bg-zinc-700 hover:bg-zinc-800 rounded-full text-sm p-2.5 text-center inline-flex items-center"
+							onClick={() => startTask(selectedTask.id)}
+						>
+							<PlayIcon />
 						</button>
 					</>
 				) : selectedTask?.status === "done" ? (
