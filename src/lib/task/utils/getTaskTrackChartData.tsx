@@ -13,7 +13,7 @@ const resetToStartOfDay = () => {
 	return resetDate;
 };
 
-const refineStartTime = (tasks: Task[]) => {
+export const refineStartTime = (tasks: Task[]) => {
 	const today = new Date();
 	return tasks.map((task) => {
 		if (task.startTime && !isSameDay(task.startTime, today)) {

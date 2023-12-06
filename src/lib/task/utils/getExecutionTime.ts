@@ -1,5 +1,6 @@
 import { ExecutionTime } from "../interface/ExecutionTime";
 import { Task } from "../interface/Task";
+import { refineStartTime } from "./getTaskTrackChartData";
 
 const calcDiffExecutionTime = (diff:number) =>{
   const hours = Math.floor(diff / 1000 / 60 / 60);
@@ -94,9 +95,10 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 };
 
 export const getTodayDoneTaskExecutionTime = (tasks:Task[]) =>{
+	const refineTask = refineStartTime(tasks)
 	let totalDiff = 0;
 
-	tasks.forEach((task) =>{
+	refineTask .forEach((task) =>{
 		if(task.startTime && task.endTime){
 			const diff = task.endTime.getTime() - task.startTime.getTime();
 			totalDiff += diff
