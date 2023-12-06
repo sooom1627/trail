@@ -6,5 +6,5 @@ export interface Task {
   created: Date;
   startTime?: Date;
   endTime?: Date;
-  pauses?:{start: Date, end:Date | null};
+  pauses?:{pause: Date, restart?:Date};
 }
