@@ -19,11 +19,18 @@ export const getDoneTaskExecutionTime = (startTime:Date, endTime:Date) =>{
   return executionTime
 }
 
-export const getDoingTaskExecutionTime = (startTime: Date, pauses?:{pause:Date, restart?:Date}[]) =>{
+export const getDoingTaskExecutionTime = (startTime: Date, pauses?: { pause: Date; restart?: Date }[]) => {
   const now = new Date();
   const diff = now.getTime() - startTime.getTime();
-  const executionTime =  calcDiffExecutionTime(diff)
-  return executionTime
+  let pausesDiffs = 0;
+  pauses?.forEach(({ pause, restart }) => {
+    if (restart && pause) {
+      pausesDiffs += restart.getTime() - pause.getTime();
+    }
+  });
+  const totalDiff = diff - pausesDiffs;
+  const executionTime = calcDiffExecutionTime(totalDiff);
+  return executionTime;
 }
 
 export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: React.Dispatch<React.SetStateAction<ExecutionTime>>) => {
@@ -41,7 +48,7 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 	if (selectedTask.status === "doing") {
 		timerId = setInterval(() => {
 			const result = selectedTask.startTime
-				? getDoingTaskExecutionTime(selectedTask.startTime)
+				? getDoingTaskExecutionTime(selectedTask.startTime, selectedTask.pauses)
 				: null;
 			if (result) {
 				setExecutionTime(result);
