@@ -13,16 +13,8 @@ const calcDiffExecutionTime = (diff:number) =>{
 	return { hoursStr, minutesStr, secondsStr };
 }
 
-export const getDoneTaskExecutionTime = (startTime:Date, endTime:Date) =>{
-  const diff = endTime.getTime() - startTime.getTime();
-  const executionTime =  calcDiffExecutionTime(diff)
-  return executionTime
-}
-
-export const getDoingTaskExecutionTime = (startTime: Date, pauses?: { pause: Date; restart?: Date }[]) => {
-  const now = new Date();
-  const diff = now.getTime() - startTime.getTime();
-  let pausesDiffs = 0;
+const calcPausesDiffFunc = (diff:number,pauses?: { pause: Date; restart?: Date }[]) =>{
+	let pausesDiffs = 0;
   pauses?.forEach(({ pause, restart }) => {
     if (restart && pause) {
       pausesDiffs += restart.getTime() - pause.getTime();
@@ -30,6 +22,27 @@ export const getDoingTaskExecutionTime = (startTime: Date, pauses?: { pause: Dat
   });
   const totalDiff = diff - pausesDiffs;
   const executionTime = calcDiffExecutionTime(totalDiff);
+	return executionTime
+}
+
+export const getDoneTaskExecutionTime = (startTime:Date, endTime:Date, pauses?: { pause: Date; restart?: Date }[]) =>{
+  const diff = endTime.getTime() - startTime.getTime();
+  const executionTime = calcPausesDiffFunc(diff, pauses)
+  return executionTime
+}
+
+const getDoingTaskExecutionTime = (startTime: Date, pauses?: { pause: Date; restart?: Date }[]) => {
+  const now = new Date();
+  const diff = now.getTime() - startTime.getTime();
+	const executionTime = calcPausesDiffFunc(diff, pauses)
+  return executionTime;
+}
+
+const getPauseTaskExecutionTime = (startTime: Date, pauses?: { pause: Date; restart?: Date }[]) =>{
+	if(!pauses || pauses.length < 1) return
+	const lastPause = pauses[pauses.length - 1].pause.getTime()
+	const diff = lastPause - startTime.getTime()
+	const executionTime = calcPausesDiffFunc(diff, pauses)
   return executionTime;
 }
 
@@ -58,16 +71,26 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 		return timerId
 	}
 
+	if (selectedTask.status === "pause") {
+		const result = selectedTask.startTime
+			? getPauseTaskExecutionTime(selectedTask.startTime, selectedTask.pauses)
+			: null;
+		if (result) {
+			setExecutionTime(result);
+		}
+		return timerId
+	}
+
 	if (selectedTask?.startTime && selectedTask?.endTime) {
 		const result = getDoneTaskExecutionTime(
 			selectedTask.startTime,
-			selectedTask.endTime
+			selectedTask.endTime,
+			selectedTask.pauses
 		);
 		setExecutionTime(result);
 		return timerId;
 	}
 
-	return timerId;
 };
 
 export const getTodayDoneTaskExecutionTime = (tasks:Task[]) =>{
