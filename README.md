@@ -32,20 +32,29 @@ export default {
 ## ディレクトリ構成
 
 ```js
-─ node_modules
-─ src
-　 ├ components
-　 ├ routes
-　 ├ types
-　 └ features
-　　 ├ 機能 A
-　　 │ 　 ├ compenents
-　　 │ 　 │ 　 ├ childrenA
-　　 │ 　 │ 　 ├ childrenB
-　　 │ 　 │ 　・・・
-　　 │ 　 ├ hooks
-　　 │ 　 ├ stores
-　　 │ 　 └ types
-　　 ├ 機能 B
-　　　・・・
+─ node_modules // プロジェクトの依存関係
+─ src // ソースコード
+　 ├ components // 再利用可能なUIコンポーネント
+　 │ 　├ accordion
+　 │ 　├ icons
+　 │ 　├ input
+　 │ 　├ menu
+　 │ 　└ templates
+　 ├ lib // ビジネスロジックとデータ管理
+　 │ 　├ quickTask // QuickTask機能に関連するコード
+　 │ 　│ 　├ components
+　 │ 　│ 　├ feature
+　 │ 　│ 　├ hooks
+　 │ 　│ 　├ interface
+　 │ 　│ 　└ stores
+　 │ 　└ task // Task機能に関連するコード
+　 │ 　 　├ components
+　 │ 　 　├ dataAccess
+　 │ 　 　├ feature
+　 │ 　 　├ hooks
+　 │ 　 　├ interface
+　 │ 　 　├ stores
+　 │ 　 　└ utils
+　 ├ pages // ページレベルのコンポーネント
+　 └ types // TypeScriptの型定義
 ```
