@@ -1,6 +1,6 @@
 import { ExecutionTime } from "../interface/ExecutionTime";
 import { Task } from "../interface/Task";
-import { refineTaskTime } from "./getTaskTrackChartData";
+import { refineTaskTime } from "./taskTimeRefineUtils";
 
 const calcDiffExecutionTime = (diff:number) =>{
   const hours = Math.floor(diff / 1000 / 60 / 60);
