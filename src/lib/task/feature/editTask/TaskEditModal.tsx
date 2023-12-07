@@ -62,7 +62,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 			toggleModal={toggleModal}
 			setToggleModal={setToggleModal}
 			confirmButton={
-				<PrimaryButton onClick={() => taskEditHandler()}>Edit</PrimaryButton>
+				<PrimaryButton onClick={() => taskEditHandler()}>Confirm</PrimaryButton>
 			}
 			deleteButton={
 				<AtentionButton onClick={() => taskDeleteHandler()}>
