@@ -1,7 +1,8 @@
 import { ExecutionTime } from "../interface/ExecutionTime";
 import { Task } from "../interface/Task";
+import { refineTaskTime } from "./taskTimeRefineUtils";
 
-export const calcDiffExecutionTime = (diff:number) =>{
+const calcDiffExecutionTime = (diff:number) =>{
   const hours = Math.floor(diff / 1000 / 60 / 60);
   const minutes = Math.floor((diff / 1000 / 60) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
@@ -13,23 +14,43 @@ export const calcDiffExecutionTime = (diff:number) =>{
 	return { hoursStr, minutesStr, secondsStr };
 }
 
-export const getDoneTaskExecutionTime = (startTime:Date, endTime:Date) =>{
+const calcPausesDiffFunc = (diff:number,pauses?: { pause: Date; restart?: Date }[]) =>{
+	let pausesDiffs = 0;
+  pauses?.forEach(({ pause, restart }) => {
+    if (restart && pause) {
+      pausesDiffs += restart.getTime() - pause.getTime();
+    }
+  });
+  const totalDiff = diff - pausesDiffs;
+  const executionTime = calcDiffExecutionTime(totalDiff);
+	return executionTime
+}
+
+export const getDoneTaskExecutionTime = (startTime:Date, endTime:Date, pauses?: { pause: Date; restart?: Date }[]) =>{
   const diff = endTime.getTime() - startTime.getTime();
-  const executionTime =  calcDiffExecutionTime(diff)
+  const executionTime = calcPausesDiffFunc(diff, pauses)
   return executionTime
 }
 
-export const getDoingTaskExecutionTime = (startTime: Date) =>{
+const getDoingTaskExecutionTime = (startTime: Date, pauses?: { pause: Date; restart?: Date }[]) => {
   const now = new Date();
   const diff = now.getTime() - startTime.getTime();
-  const executionTime =  calcDiffExecutionTime(diff)
-  return executionTime
+	const executionTime = calcPausesDiffFunc(diff, pauses)
+  return executionTime;
+}
+
+const getPauseTaskExecutionTime = (startTime: Date, pauses?: { pause: Date; restart?: Date }[]) =>{
+	if(!pauses || pauses.length < 1) return
+	const lastPause = pauses[pauses.length - 1].pause.getTime()
+	const diff = lastPause - startTime.getTime()
+	const executionTime = calcPausesDiffFunc(diff, pauses)
+  return executionTime;
 }
 
 export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: React.Dispatch<React.SetStateAction<ExecutionTime>>) => {
 	let timerId: ReturnType<typeof setTimeout> | null = null;
 
-	if (!selectedTask?.startTime && !selectedTask?.endTime) {
+	if (selectedTask.status === "todo") {
 		setExecutionTime({
 			hoursStr: "00",
 			minutesStr: "00",
@@ -38,33 +59,46 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 		return timerId;
 	}
 
-	if (selectedTask?.startTime && selectedTask?.endTime) {
-		const result = getDoneTaskExecutionTime(
-			selectedTask.startTime,
-			selectedTask.endTime
-		);
-		setExecutionTime(result);
-		return timerId;
-	}
-
-	if (selectedTask?.startTime && !selectedTask?.endTime) {
+	if (selectedTask.status === "doing") {
 		timerId = setInterval(() => {
 			const result = selectedTask.startTime
-				? getDoingTaskExecutionTime(selectedTask.startTime)
+				? getDoingTaskExecutionTime(selectedTask.startTime, selectedTask.pauses)
 				: null;
 			if (result) {
 				setExecutionTime(result);
 			}
 		}, 1000);
+
+		return timerId
 	}
 
-	return timerId;
+	if (selectedTask.status === "pause") {
+		const result = selectedTask.startTime
+			? getPauseTaskExecutionTime(selectedTask.startTime, selectedTask.pauses)
+			: null;
+		if (result) {
+			setExecutionTime(result);
+		}
+		return timerId
+	}
+
+	if (selectedTask?.startTime && selectedTask?.endTime) {
+		const result = getDoneTaskExecutionTime(
+			selectedTask.startTime,
+			selectedTask.endTime,
+			selectedTask.pauses
+		);
+		setExecutionTime(result);
+		return timerId;
+	}
+
 };
 
 export const getTodayDoneTaskExecutionTime = (tasks:Task[]) =>{
+	const refineTask = refineTaskTime(tasks)
 	let totalDiff = 0;
 
-	tasks.forEach((task) =>{
+	refineTask .forEach((task) =>{
 		if(task.startTime && task.endTime){
 			const diff = task.endTime.getTime() - task.startTime.getTime();
 			totalDiff += diff

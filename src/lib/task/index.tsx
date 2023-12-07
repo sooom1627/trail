@@ -15,7 +15,10 @@ export const TaskPage: React.FC = () => {
 	const [tasks, loadTasks] = useLoadTasks();
 	const [toggleModal, setToggleModal] = useState<boolean>(false);
 	const [sorting, setSorting] = useState<"date" | "priority">("date");
-	const { todoTasks, doingTasks, doneTasks } = taskSplitter(tasks, sorting);
+	const { todoTasks, doingOrPauseTasks, doneTasks } = taskSplitter(
+		tasks,
+		sorting
+	);
 
 	useEffect(() => {
 		loadTasks();
@@ -28,7 +31,7 @@ export const TaskPage: React.FC = () => {
 			<AddTaskForm />
 			<TaskTabs
 				todoTasks={todoTasks}
-				doingTasks={doingTasks}
+				doingTasks={doingOrPauseTasks}
 				doneTasks={doneTasks}
 				setSorting={setSorting}
 			/>

@@ -26,7 +26,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
 	useEffect(() => {
 		if (task.startTime && task.endTime) {
-			const result = getDoneTaskExecutionTime(task.startTime, task.endTime);
+			const result = getDoneTaskExecutionTime(
+				task.startTime,
+				task.endTime,
+				task.pauses
+			);
 			setExecutionTime(result);
 		}
 	}, []);

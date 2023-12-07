@@ -3,7 +3,7 @@ import { Task } from '@/lib/task/interface/Task';
 
 export const taskSplitter = (tasks: Task[], sorting:"date"|"priority") => {
   const [todoTasks, setTodoTasks] = useState<Task[]>([]);
-  const [doingTasks, setDoingTasks] = useState<Task[]>([]);
+  const [doingOrPauseTasks, setDoingOrPauseTasks] = useState<Task[]>([]);
   const [doneTasks, setDoneTasks] = useState<Task[]>([]);
 
   const priorityMapping = {
@@ -24,7 +24,7 @@ export const taskSplitter = (tasks: Task[], sorting:"date"|"priority") => {
     }else if(sorting === "priority"){
       setTodoTasks(tasks.filter(task => task.status === 'todo').sort(compareTasksByPriority));
     }    
-    setDoingTasks(tasks.filter(task => task.status === 'doing').sort((a, b) => ((b.startTime || 0) as number) - ((a.startTime || 0) as number)));
+    setDoingOrPauseTasks(tasks.filter(task => task.status === 'doing' || task.status === "pause").sort((a, b) => ((b.startTime || 0) as number) - ((a.startTime || 0) as number)));
     setDoneTasks(tasks.filter(task => {
       if (task.status !== 'done' || !task.endTime) {
         return false;
@@ -39,5 +39,5 @@ export const taskSplitter = (tasks: Task[], sorting:"date"|"priority") => {
     }).sort((a, b) => ((b.endTime || 0) as number) - ((a.endTime || 0) as number)));
   }, [tasks, sorting]);
 
-  return { todoTasks, doingTasks, doneTasks };
+  return { todoTasks, doingOrPauseTasks, doneTasks };
 };
