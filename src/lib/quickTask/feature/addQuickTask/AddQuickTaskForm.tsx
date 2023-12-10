@@ -1,6 +1,6 @@
 import { PlusIcon } from "@/components/icons/action/PlusIcon";
 import { useSaveQuickTasks } from "../../hooks/useSaveQuickTasks";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { toast } from "react-toastify";
 
 const toastConfig = {
@@ -14,8 +14,15 @@ const toastConfig = {
 	theme: "light" as const,
 };
 
-export const AddQuickTaskForm = () => {
-	const [formValue, setFormValue] = useState<string>("");
+interface AddQuickTaskFormProps {
+	formValue: string;
+	setFormValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const AddQuickTaskForm: React.FC<AddQuickTaskFormProps> = ({
+	formValue,
+	setFormValue,
+}) => {
 	const saveQuickTask = useSaveQuickTasks();
 
 	const saveQuickTaskHandler = useCallback(

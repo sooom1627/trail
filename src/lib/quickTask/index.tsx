@@ -1,11 +1,13 @@
 import { QuickTaskList } from "./feature/getQuickTask/QuickTaskList";
 import { InfoIcon } from "@/components/icons/InfoIcon";
 import { AddQuickTaskForm } from "./feature/addQuickTask/AddQuickTaskForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoadQuickTasks } from "./hooks/useLoadQuickTasks";
+import { Empty } from "./components/empty/Empty";
 
 export const QuickTaskPanel = () => {
 	const [quickTasks, loadQuickTasks] = useLoadQuickTasks();
+	const [formValue, setFormValue] = useState<string>("");
 
 	useEffect(() => {
 		loadQuickTasks();
@@ -13,7 +15,7 @@ export const QuickTaskPanel = () => {
 
 	return (
 		<>
-			<div className="flex items-center gap-2 mt-2 h-">
+			<div className="flex items-center gap-2 mt-2">
 				<div className="group relative">
 					<div className="flex justify-start items-center min-w-fit">
 						<p className="font-bold mr-1">Quick Task</p>
@@ -29,9 +31,13 @@ export const QuickTaskPanel = () => {
 						</p>
 					</div>
 				</div>
-				<AddQuickTaskForm />
+				<AddQuickTaskForm formValue={formValue} setFormValue={setFormValue} />
 			</div>
-			<QuickTaskList quickTasks={quickTasks} />
+			{quickTasks.length ? (
+				<QuickTaskList quickTasks={quickTasks} />
+			) : (
+				<Empty formValue={formValue} />
+			)}
 		</>
 	);
 };

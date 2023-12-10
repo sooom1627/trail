@@ -7,7 +7,6 @@ const MINUTES_IN_HOUR = 60;
 
 export const calculateTaskDistribution = (tasks: Task[]) => {
 	const refinedStartTimeTasks = refineTaskTime(tasks);
-	console.log(refinedStartTimeTasks);
 	let hourlyDurations = new Array(HOURS_IN_DAY).fill(0);
 
 	refinedStartTimeTasks.forEach((task) => {
