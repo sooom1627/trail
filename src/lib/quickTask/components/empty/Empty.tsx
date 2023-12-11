@@ -53,9 +53,56 @@ export const Empty = ({ formValue }: { formValue: string }) => {
 			>
 				// Stay productive!
 			</p>
-			<p className={`${styles.typing}`} style={{ animationDelay: "16800ms" }}>
-				QuickTask.<span className="text-sky-500">add</span>
-				<span className="text-amber-400">(</span>Fun Assignment:{formValue}!
+			<p className={`${styles.typing}`} style={{ animationDelay: "17000ms" }}>
+				<span className="text-sky-500">const </span>QuickTask{" "}
+				<span className="text-red-400">= {"{"}</span>
+			</p>
+			<p
+				className={`${styles.typing} pl-3`}
+				style={{ animationDelay: "17000ms" }}
+			>
+				tasks: <span className="text-orange-400">[]</span>
+				<span className="text-zinc-400">,</span>
+			</p>
+			<p
+				className={`${styles.typing} pl-3`}
+				style={{ animationDelay: "17000ms" }}
+			>
+				<span className="text-green-300">add</span>:{" "}
+				<span className="text-sky-500">function</span>
+				<span className="text-amber-400">(</span>
+				<span className="text-orange-400">task</span>:{" "}
+				<span className="text-sky-500">string</span>
+				<span className="text-amber-400">)</span>
+				<span className="text-red-400">{"{"}</span>
+			</p>
+			<p
+				className={`${styles.typing} pl-6`}
+				style={{ animationDelay: "17000ms" }}
+			>
+				<span className="text-zinc-400">this.</span>tasks.
+				<span className="text-green-300">push</span>
+				<span className="text-amber-400">(</span>task
+				<span className="text-amber-400">)</span>
+				<span className="text-zinc-400">;</span>
+			</p>
+			<p
+				className={`${styles.typing} pl-3`}
+				style={{ animationDelay: "17000ms" }}
+			>
+				<span className="text-red-400">{"}"}</span>
+			</p>
+			<p
+				className={`${styles.typing} text-zinc-400`}
+				style={{ animationDelay: "17000ms" }}
+			>
+				<span className="text-red-400">{"}"}</span>;
+			</p>
+			<br></br>
+			<p className={`${styles.typing}`} style={{ animationDelay: "19000ms" }}>
+				QuickTask.<span className="text-green-300">add</span>
+				<span className="text-amber-400">(</span>Fun Assignment:
+				{formValue === "" ? "___" : formValue}
 				<span className="text-amber-400">)</span>
 			</p>
 		</div>
