@@ -1,4 +1,5 @@
 import { QuickTask } from "../../interface/QuickTask";
+import styles from "./QuickTaskCard.module.css";
 
 interface QuickTaskCardProps {
 	task: QuickTask;
@@ -10,9 +11,9 @@ export const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
 	handleQuickTaskExecution,
 }) => {
 	return (
-		<div className="flex items-start p-2 w-full">
+		<div className="flex items-center p-2 w-ful">
 			<input
-				className="accent-white  border-zinc-300 focus:ring-3 focus:ring-zinc-300 h-4 w-4 rounded cursor-pointer transition-transform duration-500 ease-in-out"
+				className={styles.cyberpunkCheckbox}
 				type="checkbox"
 				checked={task.status === "done"}
 				onChange={() => handleQuickTaskExecution(task)}
@@ -20,7 +21,9 @@ export const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
 			/>
 			<label
 				className={`text-sm ml-3 font-medium text-zinc-900 truncate cursor-pointer grow ${
-					task.status === "done" ? "line-through decoration-zinc-700" : ""
+					task.status === "done"
+						? "line-through decoration-zinc-500 text-zinc-400"
+						: ""
 				}`}
 				onClick={() => handleQuickTaskExecution(task)}
 				htmlFor={task.id}
