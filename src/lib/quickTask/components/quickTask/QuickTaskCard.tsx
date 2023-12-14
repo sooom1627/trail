@@ -11,7 +11,7 @@ export const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
 	handleQuickTaskExecution,
 }) => {
 	return (
-		<div className="flex items-center p-2 w-ful">
+		<div className="flex items-center p-2 w-ful ">
 			<input
 				className={styles.cyberpunkCheckbox}
 				type="checkbox"
