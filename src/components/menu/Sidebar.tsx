@@ -4,13 +4,11 @@ export const Sidebar = () => {
 			<div className="h-screen py-8 px-4 w-52" aria-label="Sidebar">
 				<div className="h-full px-3 py-6 overflow-y-auto bg-zinc-950 rounded-3xl shadow-2xl shadow-zinc-700 text-center">
 					<div className="border-b border-zinc-500 py-16">
-						<img src="/group.png" alt="" className="w-10 mx-auto" />
-						<p
-							className="text-xs text-zinc-100 pt-2"
-							style={{ fontFamily: '"JetBrains Mono", monospace' }}
-						>
-							...Array
-						</p>
+						<img
+							src="/group.png"
+							alt=""
+							className="w-16 mx-auto cursor-pointer"
+						/>
 					</div>
 					<ul className="space-y-2 font-medium mt-12">
 						<li>
