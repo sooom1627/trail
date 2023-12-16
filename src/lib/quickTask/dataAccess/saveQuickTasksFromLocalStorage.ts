@@ -1,8 +1,10 @@
 import { QuickTask } from "../interface/QuickTask";
+import { autoRemoveQuickTask } from "../util/removeQuickTask";
 
 export const saveQuickTasksFromLocalStorage = (updateQuickTasks:QuickTask[]) =>{
   try{
-    localStorage.setItem("quickTasks", JSON.stringify(updateQuickTasks));
+    const removedQuickTask = autoRemoveQuickTask(updateQuickTasks)
+    localStorage.setItem("quickTasks", JSON.stringify(removedQuickTask));
   }catch (error){
     console.error('Failed to save tasks to localStorage', error);
   }

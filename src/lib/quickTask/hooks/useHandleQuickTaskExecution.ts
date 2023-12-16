@@ -16,6 +16,7 @@ export const useHandleQuickTaskExecution = () => {
 					...task,
 					status: task.status === "done" ? "todo" : "done",
 					created: new Date(task.created),
+					ended:new Date()
 				};
 			} else {
 				return {
