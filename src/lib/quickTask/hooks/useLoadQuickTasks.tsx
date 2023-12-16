@@ -11,6 +11,7 @@ export const useLoadQuickTasks = (): [QuickTask[], () => void] => {
 
 		loadedQuickTasks.forEach((task) => {
 			task.created = new Date(task.created);
+			task.ended = task.ended && new Date(task.ended);
 		});
 		sortAndSetQuickTasksToGlobalState(loadedQuickTasks, setQuickTasks);
 	};
