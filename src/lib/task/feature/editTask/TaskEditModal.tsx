@@ -7,6 +7,7 @@ import { useEditTask } from "../../hooks/useEditTask";
 import { getPriorityIcon } from "../../utils/getPriorityIcon";
 import { AtentionButton } from "@/components/button/AtentionButton";
 import { useDeleteTask } from "../../hooks/useDeleteTask";
+import { useLoadTags } from "@/lib/tag/hooks/useLoadTags";
 
 const priorityConfig: {
 	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
@@ -30,22 +31,27 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 	toggleModal,
 	setToggleModal,
 }) => {
+	const { tags, loadTags } = useLoadTags();
 	const [formValue, setFormValue] = useState<string>(task.title);
+	const [taskTag, setTaskTag] = useState<string | undefined>();
 	const [selectedPriority, setSelectedPriority] = useState<
 		"Lowest" | "Low" | "Middle" | "High" | "Highest"
 	>(task.priority);
+
+	useEffect(() => {
+		setFormValue(task.title ? task.title : "");
+		setSelectedPriority(task.priority ? task.priority : "Middle");
+		loadTags();
+		setTaskTag(task.tag ? task.tag : undefined);
+	}, [task, toggleModal]);
 
 	const taskEdit = useEditTask({
 		taskId: task.id,
 		title: formValue,
 		priority: selectedPriority,
+		tag: taskTag,
 	});
 	const taskDelete = useDeleteTask(task.id);
-
-	useEffect(() => {
-		setFormValue(task.title);
-		setSelectedPriority(task.priority);
-	}, [task]);
 
 	const taskEditHandler = async () => {
 		await taskEdit();
@@ -74,7 +80,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 				<p className="text-sm font-bold pb-2">Title</p>
 				<TextInput
 					id="simple-search"
-					placeholder="タスクを追加"
+					placeholder="Edit Task Title!"
 					value={formValue}
 					onChange={setFormValue}
 				/>
@@ -98,6 +104,35 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 						>
 							{getPriorityIcon(priority.label)}
 							<div className="w-full text-sm">{priority.label}</div>
+						</li>
+					))}
+				</ul>
+			</div>
+			<div className="mt-4">
+				<p className="text-sm font-bold pb-2">Tags</p>
+				<ul className="flex gap-2">
+					{tags.map((tag) => (
+						<li key={tag.id}>
+							<span
+								onClick={() => {
+									if (tag.id === taskTag) {
+										setTaskTag(undefined);
+									} else {
+										setTaskTag(tag.id);
+									}
+								}}
+								className={`${
+									tag.id === taskTag
+										? `bg-${tag.color}-200`
+										: `bg-${tag.color}-100`
+								} text-${
+									tag.color
+								}-800 text-xs font-medium px-2.5 py-0.5 rounded duration-200 hover:bg-${
+									tag.color
+								}-200 cursor-pointer`}
+							>
+								{tag.title}
+							</span>
 						</li>
 					))}
 				</ul>

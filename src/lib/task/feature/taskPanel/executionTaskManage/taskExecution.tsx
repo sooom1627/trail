@@ -9,6 +9,7 @@ import { Timer } from "../../../components/TaskExecution/Timer";
 import { Task } from "@/lib/task/interface/Task";
 import { ModalContext } from "@/lib/task/stores/modal/ModalContext";
 import { EditIcon } from "@/components/icons/action/EditIcon";
+import { useTagInfo } from "@/lib/task/hooks/useTaginfo";
 
 interface taskExecutionProps {
 	selectedTask: Task;
@@ -18,6 +19,7 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 	selectedTask,
 }) => {
 	const { setToggleModal } = useContext(ModalContext);
+	const tag = useTagInfo(selectedTask?.tag || "");
 	const [executionTime, setExecutionTime] = useState<ExecutionTime>({
 		hoursStr: "00",
 		minutesStr: "00",
@@ -53,14 +55,22 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 						<EditIcon />
 					</div>
 				</div>
-				<p
-					className="cursor-pointer"
-					onClick={() => alert("Ready in Tags!! Just wait!")}
-				>
-					<span className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-300">
+				{selectedTask?.tag && tag ? (
+					<span
+						className={`${`bg-${tag.color}-200`} text-${
+							tag.color
+						}-800 text-xs font-medium px-2.5 py-0.5 rounded duration-200`}
+					>
+						{tag.title}
+					</span>
+				) : (
+					<span
+						onClick={() => setToggleModal(true)}
+						className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 cursor-pointer"
+					>
 						+ add tags
 					</span>
-				</p>
+				)}
 			</div>
 			<Timer executionTime={executionTime} />
 			<div className="gap-2 flex items-center justify-center min-w-fit">

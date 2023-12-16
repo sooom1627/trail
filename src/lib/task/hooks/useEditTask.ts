@@ -8,17 +8,18 @@ import { sortAndSetTasksToGlobalState } from '../utils/sortAndSetTasksToGlobalSt
 interface useEditTaskProps{
   taskId:string
   title:string,
-  priority:"Lowest"| "Low"| "Middle" | "High"| "Highest"
+  priority:"Lowest"| "Low"| "Middle" | "High"| "Highest",
+  tag:string | undefined
 }
 
-export const useEditTask = ({taskId, title, priority}: useEditTaskProps) => {
+export const useEditTask = ({taskId, title, priority, tag}: useEditTaskProps) => {
   const [, setTasks] = useRecoilState(tasksState);
   const [, setSelectedTask] = useRecoilState(selectedTasksState);
 
   const updateTask = (task: Task) => {
     if (task.id === taskId) {
-      setSelectedTask({ ...task, title: title, priority: priority });
-      return { ...task, title: title, priority: priority };
+      setSelectedTask({ ...task, title: title, priority: priority, tag: tag });
+      return { ...task, title: title, priority: priority, tag: tag };
     }
     return task;
   };
