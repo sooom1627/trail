@@ -37,7 +37,7 @@ export const AddTaskForm = () => {
 			<div className="relative w-full">
 				<TextInput
 					id="addTask"
-					placeholder="タスクを追加"
+					placeholder="Create New Task!"
 					value={formValue}
 					onChange={setFormValue}
 				/>

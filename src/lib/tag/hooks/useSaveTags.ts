@@ -4,14 +4,14 @@ import { Tag } from "../interface/Tag"
 import { saveTagsToLocalStorage } from '../dataAcess/saveTagsToLocalStorage';
 
 export const useSaveTags = () =>{
-  const saveTags = ({name, desc, color}:{name:string, desc:string, color:string}) =>{
+  const saveTags = (name:string) =>{
     const currentTags = getTagsFromLocalStorage()
 
     const newTags: Tag = {
       id: uuidv4(),
       name,
-      desc,
-      color
+      desc:"",
+      color:""
     }
 
     const updatedTags = [...currentTags, newTags]

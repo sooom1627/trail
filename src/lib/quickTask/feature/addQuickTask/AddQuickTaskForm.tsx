@@ -47,7 +47,7 @@ export const AddQuickTaskForm: React.FC<AddQuickTaskFormProps> = ({
 			<input
 				type="text"
 				className="grow text-xs font-medium p-2 focus:outline-0"
-				placeholder="クイックタスクを追加"
+				placeholder="Create New Quick Task!"
 				value={formValue}
 				onChange={(e) => setFormValue(e.target.value)}
 			/>

@@ -74,7 +74,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 				<p className="text-sm font-bold pb-2">Title</p>
 				<TextInput
 					id="simple-search"
-					placeholder="タスクを追加"
+					placeholder="Edit Task Title!"
 					value={formValue}
 					onChange={setFormValue}
 				/>
