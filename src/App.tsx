@@ -1,17 +1,14 @@
 import "./App.css";
-import { IndexPage } from "./pages/IndexPage";
-import { TaskPage } from "./lib/task";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { TagsManagePage } from "./pages/tagsManagePage";
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./routes/appRouter";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route index element={<IndexPage leftChildren={<TaskPage />} />} />
-				<Route path="tags" element={<TagsManagePage />} />
-			</Routes>
-		</BrowserRouter>
+		<>
+			<BrowserRouter>
+				<AppRouter />
+			</BrowserRouter>
+		</>
 	);
 }
 
