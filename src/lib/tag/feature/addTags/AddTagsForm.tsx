@@ -2,7 +2,7 @@ import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { PlusIcon } from "@/components/icons/action/PlusIcon";
 import { TextInput } from "@/components/input/TextInput";
 import { useState } from "react";
-import { useSaveTags } from "../hooks/useSaveTags";
+import { useSaveTags } from "../../hooks/useSaveTags";
 
 export const AddTagsForm = () => {
 	const [formValue, setFormValue] = useState("");
