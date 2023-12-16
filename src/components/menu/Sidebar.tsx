@@ -18,15 +18,25 @@ export const Sidebar = () => {
 					</div>
 					<ul className="space-y-2 font-medium mt-12">
 						<li>
-							<div className="flex items-center p-4 text-zinc-100 rounded-lg group justify-center cursor-pointer">
-								<NavLink to="/">
+							<div className="flex items-center p-4 text-zinc-500 rounded-lg group justify-center cursor-pointer">
+								<NavLink
+									to="/"
+									className={({ isActive }) =>
+										[isActive ? "text-zinc-100" : ""].join(" ")
+									}
+								>
 									<HomeIcon />
 								</NavLink>
 							</div>
 						</li>
 						<li>
 							<div className="flex items-center p-4 text-zinc-500 rounded-lg group justify-center cursor-pointer">
-								<NavLink to="/tags">
+								<NavLink
+									to="/tags"
+									className={({ isActive }) =>
+										[isActive ? "text-zinc-100" : ""].join(" ")
+									}
+								>
 									<TagIcon />
 								</NavLink>
 							</div>

@@ -6,12 +6,14 @@ import { TagsManagePage } from "./pages/tagsManagePage";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route index element={<IndexPage leftChildren={<TaskPage />} />} />
-				<Route path="tags" element={<TagsManagePage />} />
-			</Routes>
-		</BrowserRouter>
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route index element={<IndexPage leftChildren={<TaskPage />} />} />
+					<Route path="tags" element={<TagsManagePage />} />
+				</Routes>
+			</BrowserRouter>
+		</>
 	);
 }
 
