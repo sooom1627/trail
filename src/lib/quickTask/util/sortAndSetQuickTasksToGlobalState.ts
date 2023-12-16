@@ -1,4 +1,5 @@
 import { QuickTask } from "../interface/QuickTask";
+import { autoRemoveQuickTask } from "./removeQuickTask";
 
 export const sortAndSetQuickTasksToGlobalState = (
   updateQuickTasks:QuickTask[],
@@ -7,5 +8,6 @@ export const sortAndSetQuickTasksToGlobalState = (
   updateQuickTasks = updateQuickTasks.sort(
     (a, b) => b.created.getTime() - a.created.getTime()
   );
-  setQuickTasks(updateQuickTasks);
+  const removedQuickTask = autoRemoveQuickTask(updateQuickTasks)
+  setQuickTasks(removedQuickTask);
 }
