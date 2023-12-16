@@ -1,6 +1,6 @@
 export interface Tag{
   id:string,
-  name:string
+  title:string
   desc:string
   color:string
 }

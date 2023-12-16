@@ -3,9 +3,15 @@ import { TagRow } from "./TagRow";
 
 interface TagTableProps {
 	tags: Tag[];
+	setSelectedTags: React.Dispatch<React.SetStateAction<Tag>>;
+	setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const TagTable = ({ tags }: TagTableProps) => {
+export const TagTable = ({
+	tags,
+	setSelectedTags,
+	setToggleModal,
+}: TagTableProps) => {
 	return (
 		<div className="overflow-x-auto shadow-md mt-4 rounded-lg">
 			<table className="w-full text-sm text-left text-zinc-500 dark:text-zinc-400">
@@ -27,7 +33,12 @@ export const TagTable = ({ tags }: TagTableProps) => {
 				</thead>
 				<tbody>
 					{tags.map((tag) => (
-						<TagRow key={tag.id} tag={tag} />
+						<TagRow
+							key={tag.id}
+							tag={tag}
+							setSelectedTags={setSelectedTags}
+							setToggleModal={setToggleModal}
+						/>
 					))}
 				</tbody>
 			</table>

@@ -7,12 +7,12 @@ import { tagsState } from '../stores/tagsAtom';
 
 export const useSaveTags = () =>{
   const [, setTags] = useRecoilState(tagsState)
-  const saveTags = (name:string) =>{
+  const saveTags = (title:string) =>{
     const currentTags = getTagsFromLocalStorage()
 
     const newTags: Tag = {
       id: uuidv4(),
-      name,
+      title,
       desc:"",
       color:"zinc"
     }
