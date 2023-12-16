@@ -9,7 +9,7 @@ interface useEditTaskProps{
   taskId:string
   title:string,
   priority:"Lowest"| "Low"| "Middle" | "High"| "Highest",
-  tag:string
+  tag:{id:string, title:string, color:string} | undefined
 }
 
 export const useEditTask = ({taskId, title, priority, tag}: useEditTaskProps) => {
@@ -19,7 +19,7 @@ export const useEditTask = ({taskId, title, priority, tag}: useEditTaskProps) =>
   const updateTask = (task: Task) => {
     if (task.id === taskId) {
       setSelectedTask({ ...task, title: title, priority: priority, tag: tag });
-      return { ...task, title: title, priority: priority };
+      return { ...task, title: title, priority: priority, tag: tag };
     }
     return task;
   };

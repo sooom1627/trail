@@ -53,14 +53,22 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 						<EditIcon />
 					</div>
 				</div>
-				<p
-					className="cursor-pointer"
-					onClick={() => alert("Ready in Tags!! Just wait!")}
-				>
-					<span className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-300">
+				{selectedTask?.tag ? (
+					<span
+						className={`${`bg-${selectedTask.tag.color}-200`} text-${
+							selectedTask.tag.color
+						}-800 text-xs font-medium px-2.5 py-0.5 rounded duration-200`}
+					>
+						{selectedTask.tag.title}
+					</span>
+				) : (
+					<span
+						onClick={() => alert("Ready in Tags!! Just wait!")}
+						className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 cursor-pointer"
+					>
 						+ add tags
 					</span>
-				</p>
+				)}
 			</div>
 			<Timer executionTime={executionTime} />
 			<div className="gap-2 flex items-center justify-center min-w-fit">

@@ -20,7 +20,7 @@ export const TagRow = ({
 				{tag.title}
 			</th>
 			<td className="px-6 py-4">
-				<div className={`rounded bg-${tag.color}-400 h-4 w-12`}>{""}</div>
+				<div className={`rounded bg-${tag.color}-200 h-4 w-12`}>{""}</div>
 			</td>
 			<td className="px-6 py-4">{tag.desc ? tag.desc : "-"}</td>
 			<td className="px-6 py-4">

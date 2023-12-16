@@ -11,11 +11,11 @@ export default {
         'hover:border-green-500',
         'hover:border-sky-500',
         {
-          pattern: /bg-(zinc|red|orange|green|cyan|blue|violet)-(100|200|300|400|500|800)/,
+          pattern: /bg-(zinc|red|yellow|green|cyan|blue|purple)-(100|200|300|400|500|800)/,
           variants: ['lg', 'hover', 'focus', 'lg:hover'],
         },
         {
-          pattern: /text-(zinc|red|orange|green|cyan|blue|violet)-(100|200|300|400|500|800|900)/,
+          pattern: /text-(zinc|red|yellow|green|cyan|blue|purple)-(100|200|300|400|500|800|900)/,
         },
       ],
     },

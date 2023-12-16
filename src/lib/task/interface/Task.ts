@@ -7,5 +7,5 @@ export interface Task {
   startTime?: Date;
   endTime?: Date;
   pauses?:{pause: Date, restart?:Date}[];
-  tag?:string
+  tag:{id:string, title:string, color:string}| undefined
 }

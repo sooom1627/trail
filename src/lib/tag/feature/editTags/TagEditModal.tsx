@@ -12,7 +12,7 @@ interface TaskEditModalProps {
 	setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const tagColor = ["zinc", "red", "orange", "green", "cyan", "blue", "violet"];
+const tagColor = ["zinc", "red", "yellow", "green", "cyan", "blue", "purple"];
 
 export const TagEditModal: React.FC<TaskEditModalProps> = ({
 	tag,

@@ -33,10 +33,19 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 }) => {
 	const { tags, loadTags } = useLoadTags();
 	const [formValue, setFormValue] = useState<string>(task.title);
-	const [taskTag, setTaskTag] = useState("");
+	const [taskTag, setTaskTag] = useState<
+		{ id: string; title: string; color: string } | undefined
+	>();
 	const [selectedPriority, setSelectedPriority] = useState<
 		"Lowest" | "Low" | "Middle" | "High" | "Highest"
 	>(task.priority);
+
+	useEffect(() => {
+		setFormValue(task.title ? task.title : "");
+		setSelectedPriority(task.priority ? task.priority : "Middle");
+		loadTags();
+		setTaskTag(task.tag ? task.tag : undefined);
+	}, [task, toggleModal]);
 
 	const taskEdit = useEditTask({
 		taskId: task.id,
@@ -45,13 +54,6 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 		tag: taskTag,
 	});
 	const taskDelete = useDeleteTask(task.id);
-
-	useEffect(() => {
-		setFormValue(task.title ? task.title : "");
-		setSelectedPriority(task.priority ? task.priority : "Middle");
-		setTaskTag(task.tag ? task.tag : "");
-		loadTags();
-	}, [task]);
 
 	const taskEditHandler = async () => {
 		await taskEdit();
@@ -112,24 +114,28 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 				<p className="text-sm font-bold pb-2">Tags</p>
 				<ul className="flex gap-2">
 					{tags.map((tag) => (
-						<li>
+						<li key={tag.id}>
 							<span
 								onClick={() => {
-									if (tag.id === taskTag) {
-										setTaskTag("");
+									if (tag.id === taskTag?.id) {
+										setTaskTag(undefined);
 									} else {
-										setTaskTag(tag.id);
+										setTaskTag({
+											id: tag.id,
+											title: tag.title,
+											color: tag.color,
+										});
 									}
 								}}
 								className={`${
-									tag.id === taskTag
-										? `bg-${tag.color}-300`
+									tag.id === taskTag?.id
+										? `bg-${tag.color}-200`
 										: `bg-${tag.color}-100`
 								} text-${
 									tag.color
 								}-800 text-xs font-medium px-2.5 py-0.5 rounded duration-200 hover:bg-${
 									tag.color
-								}-300 cursor-pointer`}
+								}-200 cursor-pointer`}
 							>
 								{tag.title}
 							</span>
