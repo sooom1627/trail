@@ -31,12 +31,12 @@ export const AddTaskForm = () => {
 
 	return (
 		<form className="flex items-center">
-			<label htmlFor="simple-search" className="sr-only">
-				Search
+			<label htmlFor="addTask" className="sr-only">
+				add
 			</label>
 			<div className="relative w-full">
 				<TextInput
-					id="simple-search"
+					id="addTask"
 					placeholder="タスクを追加"
 					value={formValue}
 					onChange={setFormValue}
