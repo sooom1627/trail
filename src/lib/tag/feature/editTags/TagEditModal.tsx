@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { AtentionButton } from "@/components/button/AtentionButton";
 import { useEditTags } from "../../hooks/useEditTags";
+import { useDeleteTags } from "../../hooks/useDeleteTags";
 
 interface TaskEditModalProps {
 	tag: Tag;
@@ -22,6 +23,7 @@ export const TagEditModal: React.FC<TaskEditModalProps> = ({
 	const [formValue, setFormValue] = useState<string>("");
 	const [colorValue, setColorValue] = useState<string>("");
 	const [descValue, setDescValue] = useState<string>("");
+	const deleteTags = useDeleteTags(tag.id);
 	const editTags = useEditTags({
 		tagId: tag.id,
 		title: formValue,
@@ -40,6 +42,11 @@ export const TagEditModal: React.FC<TaskEditModalProps> = ({
 		setToggleModal(false);
 	};
 
+	const deleteTagHandler = () => {
+		deleteTags();
+		setToggleModal(false);
+	};
+
 	return (
 		<Modal
 			modalTitle={tag.title}
@@ -49,7 +56,9 @@ export const TagEditModal: React.FC<TaskEditModalProps> = ({
 				<PrimaryButton onClick={() => editTagHandler()}>Confirm</PrimaryButton>
 			}
 			deleteButton={
-				<AtentionButton onClick={() => alert("hello")}>Delete</AtentionButton>
+				<AtentionButton onClick={() => deleteTagHandler()}>
+					Delete
+				</AtentionButton>
 			}
 		>
 			<div>

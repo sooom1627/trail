@@ -65,7 +65,7 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 					</span>
 				) : (
 					<span
-						onClick={() => alert("Ready in Tags!! Just wait!")}
+						onClick={() => setToggleModal(true)}
 						className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 cursor-pointer"
 					>
 						+ add tags
