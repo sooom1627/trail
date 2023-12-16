@@ -9,6 +9,7 @@ import { getPriorityIcon } from "../../utils/getPriorityIcon";
 import { TaskTitle } from "./TaskTitle";
 import { ClockIcon } from "@/components/icons/ClockIcon";
 import { EditIcon } from "@/components/icons/action/EditIcon";
+import { useTagInfo } from "../../hooks/useTaginfo";
 
 interface TaskCardProps {
 	task: Task;
@@ -18,6 +19,7 @@ interface TaskCardProps {
 export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 	const [, setSelectedTask] = useRecoilState(selectedTasksState);
 	const { setToggleModal } = useContext(ModalContext);
+	const tag = useTagInfo(task?.tag || "");
 	const [executionTime, setExecutionTime] = useState<ExecutionTime>({
 		hoursStr: "00",
 		minutesStr: "00",
@@ -39,15 +41,15 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 		<>
 			<div className="p-4 flex justify-between items-center  max-w-full">
 				<TaskTitle setSelectedTask={setSelectedTask} task={task} />
-				{task.tag && (
-					<p
-						className={`${`bg-${task.tag.color}-200`} text-${
-							task.tag.color
+				{tag ? (
+					<span
+						className={`${`bg-${tag.color}-200`} text-${
+							tag.color
 						}-800 text-xs font-medium px-2.5 py-0.5 rounded duration-200`}
 					>
-						{task.tag.title}
-					</p>
-				)}
+						{tag.title}
+					</span>
+				) : null}
 				<div className="flex items-center min-w-fit ml-4">
 					<ClockIcon />
 					<p className="text-sm flex gap-1 mr-4 ml-2 items-center justify-between">

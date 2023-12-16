@@ -9,7 +9,7 @@ interface useEditTaskProps{
   taskId:string
   title:string,
   priority:"Lowest"| "Low"| "Middle" | "High"| "Highest",
-  tag:{id:string, title:string, color:string} | undefined
+  tag:string | undefined
 }
 
 export const useEditTask = ({taskId, title, priority, tag}: useEditTaskProps) => {

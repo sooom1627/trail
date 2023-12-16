@@ -33,9 +33,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 }) => {
 	const { tags, loadTags } = useLoadTags();
 	const [formValue, setFormValue] = useState<string>(task.title);
-	const [taskTag, setTaskTag] = useState<
-		{ id: string; title: string; color: string } | undefined
-	>();
+	const [taskTag, setTaskTag] = useState<string | undefined>();
 	const [selectedPriority, setSelectedPriority] = useState<
 		"Lowest" | "Low" | "Middle" | "High" | "Highest"
 	>(task.priority);
@@ -117,18 +115,14 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 						<li key={tag.id}>
 							<span
 								onClick={() => {
-									if (tag.id === taskTag?.id) {
+									if (tag.id === taskTag) {
 										setTaskTag(undefined);
 									} else {
-										setTaskTag({
-											id: tag.id,
-											title: tag.title,
-											color: tag.color,
-										});
+										setTaskTag(tag.id);
 									}
 								}}
 								className={`${
-									tag.id === taskTag?.id
+									tag.id === taskTag
 										? `bg-${tag.color}-200`
 										: `bg-${tag.color}-100`
 								} text-${

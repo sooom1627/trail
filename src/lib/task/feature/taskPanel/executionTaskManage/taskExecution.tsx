@@ -9,6 +9,7 @@ import { Timer } from "../../../components/TaskExecution/Timer";
 import { Task } from "@/lib/task/interface/Task";
 import { ModalContext } from "@/lib/task/stores/modal/ModalContext";
 import { EditIcon } from "@/components/icons/action/EditIcon";
+import { useTagInfo } from "@/lib/task/hooks/useTaginfo";
 
 interface taskExecutionProps {
 	selectedTask: Task;
@@ -18,6 +19,7 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 	selectedTask,
 }) => {
 	const { setToggleModal } = useContext(ModalContext);
+	const tag = useTagInfo(selectedTask?.tag || "");
 	const [executionTime, setExecutionTime] = useState<ExecutionTime>({
 		hoursStr: "00",
 		minutesStr: "00",
@@ -53,13 +55,13 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 						<EditIcon />
 					</div>
 				</div>
-				{selectedTask?.tag ? (
+				{selectedTask?.tag && tag ? (
 					<span
-						className={`${`bg-${selectedTask.tag.color}-200`} text-${
-							selectedTask.tag.color
+						className={`${`bg-${tag.color}-200`} text-${
+							tag.color
 						}-800 text-xs font-medium px-2.5 py-0.5 rounded duration-200`}
 					>
-						{selectedTask.tag.title}
+						{tag.title}
 					</span>
 				) : (
 					<span
