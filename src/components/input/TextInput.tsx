@@ -14,7 +14,7 @@ export const TextInput: React.FC<TextInputProps> = ({
 	<input
 		type="text"
 		id={id}
-		className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full p-2.5 pl-4"
+		className="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full p-2.5 pl-4"
 		placeholder={placeholder}
 		value={value}
 		onChange={(e) => onChange(e.target.value)}

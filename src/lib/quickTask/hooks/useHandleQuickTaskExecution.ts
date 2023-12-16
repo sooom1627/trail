@@ -5,9 +5,9 @@ import { getQuickTasksFromLocalStorage } from "../dataAccess/getQuickTasksFromLo
 import { saveQuickTasksFromLocalStorage } from "../dataAccess/saveQuickTasksFromLocalStorage";
 import { sortAndSetQuickTasksToGlobalState } from "../util/sortAndSetQuickTasksToGlobalState";
 
-export const useHandleQuickTaskExecution = (quickTask: QuickTask) => {
+export const useHandleQuickTaskExecution = () => {
 	const [, setQuickTasks] = useRecoilState(quickTasksState);
-	const handleQuickTaskExecution = () => {
+	const handleQuickTaskExecution = (quickTask: QuickTask) => {
 		const currentQuickTasks =  getQuickTasksFromLocalStorage()
 
 		let updatedQuickTasks = currentQuickTasks.map((task: QuickTask) => {
@@ -16,6 +16,7 @@ export const useHandleQuickTaskExecution = (quickTask: QuickTask) => {
 					...task,
 					status: task.status === "done" ? "todo" : "done",
 					created: new Date(task.created),
+					ended:new Date()
 				};
 			} else {
 				return {
