@@ -1,35 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PanelTitle } from "../components/PanelTitle";
-import styles from "@/assets/cyberpunkCheckbox.module.css";
 import { HandleHabitModal } from "./HandleHabitModal";
+import { HabitsList } from "../components/HabitList";
+import { useSaveHabits } from "../hooks/useSaveHabits";
+import { HabitType } from "../interface/Habit";
+import { useLoadHabits } from "../hooks/useLoadHabits";
 
 export const Habit = () => {
 	const [toggleModal, setToggleModal] = useState(false);
+	const [habits, setHabits] = useState<HabitType[]>([]);
+	const [selectedHabits, setSelectedHabits] = useState<HabitType>();
+	const saveHabits = useSaveHabits(setHabits);
+	const loadHabits = useLoadHabits(setHabits);
+
+	const selectHabitAndToggleModal = (habit: HabitType) => {
+		setToggleModal(true);
+		setSelectedHabits(habit);
+	};
+
+	const createHabitToggleModal = () => {
+		setToggleModal(true);
+		setSelectedHabits(undefined);
+	};
+
+	useEffect(() => {
+		loadHabits();
+	}, []);
+
 	return (
 		<>
-			<div className="flex justify-between items-center">
-				<PanelTitle />
-				<span
-					onClick={() => setToggleModal(true)}
-					className="bg-zinc-200 text-zinc-800 text-xs font-medium px-2.5 py-0.5 rounded hover:bg-zinc-300 cursor-pointer"
-				>
-					+ Create new habit.
-				</span>
-			</div>
-			<div className="h-full overflow-y-auto pb-8 mt-2">
-				<div className="flex items-center p-2 w-ful">
-					<input className={styles.cyberpunkCheckbox} type="checkbox" />
-					<label
-						className={`text-sm ml-3 font-medium text-zinc-900 truncate cursor-pointer grow `}
-					>
-						係数確認
-					</label>
-					<p className="text-xs font-medium text-zinc-400">21:00</p>
-				</div>
-			</div>
+			<PanelTitle createHabitToggleModal={createHabitToggleModal} />
+			<HabitsList
+				habits={habits}
+				saveHabits={saveHabits}
+				selectHabitAndToggleModal={selectHabitAndToggleModal}
+			/>
 			<HandleHabitModal
 				toggleModal={toggleModal}
 				setToggleModal={setToggleModal}
+				saveHabits={saveHabits}
+				selectedHabit={selectedHabits}
 			/>
 		</>
 	);
