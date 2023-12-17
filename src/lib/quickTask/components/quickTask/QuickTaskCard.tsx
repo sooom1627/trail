@@ -1,5 +1,5 @@
 import { QuickTask } from "../../interface/QuickTask";
-import styles from "./QuickTaskCard.module.css";
+import styles from "@/assets/cyberpunkCheckbox.module.css";
 
 interface QuickTaskCardProps {
 	task: QuickTask;
