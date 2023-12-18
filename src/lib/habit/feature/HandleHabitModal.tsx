@@ -10,7 +10,7 @@ interface HandleHabitModalProps {
 	setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 	saveHabits: (
 		habit: HabitType | string,
-		actionType: "create" | "toggleStatus" | "edit",
+		actionType: "create" | "toggleStatus" | "edit" | "delete",
 		editTitle?: string
 	) => void;
 	selectedHabit: HabitType | undefined;
@@ -31,6 +31,12 @@ export const HandleHabitModal: React.FC<HandleHabitModalProps> = ({
 
 	const editHabitsHandler = (habit: HabitType, editTitle: string) => {
 		saveHabits(habit, "edit", editTitle);
+		setFormValue("");
+		setToggleModal(false);
+	};
+
+	const deleteHabitsHandler = (habit: HabitType) => {
+		saveHabits(habit, "delete");
 		setFormValue("");
 		setToggleModal(false);
 	};
@@ -56,7 +62,13 @@ export const HandleHabitModal: React.FC<HandleHabitModalProps> = ({
 				</PrimaryButton>
 			}
 			deleteButton={
-				<AtentionButton onClick={() => alert("hello")}>Delete</AtentionButton>
+				selectedHabit ? (
+					<AtentionButton onClick={() => deleteHabitsHandler(selectedHabit)}>
+						Delete
+					</AtentionButton>
+				) : (
+					""
+				)
 			}
 		>
 			<div>
