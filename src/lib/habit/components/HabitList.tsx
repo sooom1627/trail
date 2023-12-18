@@ -4,6 +4,7 @@ import { EditIcon } from "@/components/icons/action/EditIcon";
 import { AlertText } from "./AlertText";
 import { useEffect, useState } from "react";
 import { countTodoHabits } from "../utils/countTodoHabits";
+import { Empty } from "./empty/Empty";
 
 interface HabitsListProps {
 	habits: HabitType[];
@@ -21,11 +22,12 @@ export const HabitsList: React.FC<HabitsListProps> = ({
 		setTodoHabitCount(countTodoHabits(habits));
 	}, [habits]);
 	return (
-		<div className="h-full overflow-y-auto pb-16 mt-2">
-			{habits.length > 0 && <AlertText todoHabitCount={todoHabitCount} />}
-			{habits.length > 0
-				? habits.map((habit) => (
-						<div className="flex items-center p-2 w-ful" key={habit.id}>
+		<>
+			{habits.length > 0 ? (
+				<div className="h-full overflow-y-auto pb-16 mt-2">
+					{habits.length > 0 && <AlertText todoHabitCount={todoHabitCount} />}
+					{habits.map((habit) => (
+						<div className="flex items-center p-2 w-full" key={habit.id}>
 							<input
 								id={habit.id}
 								className={styles.cyberpunkCheckbox}
@@ -50,8 +52,11 @@ export const HabitsList: React.FC<HabitsListProps> = ({
 								<EditIcon />
 							</div>
 						</div>
-				  ))
-				: ""}
-		</div>
+					))}
+				</div>
+			) : (
+				<Empty />
+			)}
+		</>
 	);
 };
