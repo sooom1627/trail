@@ -4,7 +4,7 @@ import { HabitType } from '../interface/Habit';
 import { saveHabitsToLocalStorage } from '../dataAcess/saveHabitsToLocalStorage';
 
 export const useSaveHabits = (setHabits: React.Dispatch<React.SetStateAction<HabitType[]>>) =>{
-  const saveHabits = (habit:HabitType | string, actionType:"create"|"toggleStatus"|"edit", editTitle?:string,) =>{
+  const saveHabits = (habit:HabitType | string, actionType:"create"|"toggleStatus"|"edit"|"delete", editTitle?:string,) =>{
     const currentHabits = getHabitsFromLocalStorage()
     switch(actionType){
     case "create":
@@ -58,6 +58,13 @@ export const useSaveHabits = (setHabits: React.Dispatch<React.SetStateAction<Hab
           }
         }) as HabitType[]
   
+        saveHabitsToLocalStorage(updatedHabits)
+        setHabits(updatedHabits)
+      }
+      break
+    case "delete":
+      if(typeof habit !== 'string'){
+        const updatedHabits = currentHabits.filter((habitItem) => habitItem.id !== habit.id)
         saveHabitsToLocalStorage(updatedHabits)
         setHabits(updatedHabits)
       }
