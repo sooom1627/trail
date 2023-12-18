@@ -14,7 +14,7 @@ export const HabitsList: React.FC<HabitsListProps> = ({
 	saveHabits,
 }) => {
 	return (
-		<div className="h-full overflow-y-auto pb-8 mt-2">
+		<div className="h-full overflow-y-auto pb-16 mt-2">
 			{habits.length > 0
 				? habits.map((habit) => (
 						<div className="flex items-center p-2 w-ful" key={habit.id}>
