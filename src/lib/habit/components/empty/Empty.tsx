@@ -2,7 +2,7 @@ import gymBro from "@/assets/images/Gym-bro.png";
 
 export const Empty = () => {
 	return (
-		<div className="flex w-full items-center justify-center flex-col mt-5 font-bold">
+		<div className="flex w-full items-center justify-center flex-col mt-2 font-bold">
 			<img src={gymBro} alt="" className="w-11/12 cursor-pointer" />
 
 			<a

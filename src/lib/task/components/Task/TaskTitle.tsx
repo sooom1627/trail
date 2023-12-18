@@ -20,6 +20,8 @@ export const TaskTitle: React.FC<TaskTitleProps> = ({
 					? `Create: ${task.created.toLocaleString()}`
 					: task.status === "doing" && task.startTime
 					? `Start: ${task.startTime.toLocaleString()}`
+					: task.status === "pause" && task.startTime
+					? `Start: ${task.startTime.toLocaleString()}`
 					: task.status === "done" && task.endTime
 					? `End: ${task.endTime.toLocaleString()}`
 					: null}

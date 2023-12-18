@@ -10,6 +10,7 @@ import { Task } from "@/lib/task/interface/Task";
 import { ModalContext } from "@/lib/task/stores/modal/ModalContext";
 import { EditIcon } from "@/components/icons/action/EditIcon";
 import { useTagInfo } from "@/lib/task/hooks/useTaginfo";
+import { getPauseTime } from "@/lib/task/utils/getPauseTime";
 
 interface taskExecutionProps {
 	selectedTask: Task;
@@ -111,10 +112,31 @@ export const TaskExecution: React.FC<taskExecutionProps> = ({
 							<PlayIcon />
 						</button>
 					</>
-				) : selectedTask?.status === "done" ? (
+				) : selectedTask.startTime && selectedTask.endTime ? (
 					<div className="block text-center" style={{ marginTop: "-4px" }}>
-						<p className="">2023/11/23 11:11 ~ 13:22</p>
-						<p className="text-xs text-zinc-500">(Pause in 23min)</p>
+						<p className="">
+							<span>
+								{selectedTask.startTime.toLocaleString("ja-JP", {
+									month: "2-digit",
+									day: "2-digit",
+									hour: "2-digit",
+									minute: "2-digit",
+								})}{" "}
+							</span>
+							~
+							<span>
+								{" "}
+								{selectedTask.endTime.toLocaleString("ja-JP", {
+									month: "2-digit",
+									day: "2-digit",
+									hour: "2-digit",
+									minute: "2-digit",
+								})}
+							</span>
+						</p>
+						<p className="text-xs text-zinc-500">{`(Pause in ${getPauseTime(
+							selectedTask.pauses
+						)})`}</p>
 					</div>
 				) : (
 					""

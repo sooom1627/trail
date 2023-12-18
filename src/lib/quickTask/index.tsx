@@ -15,7 +15,7 @@ export const QuickTaskPanel = () => {
 
 	return (
 		<>
-			<div className="flex items-center gap-2 mt-2">
+			<div className="flex items-center gap-2">
 				<PanelTitle />
 				<AddQuickTaskForm formValue={formValue} setFormValue={setFormValue} />
 			</div>
