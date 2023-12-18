@@ -5,7 +5,7 @@ export const getHabitsFromLocalStorage = () =>{
   try{
     const currentHabits = habitsStrings?(JSON.parse(habitsStrings).map((habit: HabitType) =>({
       ...habit,
-      ininitialized:new Date(habit.initialized)
+      initialized:new Date(habit.initialized)
     }))as HabitType[] ):[]
     return currentHabits
   }catch(error){
