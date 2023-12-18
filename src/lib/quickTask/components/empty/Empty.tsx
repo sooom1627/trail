@@ -24,9 +24,8 @@ export const Empty = ({ formValue }: { formValue: string }) => {
 			>
 				Oops! Looks like your to-do list vanished!!
 			</p>
-			<br></br>
 			<p
-				className={`${styles.typing} text-zinc-400`}
+				className={`${styles.typing} text-zinc-400 mt-4`}
 				style={{ animationDelay: "6000ms" }}
 			>
 				// Add tasks that can be completed in 5 minutes or less
@@ -46,9 +45,8 @@ export const Empty = ({ formValue }: { formValue: string }) => {
 			<p className={`${styles.typing}`} style={{ animationDelay: "13400ms" }}>
 				・Review tomorrow's meeting agenda.
 			</p>
-			<br></br>
 			<p
-				className={`${styles.typing} text-zinc-400`}
+				className={`${styles.typing} text-zinc-400 mt-4`}
 				style={{ animationDelay: "15200ms" }}
 			>
 				// Stay productive!
@@ -98,8 +96,10 @@ export const Empty = ({ formValue }: { formValue: string }) => {
 			>
 				<span className="text-red-400">{"}"}</span>;
 			</p>
-			<br></br>
-			<p className={`${styles.typing}`} style={{ animationDelay: "19000ms" }}>
+			<p
+				className={`${styles.typing} mt-4`}
+				style={{ animationDelay: "19000ms" }}
+			>
 				QuickTask.<span className="text-green-300">add</span>
 				<span className="text-amber-400">(</span>Fun Assignment:
 				{formValue === "" ? "___" : formValue}

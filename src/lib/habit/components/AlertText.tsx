@@ -10,7 +10,7 @@ export const AlertText: React.FC<AlertTextProps> = (todoHabitCount) => {
 		<>
 			{todoHabitCount.todoHabitCount > 0 ? (
 				<div
-					className="flex items-center p-2 my-2 text-xs text-red-800 rounded-lg bg-red-50"
+					className="flex items-center p-2 mr-1 my-2 text-xs text-red-800 h-8 rounded-lg bg-red-50"
 					role="alert"
 				>
 					<AlertIcon />
