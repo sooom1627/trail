@@ -5,7 +5,6 @@ import { HabitsList } from "../components/HabitList";
 import { useSaveHabits } from "../hooks/useSaveHabits";
 import { HabitType } from "../interface/Habit";
 import { useLoadHabits } from "../hooks/useLoadHabits";
-import { AlertText } from "../components/AlertText";
 
 export const Habit = () => {
 	const [toggleModal, setToggleModal] = useState(false);
@@ -31,7 +30,6 @@ export const Habit = () => {
 	return (
 		<>
 			<PanelTitle createHabitToggleModal={createHabitToggleModal} />
-			<AlertText />
 			<HabitsList
 				habits={habits}
 				saveHabits={saveHabits}

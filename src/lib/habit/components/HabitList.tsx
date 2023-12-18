@@ -1,6 +1,9 @@
 import styles from "@/assets/cyberpunkCheckbox.module.css";
 import { HabitType } from "../interface/Habit";
 import { EditIcon } from "@/components/icons/action/EditIcon";
+import { AlertText } from "./AlertText";
+import { useEffect, useState } from "react";
+import { countTodoHabits } from "../utils/countTodoHabits";
 
 interface HabitsListProps {
 	habits: HabitType[];
@@ -13,8 +16,13 @@ export const HabitsList: React.FC<HabitsListProps> = ({
 	selectHabitAndToggleModal,
 	saveHabits,
 }) => {
+	const [todoHabitCount, setTodoHabitCount] = useState(0);
+	useEffect(() => {
+		setTodoHabitCount(countTodoHabits(habits));
+	}, [habits]);
 	return (
 		<div className="h-full overflow-y-auto pb-16 mt-2">
+			{habits.length > 0 && <AlertText todoHabitCount={todoHabitCount} />}
 			{habits.length > 0
 				? habits.map((habit) => (
 						<div className="flex items-center p-2 w-ful" key={habit.id}>
