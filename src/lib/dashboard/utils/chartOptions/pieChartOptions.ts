@@ -14,6 +14,12 @@ export const pieChartOptions = (
 			position: "top",
 			horizontalAlign: "right",
 		},
+		dataLabels: {
+			enabled: true,
+			dropShadow: {
+				enabled: false, // ドロップシャドウを無効にする
+			}
+		},
 		tooltip: {
 			y: {
 				formatter: function (value: number) {

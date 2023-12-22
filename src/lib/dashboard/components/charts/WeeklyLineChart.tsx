@@ -53,12 +53,12 @@ export const WeeklyLineChart = () => {
 	return (
 		<>
 			<p className="p-2 font-bold text-lg">Weekly Trend</p>
-			<div className="bg-zinc-100 p-4 rounded-lg max-h-72">
+			<div className="bg-zinc-100 p-4 rounded-lg max-h-80">
 				<ReactApexChart
 					options={options}
 					series={series}
 					type="line"
-					height={260}
+					height={300}
 				/>
 			</div>
 		</>
