@@ -3,65 +3,50 @@ import { ApexOptions } from "apexcharts";
 import { useGetWeeklyLineChartData } from "../../hooks/useGetWeeklyLineChartData";
 import { Task } from "@/lib/task/interface/Task";
 import { useEffect, useState } from "react";
-
-const options: ApexOptions = {
-	chart: {
-		height: 350,
-		type: "line",
-		fontFamily: "kanit, sans-serif",
-		zoom: {
-			enabled: false,
-		},
-		toolbar: {
-			show: true,
-			tools: {
-				download: false,
-			},
-		},
-	},
-	dataLabels: {
-		enabled: false,
-	},
-	stroke: {
-		curve: "smooth",
-	},
-	grid: {
-		row: {
-			colors: ["transparent"],
-			opacity: 0.5,
-		},
-	},
-	legend: {
-		position: "top",
-		horizontalAlign: "right",
-	},
-};
+import { Tag } from "@/lib/tag/interface/Tag";
+import { lineChartOptions } from "../../utils/chartOptions/lineChartOptions";
 
 interface WeeklyLineChartProps {
 	tasks: Task[];
+	tags: Tag[];
 }
 
-export const WeeklyLineChart: React.FC<WeeklyLineChartProps> = ({ tasks }) => {
+export const WeeklyLineChart: React.FC<WeeklyLineChartProps> = ({
+	tasks,
+	tags,
+}) => {
 	const [series, setSeries] = useState<
 		{ name: string; data: { x: string; y: number }[] }[]
 	>([]);
+	const [colorData, setColorData] = useState<string[]>([]);
+	const [chartOptions, setChartOptions] = useState<ApexOptions>(
+		lineChartOptions([])
+	);
 	const getWeeklyLineChartData = useGetWeeklyLineChartData({
-		tasks,
 		setSeries,
+		setColorData,
+		tasks,
+		tags,
 	});
 
 	useEffect(() => {
 		getWeeklyLineChartData();
 	}, [tasks]);
+
+	useEffect(() => {
+		setChartOptions((prevOptions) => ({
+			...prevOptions,
+			colors: colorData,
+		}));
+	}, [colorData]);
 	return (
 		<>
-			<p className="p-2 font-bold text-lg">Weekly Trend</p>
-			<div className="bg-zinc-100 p-4 rounded-lg max-h-72 shadow-md">
+			<div className="bg-zinc-100 p-4 rounded-lg h-full">
 				<ReactApexChart
-					options={options}
+					options={chartOptions}
 					series={series}
-					type="line"
-					height={270}
+					type="bar"
+					height="100%"
 				/>
 			</div>
 		</>

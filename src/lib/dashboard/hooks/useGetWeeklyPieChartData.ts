@@ -1,5 +1,4 @@
 
-import { filterTasksCompletedInLast7Days } from "../utils/filterTasksCompletedInLast7Days"
 import { groupTasksByTag } from "../utils/groupTasksByTag"
 import { calculateTotalElapsedTime } from "../utils/calculateTotalElapsedTime"
 import { Task } from "@/lib/task/interface/Task"
@@ -15,8 +14,7 @@ interface useGetWeeklyPieChartDataProps{
 }
 
 export const useGetWeeklyPieChartData = ({setPieChartData, setPieChartLabel,setPieChartColor, tasks, tags}: useGetWeeklyPieChartDataProps) =>{
-  const inLast7DaysTasks = filterTasksCompletedInLast7Days(tasks)
-  const groupedByTagTasks = groupTasksByTag(inLast7DaysTasks)
+  const groupedByTagTasks = groupTasksByTag(tasks)
 
   const getWeeklyPieChartData = () =>{
     let pieChartData:number[] = []

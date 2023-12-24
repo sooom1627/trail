@@ -1,6 +1,6 @@
 import { Task } from "@/lib/task/interface/Task"
-import { filterTasksCompletedInLast7Days } from "../utils/filterTasksCompletedInLast7Days"
 import { transformTasksToChartData } from "../utils/transformTasksToChartData"
+import { Tag } from "@/lib/tag/interface/Tag";
 
 interface useGetWeeklyLineChartDataProps{
   setSeries: React.Dispatch<React.SetStateAction<{
@@ -9,15 +9,17 @@ interface useGetWeeklyLineChartDataProps{
         x: string;
         y: number;
     }[];
-}[]>>
-  tasks:Task[]
+  }[]>>
+  setColorData: React.Dispatch<React.SetStateAction<string[]>>
+  tasks:Task[],
+  tags:Tag[]
 }
 
-export const useGetWeeklyLineChartData = ({tasks,setSeries}:useGetWeeklyLineChartDataProps) =>{
-  const inLast7DaysTasks = filterTasksCompletedInLast7Days(tasks)
-  const chartData = transformTasksToChartData(inLast7DaysTasks)
+export const useGetWeeklyLineChartData = ({setSeries, setColorData,tasks, tags}:useGetWeeklyLineChartDataProps) =>{
+  const [chartData, colorData] = transformTasksToChartData(tasks, tags)
   const getWeeklyLineChartData = () =>{
     setSeries(chartData)
+    setColorData(colorData)
   }
   return getWeeklyLineChartData
 }

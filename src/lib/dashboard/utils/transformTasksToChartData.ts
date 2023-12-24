@@ -1,15 +1,24 @@
 import { Task } from "@/lib/task/interface/Task";
 import { calculateTotalElapsedTime } from "./calculateTotalElapsedTime";
+import { getTagNameById } from "./getTagNamebyID";
+import { Tag } from "@/lib/tag/interface/Tag";
 
 const SHOWDAYS = 6
 
-export const transformTasksToChartData = (tasks: Task[]): { name: string, data: { x: string, y: number }[] }[] => {
+export const transformTasksToChartData = (tasks: Task[], tags: Tag[]): [
+  { name: string, data: { x: string, y: number }[] }[], 
+  string[]
+] => {
   const chartData: { name: string, data: { x: string, y: number }[] }[] = [];
+  const colorData: Set<string> = new Set();
   const groupedTasks: Record<string, Task[]> = {};
 
   tasks.forEach(task => {
     if (task.endTime) {
-      const tag = task.tag || 'undefined';
+      const [tag, tagColor] = task.tag ? getTagNameById(task.tag, tags) : ["undefind", "#a1a1aa"]; 
+      if (tagColor) {
+        colorData.add(tagColor);
+      }
       if (!groupedTasks[tag]) {
         groupedTasks[tag] = [];
       }
@@ -32,6 +41,5 @@ export const transformTasksToChartData = (tasks: Task[]): { name: string, data: 
     }
     chartData.push({ name: tag, data });
   }
-
-  return chartData;
+  return [chartData, Array.from(colorData)];
 }

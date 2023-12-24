@@ -7,6 +7,7 @@ export const pieChartOptions = (
 	return {
 		chart: {
 			type: "pie",
+			fontFamily: "kanit, sans-serif",
 		},
 		labels: pieChartLabel,
 		colors: pieChartColor,
