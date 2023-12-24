@@ -38,7 +38,6 @@ export const transformTasksToChartData = (tasks: Task[], tags: Tag[]): [
         }
         return false;
       });
-      console.log(tasksOnDate)
       const totalDurationOnDate = calculateTotalElapsedTime(tasksOnDate);
       const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
       const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
