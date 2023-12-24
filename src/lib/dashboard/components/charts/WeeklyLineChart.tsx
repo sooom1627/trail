@@ -1,5 +1,8 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { useGetWeeklyLineChartData } from "../../hooks/useGetWeeklyLineChartData";
+import { Task } from "@/lib/task/interface/Task";
+import { useEffect, useState } from "react";
 
 const options: ApexOptions = {
 	chart: {
@@ -16,7 +19,6 @@ const options: ApexOptions = {
 			},
 		},
 	},
-
 	dataLabels: {
 		enabled: false,
 	},
@@ -29,36 +31,37 @@ const options: ApexOptions = {
 			opacity: 0.5,
 		},
 	},
-	xaxis: {
-		categories: ["12/14", "12/15", "12/16", "12/17", "12/18", "12/19", "12/20"],
-	},
 	legend: {
 		position: "top",
 		horizontalAlign: "right",
 	},
 };
 
-const series = [
-	{
-		name: "ArrayTask",
-		data: [10, 41, 49, 62, 69, 91, 148],
-	},
-	{
-		name: "Work",
-		data: [80, 34, 62, 51, 90, 43, 34],
-	},
-];
+interface WeeklyLineChartProps {
+	tasks: Task[];
+}
 
-export const WeeklyLineChart = () => {
+export const WeeklyLineChart: React.FC<WeeklyLineChartProps> = ({ tasks }) => {
+	const [series, setSeries] = useState<
+		{ name: string; data: { x: string; y: number }[] }[]
+	>([]);
+	const getWeeklyLineChartData = useGetWeeklyLineChartData({
+		tasks,
+		setSeries,
+	});
+
+	useEffect(() => {
+		getWeeklyLineChartData();
+	}, [tasks]);
 	return (
 		<>
 			<p className="p-2 font-bold text-lg">Weekly Trend</p>
-			<div className="bg-zinc-100 p-4 rounded-lg max-h-80">
+			<div className="bg-zinc-100 p-4 rounded-lg max-h-72 shadow-md">
 				<ReactApexChart
 					options={options}
 					series={series}
 					type="line"
-					height={300}
+					height={270}
 				/>
 			</div>
 		</>

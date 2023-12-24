@@ -3,7 +3,6 @@ import { filterTasksCompletedInLast7Days } from "../utils/filterTasksCompletedIn
 import { groupTasksByTag } from "../utils/groupTasksByTag"
 import { calculateTotalElapsedTime } from "../utils/calculateTotalElapsedTime"
 import { Task } from "@/lib/task/interface/Task"
-import React from "react"
 import { Tag } from "@/lib/tag/interface/Tag"
 import { getTagDetailsByIds } from "../utils/getTagDetailsByIds"
 

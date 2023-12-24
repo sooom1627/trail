@@ -45,13 +45,13 @@ export const WeeklyPieChart: React.FC<WeeklyPieChartProps> = ({
 	return (
 		<>
 			<p className="p-2 font-bold text-lg">Task Classification</p>
-			<div className="bg-zinc-100 p-4 rounded-lg max-h-80">
+			<div className="bg-zinc-100 p-4 rounded-lg max-h-72 shadow-md">
 				{pieChartData && (
 					<ReactApexChart
 						options={chartOptions}
 						series={pieChartData}
 						type="pie"
-						height={300}
+						height={290}
 					/>
 				)}
 			</div>
