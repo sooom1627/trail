@@ -30,7 +30,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task }) => {
 		<tr className="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 w-full">
 			<th
 				scope="row"
-				className="px-2 py-2 font-medium text-ms text-zinc-900 whitespace-nowrap max-w-[250px]"
+				className="px-2 py-2 font-medium text-ms text-zinc-900 whitespace-nowrap max-w-[250px] truncate"
 			>
 				{task.title}
 			</th>

@@ -22,14 +22,26 @@ export const Dashboard = () => {
 	return (
 		<>
 			<div className="h-full overflow-hidden gap-4 w-7/12 py-2 flex flex-col">
+				<div className="w-full text-blue-800 bg-blue-100 p-2 rounded">
+					Still be in Develop!
+				</div>
 				<div className="w-full">
 					<div className="flex gap-2">
 						<div className="w-1/2 bg-zinc-100 p-2 rounded-lg text-center">
 							<p className="text-xs">Duration in 7 days.</p>
 							<p className="text-3xl">
-								<span> {Math.floor(executionTime / 60)}</span>
+								<span>
+									{" "}
+									{Math.floor(executionTime / 60)
+										.toString()
+										.padStart(2, "0")}
+								</span>
 								<span className="text-base">h</span>
-								<span>{Math.floor(executionTime % 60)}</span>
+								<span>
+									{Math.floor(executionTime % 60)
+										.toString()
+										.padStart(2, "0")}
+								</span>
 								<span className="text-base">m </span>
 							</p>
 						</div>
