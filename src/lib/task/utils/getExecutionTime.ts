@@ -1,3 +1,4 @@
+import { calculateTotalElapsedTime } from "@/lib/dashboard/utils/calculateTotalElapsedTime";
 import { ExecutionTime } from "../interface/ExecutionTime";
 import { Task } from "../interface/Task";
 import { refineTaskTime } from "./taskTimeRefineUtils";
@@ -96,15 +97,7 @@ export const getTimerTaskExecutionTime = (selectedTask: Task, setExecutionTime: 
 
 export const getTodayDoneTaskExecutionTime = (tasks:Task[]) =>{
 	const refineTask = refineTaskTime(tasks)
-	let totalDiff = 0;
-
-	refineTask .forEach((task) =>{
-		if(task.startTime && task.endTime){
-			const diff = task.endTime.getTime() - task.startTime.getTime();
-			totalDiff += diff
-		}
-	})
-
-	const executionTime =  calcDiffExecutionTime(totalDiff)
+	const total = calculateTotalElapsedTime(refineTask)
+	const executionTime =  calcDiffExecutionTime(total*60000)
 	return executionTime
 }

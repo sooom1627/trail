@@ -15,7 +15,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ leftChildren }) => {
 					<div className="h-[40%] w-full overflow-hidden py-2">
 						<Habit />
 					</div>
-					<div className="h-2/3 py-2 font-bold w-full  overflow-hidden">
+					<div className="h-2/3 py-2 font-bold w-full overflow-hidden">
 						<QuickTaskPanel />
 					</div>
 				</div>

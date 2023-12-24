@@ -42,13 +42,15 @@ export const Sidebar = () => {
 							</div>
 						</li>
 						<li>
-							<div
-								className="flex items-center p-4 text-zinc-500 rounded-lg group justify-center cursor-pointer"
-								onClick={() =>
-									alert("Currently in development – with a twist of fun!")
-								}
-							>
-								<SummaryIcon />
+							<div className="flex items-center p-4 text-zinc-500 rounded-lg group justify-center cursor-pointer">
+								<NavLink
+									to="/dashboard"
+									className={({ isActive }) =>
+										[isActive ? "text-zinc-100" : ""].join(" ")
+									}
+								>
+									<SummaryIcon />
+								</NavLink>
 							</div>
 						</li>
 						<li>
