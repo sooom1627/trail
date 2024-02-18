@@ -11,6 +11,7 @@ import { useLoadTags } from "@/lib/tag/hooks/useLoadTags";
 import { TextArea } from "@/components/input/TextArea";
 import { ArrowDown } from "@/components/icons/arrow/ArrowDown";
 import { ArrowUp } from "@/components/icons/arrow/ArrowUp";
+import { CustomDatePicker } from "@/components/input/CustomDatePicker";
 
 const priorityConfig: {
 	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
@@ -153,7 +154,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 					<div className="transition-all duration-500 ease-out overflow-hidden max-h-[500px] opacity-100 p-4 bg-zinc-100 rounded-lg">
 						<div>
 							<p className="text-sm font-bold pb-2 text-zinc-700">Deadline</p>
-							<input type="date" name="" id="" />
+							<CustomDatePicker />
 						</div>
 						<div className="mt-4">
 							<p className="text-sm font-bold pb-2 text-zinc-700">Memo</p>
