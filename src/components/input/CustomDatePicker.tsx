@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import { useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-export const CustomDatePicker: React.FC = () => {
-	const [selectedDate, setSelectedDate] = useState<Date | undefined>();
 
+interface CustomDatePickerProps {
+	selectedDate: Date | undefined;
+	setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+}
+
+export const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
+	selectedDate,
+	setSelectedDate,
+}) => {
+	useEffect(() => {
+		console.log(selectedDate);
+	}, [selectedDate]);
 	return (
 		<DatePicker
 			selected={selectedDate}
