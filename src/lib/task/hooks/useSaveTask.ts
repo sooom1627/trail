@@ -19,7 +19,9 @@ export const useSaveTask = () => {
       priority:"Middle",
       status :"todo",
       created: new Date(),
-      tag:undefined
+      tag:undefined,
+      deadLine:undefined,
+      memo:undefined
     };
     
     let updatedTasks = [...currentTasks, newTask];

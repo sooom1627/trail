@@ -8,6 +8,8 @@ import { getPriorityIcon } from "../../utils/getPriorityIcon";
 import { AtentionButton } from "@/components/button/AtentionButton";
 import { useDeleteTask } from "../../hooks/useDeleteTask";
 import { useLoadTags } from "@/lib/tag/hooks/useLoadTags";
+import { TextArea } from "@/components/input/TextArea";
+import { CustomDatePicker } from "@/components/input/CustomDatePicker";
 
 const priorityConfig: {
 	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
@@ -33,14 +35,19 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 }) => {
 	const { tags, loadTags } = useLoadTags();
 	const [formValue, setFormValue] = useState<string>(task.title);
+	const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+	const [memoValue, setMemoValue] = useState<string | undefined>();
 	const [taskTag, setTaskTag] = useState<string | undefined>();
 	const [selectedPriority, setSelectedPriority] = useState<
 		"Lowest" | "Low" | "Middle" | "High" | "Highest"
 	>(task.priority);
 
 	useEffect(() => {
+		console.log(`${task.deadLine}&${task.created}`);
 		setFormValue(task.title ? task.title : "");
 		setSelectedPriority(task.priority ? task.priority : "Middle");
+		setSelectedDate(task.deadLine ? task.deadLine : undefined);
+		setMemoValue(task.memo ? task.memo : "");
 		loadTags();
 		setTaskTag(task.tag ? task.tag : undefined);
 	}, [task, toggleModal]);
@@ -50,6 +57,8 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 		title: formValue,
 		priority: selectedPriority,
 		tag: taskTag,
+		deadline: selectedDate,
+		memo: memoValue,
 	});
 	const taskDelete = useDeleteTask(task.id);
 
@@ -136,6 +145,35 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 						</li>
 					))}
 				</ul>
+			</div>
+			<div className="mt-4">
+				<div className="flex items-center gap-2 cursor-pointer w-fit">
+					<p className="text-sm font-bold pb-2 ">Option</p>
+				</div>
+				<div className="transition-all duration-500 ease-out overflow-hidden max-h-[500px] opacity-100 p-4 bg-zinc-100 rounded-lg">
+					<div className="flex items-center gap-2">
+						<p className="text-sm font-bold text-zinc-700">Deadline</p>
+						<CustomDatePicker
+							selectedDate={selectedDate}
+							setSelectedDate={setSelectedDate}
+						/>
+						{selectedDate && (
+							<p
+								className="text-xs text-zinc-500 hover:text-zinc-700 cursor-pointer"
+								onClick={() => setSelectedDate(undefined)}
+							>
+								clear
+							</p>
+						)}
+					</div>
+					<div className="mt-4">
+						<p className="text-sm font-bold pb-2 text-zinc-700">Memo</p>
+						<TextArea
+							value={memoValue ? memoValue : ""}
+							setValue={setMemoValue}
+						/>
+					</div>
+				</div>
 			</div>
 		</Modal>
 	);
