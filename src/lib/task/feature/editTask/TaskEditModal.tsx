@@ -151,12 +151,20 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 					<p className="text-sm font-bold pb-2 ">Option</p>
 				</div>
 				<div className="transition-all duration-500 ease-out overflow-hidden max-h-[500px] opacity-100 p-4 bg-zinc-100 rounded-lg">
-					<div>
-						<p className="text-sm font-bold pb-2 text-zinc-700">Deadline</p>
+					<div className="flex items-center gap-2">
+						<p className="text-sm font-bold text-zinc-700">Deadline</p>
 						<CustomDatePicker
 							selectedDate={selectedDate}
 							setSelectedDate={setSelectedDate}
 						/>
+						{selectedDate && (
+							<p
+								className="text-xs text-zinc-500 hover:text-zinc-700 cursor-pointer"
+								onClick={() => setSelectedDate(undefined)}
+							>
+								clear
+							</p>
+						)}
 					</div>
 					<div className="mt-4">
 						<p className="text-sm font-bold pb-2 text-zinc-700">Memo</p>

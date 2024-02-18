@@ -18,9 +18,9 @@ export const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
 		<DatePicker
 			selected={selectedDate}
 			onChange={(date: Date) => setSelectedDate(date)}
-			placeholderText="Select Deadline date"
+			placeholderText="yyyy/mm/dd"
 			dateFormat="yyyy/MM/dd"
-			className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+			className=" bg-zinc-100 border-b border-gray-300 text-sm focus:outline-none px-2 w-28 text-center"
 		/>
 	);
 };
