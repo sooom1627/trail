@@ -8,6 +8,9 @@ import { getPriorityIcon } from "../../utils/getPriorityIcon";
 import { AtentionButton } from "@/components/button/AtentionButton";
 import { useDeleteTask } from "../../hooks/useDeleteTask";
 import { useLoadTags } from "@/lib/tag/hooks/useLoadTags";
+import { TextArea } from "@/components/input/TextArea";
+import { ArrowDown } from "@/components/icons/arrow/ArrowDown";
+import { ArrowUp } from "@/components/icons/arrow/ArrowUp";
 
 const priorityConfig: {
 	label: "Lowest" | "Low" | "Middle" | "High" | "Highest";
@@ -34,6 +37,7 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 	const { tags, loadTags } = useLoadTags();
 	const [formValue, setFormValue] = useState<string>(task.title);
 	const [taskTag, setTaskTag] = useState<string | undefined>();
+	const [openOption, setOpenOption] = useState(false);
 	const [selectedPriority, setSelectedPriority] = useState<
 		"Lowest" | "Low" | "Middle" | "High" | "Highest"
 	>(task.priority);
@@ -136,6 +140,29 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 						</li>
 					))}
 				</ul>
+			</div>
+			<div className="mt-4">
+				<div
+					className="flex items-center gap-2 cursor-pointer w-fit"
+					onClick={() => setOpenOption(!openOption)}
+				>
+					<p className="text-sm font-bold pb-2 ">Option</p>
+					{openOption ? <ArrowDown /> : <ArrowUp />}
+				</div>
+				{openOption ? (
+					<div className="transition-all duration-500 ease-out overflow-hidden max-h-[500px] opacity-100 p-4 bg-zinc-100 rounded-lg">
+						<div>
+							<p className="text-sm font-bold pb-2 text-zinc-700">Deadline</p>
+							<input type="date" name="" id="" />
+						</div>
+						<div className="mt-4">
+							<p className="text-sm font-bold pb-2 text-zinc-700">Memo</p>
+							<TextArea />
+						</div>
+					</div>
+				) : (
+					<div className="transition-all duration-500 ease-in overflow-hidden max-h-0 opacity-0"></div>
+				)}
 			</div>
 		</Modal>
 	);
