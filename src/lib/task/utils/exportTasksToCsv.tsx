@@ -90,7 +90,14 @@ const ExportTasksToCsvButton: React.FC = () => {
 	const csvString = useConvertTasksToCSV();
 
 	const handleDownload = () => {
-		downloadCSV(csvString);
+		// 確認ダイアログを表示
+		const isConfirmed = window.confirm(
+			"Do you want to download the CSV file for tasks with the Todo status?"
+		);
+		if (isConfirmed) {
+			// OKが押された場合、CSVファイルのダウンロードを実行
+			downloadCSV(csvString);
+		}
 	};
 	return (
 		<div onClick={handleDownload}>
