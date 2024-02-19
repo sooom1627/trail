@@ -35,7 +35,7 @@ export const TaskTitle: React.FC<TaskTitleProps> = ({
 								task.deadLine &&
 								new Date(task.deadLine).getTime() - new Date().getTime() <=
 									3 * 24 * 60 * 60 * 1000
-									? "text-red-300"
+									? "text-red-400"
 									: "text-zinc-400"
 							}`}
 						>
