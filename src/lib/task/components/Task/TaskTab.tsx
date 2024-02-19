@@ -1,5 +1,5 @@
 import { TabContent } from "@/components/tab/TabContent";
-import { Tab } from "@/components/tab/tab";
+import { Tab } from "@/components/tab/Tab";
 import { TaskList } from "./TaskList";
 import { useState } from "react";
 import { Task } from "../../interface/Task";

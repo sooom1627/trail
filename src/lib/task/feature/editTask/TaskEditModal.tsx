@@ -43,7 +43,6 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = ({
 	>(task.priority);
 
 	useEffect(() => {
-		console.log(`${task.deadLine}&${task.created}`);
 		setFormValue(task.title ? task.title : "");
 		setSelectedPriority(task.priority ? task.priority : "Middle");
 		setSelectedDate(task.deadLine ? task.deadLine : undefined);

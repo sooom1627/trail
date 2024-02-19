@@ -1,5 +1,6 @@
 import { SortIcon } from "../icons/action/SortIcon";
 import { TabPanel } from "./TabPanel";
+import ExportTasksToCsvButton from "@/lib/task/utils/exportTasksToCsv";
 
 interface TabProps {
 	tabNames: string[];
@@ -43,12 +44,18 @@ export const Tab: React.FC<TabProps> = (props) => {
 						/>
 					))}
 				</ul>
+
 				{activeTab === "todo" && (
-					<div
-						className="w-fit mr-4 mt-4 cursor-pointer flex items-center"
-						onClick={sortingHandler}
-					>
-						<SortIcon />
+					<div className="flex items-center gap-3 mr-4">
+						<div
+							className="w-fit mt-4 cursor-pointer flex items-center"
+							onClick={sortingHandler}
+						>
+							<SortIcon />
+						</div>
+						<div className="w-fit mt-4 cursor-pointer flex items-center">
+							<ExportTasksToCsvButton />
+						</div>
 					</div>
 				)}
 			</div>
