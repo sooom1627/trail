@@ -21,7 +21,6 @@ export const Tab: React.FC<TabProps> = (props) => {
 		sortingHandler,
 	} = props;
 
-	// comment
 	const handleTabClick = (tab: string) => {
 		setActiveTab(tab);
 	};
